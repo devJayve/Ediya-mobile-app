@@ -11,7 +11,7 @@ class Main {
     var answerNum : Int = 0
     var selectNum : Int = 0
 
-    fun loadKiost() {
+    fun loadKiosk() {
         payment.choiceOrderType()
 
         do {
@@ -24,9 +24,15 @@ class Main {
             selectNum = readLine()!!.toInt()
         }while ( selectNum < 4 )
 
-        when (selectNum) {
-            1-> payment
+        if (selectNum == 1)
+            basket.addMenu()
+        else if (selectNum == 2)
+            basket.informBasket()
+        else {
+            payment.askMembership()
         }
+
+
     }
 }
 
