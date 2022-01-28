@@ -33,7 +33,14 @@ class Payment {
         println("멤버십 포인트를 적립할 전화번호를 입력해주세요. (취소 : 0)")
         val membershipNum : String = readLine()!!.toString()
         while ((membershipNum.length == 11)) {
-
+            if(membershipNum.length != 11) {
+                println("전화번호 11자리를 다시 확인해주세요.")
+                continue
+            }
+            else if(membershipNum == "0")
+                return askMembership()
+        print("멤버십 할인 500원이 적용됩니다.")
+            discountAmount -= 500
         }
     }
 //    fun payByCard

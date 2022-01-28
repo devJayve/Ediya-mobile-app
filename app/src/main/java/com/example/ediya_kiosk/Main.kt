@@ -31,10 +31,12 @@ class Main {
         else {
             payment.askMembership()
         }
-
-
     }
 }
+
+    fun quitKiosk() {
+        print("키오스크를 종료합니다. \n이용해주셔서 감사합니다.")
+    }
 
 
 fun main() {
