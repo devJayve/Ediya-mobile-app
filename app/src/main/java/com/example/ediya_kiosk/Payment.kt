@@ -43,6 +43,8 @@ class Payment {
             discountAmount -= 500
         }
     }
-//    fun payByCard
+    fun payByCard(menuCost : MutableList<Int>, OptionCost: MutableList<Int>) {
+        //var totalPayment : Int
+    }
 
 }

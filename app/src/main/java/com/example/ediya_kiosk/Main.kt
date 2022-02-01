@@ -11,6 +11,7 @@ class Main {
     var answerNum : Int = 0
     var selectNum : Int = 0
 
+
     fun loadKiosk() {
         payment.choiceOrderType()
 
@@ -30,6 +31,16 @@ class Main {
             basket.informBasket()
         else {
             payment.askMembership()
+            println("원하시는 결제수단을 선택해주세요.")
+            print("""
+                1.카드 결제
+                2.현금 결제
+                3. 취소
+            """.trimIndent())
+            var payment_answer : Int = readLine()!!.toInt()
+            if (payment_answer == 1) {
+                payment.payByCard(basket.menuCost, basket.optionCost)
+            }
         }
     }
 }
