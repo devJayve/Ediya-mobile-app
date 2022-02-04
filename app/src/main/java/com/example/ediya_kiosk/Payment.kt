@@ -43,8 +43,20 @@ class Payment {
             discountAmount -= 500
         }
     }
-    fun payByCard(menuCost : MutableList<Int>, OptionCost: MutableList<Int>) {
-        //var totalPayment : Int
+    fun payByCard(menuCost : MutableList<Int>, optionCost: MutableList<Int>) {
+        var totalPayment = menuCost.sum() + optionCost.sum()
+        println("총 결제 금액 : $totalPayment 원")
+    }
+
+    fun payByCash(menuCost : MutableList<Int>, optionCost: MutableList<Int>) {
+        println("현금 결제를 진행합니다.")
+        var totalPayment = menuCost.sum() + optionCost.sum()
+        println("총 결제 금액 : $totalPayment 원")
+        println("투입구에 현금을 투입해주세요.")
+        var cashInput : Int = readLine()!!.toInt()
+        if (cashInput < totalPayment )
+            println("잔액이 부족합니다.")
+
     }
 
 }

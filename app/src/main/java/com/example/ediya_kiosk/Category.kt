@@ -103,17 +103,21 @@ class Category {
         5 to bakeryMenu
     )
 
-    fun showCategory() {
+    fun showCategory() : Int {
         println("원하시는 카테고리를 선택해주세요.")
         println("1 : COFFEE\n2: 베버러지\n3 : 플랫치노\n4 :  버븚밀크티\n5 : 베이커리")
         var choiceNum = readLine()!!.toInt()
-
-        return showMenu(choiceNum)
+        return choiceNum
     }
 
-    fun showMenu(choiceNum : Int) {
-        for ((key, value) in menuCategory[choiceNum]!!) {
-            println("$key | $value 원")
+    fun showMenu() : Map<String,Int> {
+        var choiceNum = showCategory()
+        var i = 1
+        var chosenCategory = menuCategory[choiceNum]
+        for ((key, value) in chosenCategory!!) {
+            println("$i. $key | $value 원")
+            i += 1
         }
+        return chosenCategory
     }
 }
