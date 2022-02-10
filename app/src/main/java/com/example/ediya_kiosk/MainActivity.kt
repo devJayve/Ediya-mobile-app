@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
 
         initEvent()
         goBasketEvent()
+        goMembershipEvent()
     }
 
     fun initEvent() {
@@ -41,15 +42,7 @@ class MainActivity : AppCompatActivity() {
                 supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, btn_fragment).commit()
             }
         }
-
-//        coffeeBtn!!.setOnClickListener {
-//            supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, coffee_fragment()).commit()
-//        }
-//
-//        beverageBtn!!.setOnClickListener {
-//            supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, beverage_fragment()).commit()
-//        }
-        }
+    }
 
     fun goBasketEvent() {
         var basketBtn = findViewById<Button>(R.id.basketBtn)
@@ -57,6 +50,15 @@ class MainActivity : AppCompatActivity() {
         basketBtn!!.setOnClickListener {
             val basketIntent = Intent(this, BasketActivity::class.java)
             startActivity(basketIntent)
+        }
+    }
+
+    fun goMembershipEvent() {
+        var membershipBtn = findViewById<Button>(R.id.paymentBtn)
+
+        membershipBtn!!.setOnClickListener {
+            val membershipIntent = Intent(this, MembershipActivity::class.java)
+            startActivity(membershipIntent)
         }
     }
 }

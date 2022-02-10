@@ -5,11 +5,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 
-class BasketActivity : AppCompatActivity() {
+class MembershipActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.basket_layout)
-        supportFragmentManager.beginTransaction().replace(R.id.basket_fragmentArea, basket_fragment()).commit()
+        setContentView(R.layout.membership_layout)
+//        supportFragmentManager.beginTransaction().replace(R.id.basket_fragmentArea, basket_fragment()).commit()
     }
 }
