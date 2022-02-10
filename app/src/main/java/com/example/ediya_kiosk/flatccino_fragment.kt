@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-object coffee_fragment : Fragment() {
+object flatccino_fragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_coffee_fragment, container, false)
+        return inflater.inflate(R.layout.main_flatccino_fragment, container, false)
     }
 }

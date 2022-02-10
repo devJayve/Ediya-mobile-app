@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-class beverage_fragment : Fragment() {
+object beverage_fragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

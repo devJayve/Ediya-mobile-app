@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.main_layout)
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, coffee_fragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, coffee_fragment).commit()
 
         initEvent()
         goBasketEvent()
@@ -20,21 +20,36 @@ class MainActivity : AppCompatActivity() {
         var coffeeBtn = findViewById<Button>(R.id.coffeeBtn)
         var beverageBtn = findViewById<Button>(R.id.beverageBtn)
         var blendingTeaBtn = findViewById<Button>(R.id.blendingTeaBtn)
-        var aidBtn = findViewById<Button>(R.id.aidBtn)
+        var adeBtn = findViewById<Button>(R.id.adeBtn)
         var shakeBtn = findViewById<Button>(R.id.shakeBtn)
-        var platinoBtn = findViewById<Button>(R.id.platinoBtn)
+        var flatccinoBtn = findViewById<Button>(R.id.flatccinoBtn)
         var bubbleMilkTeaBtn = findViewById<Button>(R.id.bubbleMilkTeaBtn)
         var bakeryBtn = findViewById<Button>(R.id.bakeryBtn)
 
+        val categoryBtnMap = mapOf(
+            coffeeBtn to coffee_fragment,
+            beverageBtn to beverage_fragment,
+            blendingTeaBtn to blendingTea_fragment,
+            adeBtn to ade_fragment,
+            shakeBtn to shake_fragment,
+            flatccinoBtn to flatccino_fragment,
+            bubbleMilkTeaBtn to bubbleMilkTea_fragment,
+            bakeryBtn to bakery_fragment)
 
-        coffeeBtn!!.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, coffee_fragment()).commit()
+        for ((btn, btn_fragment) in categoryBtnMap) {
+            btn!!.setOnClickListener {
+                supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, btn_fragment).commit()
+            }
         }
 
-        beverageBtn!!.setOnClickListener {
-            supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, beverage_fragment()).commit()
+//        coffeeBtn!!.setOnClickListener {
+//            supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, coffee_fragment()).commit()
+//        }
+//
+//        beverageBtn!!.setOnClickListener {
+//            supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, beverage_fragment()).commit()
+//        }
         }
-    }
 
     fun goBasketEvent() {
         var basketBtn = findViewById<Button>(R.id.basketBtn)
