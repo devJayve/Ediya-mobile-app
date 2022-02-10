@@ -71,7 +71,7 @@ class Cal(number : Int, number2: Int) {
         printList()
     }
 
-    fun sum(a: Int, b: Int) : Int {  // 멤버함수
+        fun sum(a: Int, b: Int) : Int {  // 멤버함수
         return(a + b)
     }
 
