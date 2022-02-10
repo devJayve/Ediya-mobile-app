@@ -1,7 +1,4 @@
-package com.example.ediya_kiosk
-
-import com.example.ediya_kiosk.Payment
-import com.example.ediya_kiosk.Basket
+package com.example.ediya_kiosk_Logic
 
 
 class Main {

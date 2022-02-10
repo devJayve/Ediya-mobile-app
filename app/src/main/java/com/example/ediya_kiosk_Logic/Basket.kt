@@ -1,7 +1,4 @@
-package com.example.ediya_kiosk
-
-import com.example.ediya_kiosk.Menu
-import com.example.ediya_kiosk.Category
+package com.example.ediya_kiosk_Logic
 
 class Basket {
     val menu = Menu()

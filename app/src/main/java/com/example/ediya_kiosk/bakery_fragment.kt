@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 
-class blendingTea_fragment : Fragment() {
+class bakery_fragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.main_blendingtea_fragment, container, false)
+        return inflater.inflate(R.layout.main_bakery_fragment, container, false)
     }
 }

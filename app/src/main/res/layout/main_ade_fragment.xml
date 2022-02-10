@@ -8,7 +8,7 @@
     android:layout_weight="3">
 
     <LinearLayout
-        android:id="@+id/bubbleMilkTeaLayout_1"
+        android:id="@+id/adeLayout_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -20,10 +20,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/bubbleMilkTeaMenu1"
+            android:id="@+id/adeMenu1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
+            android:drawableTop="@drawable/ade_xml1"
             android:text="딸기라떼"
             android:background="@drawable/black_corner"
             android:layout_weight="1"
@@ -33,10 +33,10 @@
             android:layout_marginRight="20dp"/>
 
         <Button
-            android:id="@+id/bubbleMilkTeaMenu2"
+            android:id="@+id/adeMenu2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
+            android:drawableTop="@drawable/ade_xml1"
             android:text="아메리카노"
             android:background="@drawable/black_corner"
             android:layout_weight="1"
@@ -46,60 +46,10 @@
             android:layout_marginRight="20dp"/>
 
         <Button
-            android:id="@+id/bubbleMilkTeaMenu3"
+            android:id="@+id/adeMenu3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
-            android:text="아메리카노"
-            android:background="@drawable/black_corner"
-            android:layout_weight="1"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/bubbleMilkTeaLayout_2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="20dp"
-        android:orientation="horizontal"
-        android:layout_weight="3"
-        app:layout_constraintTop_toBottomOf="@id/bubbleMilkTeaLayout_1">
-
-        <Button
-            android:id="@+id/bubbleMilkTeaMenu4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
-            android:text="아메리카노"
-            android:background="@drawable/black_corner"
-            android:layout_weight="1"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
-
-        <Button
-            android:id="@+id/bubbleMilkTeaMenu5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
-            android:text="아메리카노"
-            android:background="@drawable/black_corner"
-            android:layout_weight="1"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"/>
-
-        <Button
-            android:id="@+id/bubbleMilkTeaMenu6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
+            android:drawableTop="@drawable/ade_xml1"
             android:text="아메리카노"
             android:background="@drawable/black_corner"
             android:layout_weight="1"
@@ -110,20 +60,20 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/bubbleMilkTeaLayout_3"
+        android:id="@+id/adeLayout_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingBottom="20dp"
         android:orientation="horizontal"
         android:layout_weight="3"
-        app:layout_constraintTop_toBottomOf="@id/bubbleMilkTeaLayout_2">
+        app:layout_constraintTop_toBottomOf="@id/adeLayout_1">
 
         <Button
-            android:id="@+id/bubbleMilkTeaMenu7"
+            android:id="@+id/adeMenu4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
+            android:drawableTop="@drawable/ade_xml1"
             android:text="아메리카노"
             android:background="@drawable/black_corner"
             android:layout_weight="1"
@@ -133,10 +83,10 @@
             android:layout_marginRight="20dp"/>
 
         <Button
-            android:id="@+id/bubbleMilkTeaMenu8"
+            android:id="@+id/adeMenu5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
+            android:drawableTop="@drawable/ade_xml1"
             android:text="아메리카노"
             android:background="@drawable/black_corner"
             android:layout_weight="1"
@@ -146,10 +96,60 @@
             android:layout_marginRight="20dp"/>
 
         <Button
-            android:id="@+id/bubbleMilkTeaMenu9"
+            android:id="@+id/adeMenu6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableTop="@drawable/bubblemilktea_xml1"
+            android:drawableTop="@drawable/ade_xml1"
+            android:text="아메리카노"
+            android:background="@drawable/black_corner"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/adeLayout_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:orientation="horizontal"
+        android:layout_weight="3"
+        app:layout_constraintTop_toBottomOf="@id/adeLayout_2">
+
+        <Button
+            android:id="@+id/adeMenu7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ade_xml1"
+            android:text="아메리카노"
+            android:background="@drawable/black_corner"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <Button
+            android:id="@+id/adeMenu8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ade_xml1"
+            android:text="아메리카노"
+            android:background="@drawable/black_corner"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+
+        <Button
+            android:id="@+id/adeMenu9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@drawable/ade_xml1"
             android:text="아메리카노"
             android:background="@drawable/black_corner"
             android:layout_weight="1"

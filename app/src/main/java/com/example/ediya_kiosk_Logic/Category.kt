@@ -1,4 +1,4 @@
-package com.example.ediya_kiosk
+package com.example.ediya_kiosk_Logic
 
 class Category {
     val coffeeMenu : Map<String, Int> = mapOf(

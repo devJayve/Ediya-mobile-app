@@ -1,4 +1,4 @@
-package com.example.ediya_kiosk
+package com.example.ediya_kiosk_Logic
 
 class Menu {
     val optionList : Map<String,Int> = mapOf("+에스프레소 1샷" to 500,

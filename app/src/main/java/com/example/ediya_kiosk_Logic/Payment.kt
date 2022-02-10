@@ -1,4 +1,4 @@
-package com.example.ediya_kiosk
+package com.example.ediya_kiosk_Logic
 
 class Payment {
 

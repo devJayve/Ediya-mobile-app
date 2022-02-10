@@ -1,5 +1,6 @@
 package com.example.ediya_kiosk
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, coffee_fragment()).commit()
 
         initEvent()
-
+        goBasketEvent()
     }
 
     fun initEvent() {
@@ -32,6 +33,15 @@ class MainActivity : AppCompatActivity() {
 
         beverageBtn!!.setOnClickListener {
             supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, beverage_fragment()).commit()
+        }
+    }
+
+    fun goBasketEvent() {
+        var basketBtn = findViewById<Button>(R.id.basketBtn)
+
+        basketBtn!!.setOnClickListener {
+            val basketIntent = Intent(this, BasketActivity::class.java)
+            startActivity(basketIntent)
         }
     }
 }
