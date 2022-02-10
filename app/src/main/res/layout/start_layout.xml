@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main"
     android:background="#13235D"
     >
 
@@ -28,7 +27,6 @@
         android:background="@drawable/rounded_corner"
         android:text="매장에서 먹어요"
         android:textColor="#FFFFFF"
-        android:textAllcaps="false"
         android:layout_marginTop="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -41,7 +39,6 @@
         android:background="@drawable/rounded_corner"
         android:text="포장해서 갈래요"
         android:textColor="#FFFFFF"
-        android:textAllcaps="false"
         android:layout_marginTop="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
