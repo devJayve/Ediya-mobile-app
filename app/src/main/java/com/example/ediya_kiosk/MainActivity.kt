@@ -4,17 +4,50 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.ediya_kiosk.fragment.*
+import kotlinx.android.synthetic.main.main_layout.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var myadapter: MainRvAdapter
+
+    // 데이터를 담는 배열
+    var menuList = ArrayList<MenuData>()
+
+    // 뷰를 화면에 띄워줌
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.main_layout)
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, coffee_fragment).commit()
 
+
+        //호출 함수
+        initRecyclerView()
         initEvent()
         goBasketEvent()
         goMembershipEvent()
+    }
+
+    fun initRecyclerView() {
+        for (i in 1..10){
+            val menuData = MenuData("COFFEE","아메리카노 $i","3500", "")
+            this.menuList.add(menuData)
+
+            //어답터 인스턴스 생성
+            myadapter = MainRvAdapter()
+
+            myadapter.submitList(this.menuList)
+
+            // 리사이클뷰 설정
+            menuRecycleView.apply {
+                layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+
+                //어답터 장착
+                adapter = myadapter
+            }
+
+        }
     }
 
     fun initEvent() {
@@ -25,7 +58,6 @@ class MainActivity : AppCompatActivity() {
         var shakeBtn = findViewById<Button>(R.id.shakeBtn)
         var flatccinoBtn = findViewById<Button>(R.id.flatccinoBtn)
         var bubbleMilkTeaBtn = findViewById<Button>(R.id.bubbleMilkTeaBtn)
-        var bakeryBtn = findViewById<Button>(R.id.bakeryBtn)
 
         val categoryBtnMap = mapOf(
             coffeeBtn to coffee_fragment,
@@ -35,13 +67,13 @@ class MainActivity : AppCompatActivity() {
             shakeBtn to shake_fragment,
             flatccinoBtn to flatccino_fragment,
             bubbleMilkTeaBtn to bubbleMilkTea_fragment,
-            bakeryBtn to bakery_fragment)
+        )
 
-        for ((btn, btn_fragment) in categoryBtnMap) {
-            btn!!.setOnClickListener {
-                supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, btn_fragment).commit()
-            }
-        }
+//        for ((btn, btn_fragment) in categoryBtnMap) {
+//            btn!!.setOnClickListener {
+//                supportFragmentManager.beginTransaction().replace(R.id.fragmentArea, btn_fragment).commit()
+//            }
+//        }
     }
 
     fun goBasketEvent() {
