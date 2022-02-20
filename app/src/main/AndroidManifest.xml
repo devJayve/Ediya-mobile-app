@@ -25,10 +25,6 @@
         </activity>
 
         <activity
-            android:name=".BasketActivity">
-        </activity>
-
-        <activity
             android:name=".MembershipActivity">
         </activity>
 

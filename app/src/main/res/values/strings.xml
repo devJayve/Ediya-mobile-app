@@ -1,3 +1,105 @@
 <resources>
     <string name="app_name">Ediya_Kiosk</string>
+
+    <!-- 카테고리_메뉴이름 정보 -->
+    <string-array name="coffee_name">
+        <item>아메리카노</item>
+        <item>아메리카노2</item>
+        <item>아메리카노3</item>
+    </string-array>
+
+    <string-array name="beverage_name">
+        <item>베버러지</item>
+        <item>베버러지2</item>
+        <item>베버러지3</item>
+    </string-array>
+
+    <string-array name="blendingtea_name">
+        <item>블랜딩 티1</item>
+        <item>블랜딩 티2</item>
+        <item>블랜딩 티3</item>
+    </string-array>
+
+    <string-array name="bubblemilktea_name">
+        <item>버블 밀크 티1</item>
+        <item>버블 밀크 티2</item>
+        <item>버블 밀크 티3</item>
+    </string-array>
+
+    <string-array name="flatccino_name">
+        <item>플랫치노1</item>
+        <item>플랫치노2</item>
+        <item>플랫치노3</item>
+    </string-array>
+
+    <string-array name="shake_name">
+        <item>쉐이크 1</item>
+        <item>쉐이크 2</item>
+        <item>쉐이크 3</item>
+    </string-array>
+
+    <string-array name="ade_name">
+        <item>에이드 1</item>
+        <item>에이드 2</item>
+        <item>에이드 3</item>
+    </string-array>
+
+    <!-- 카테고리_가격 정보 -->
+
+    <string-array name="coffee_price">
+        <item>3,000원</item>
+        <item>3,000원</item>
+        <item>3,000원</item>
+    </string-array>
+
+    <string-array name="beverage_price">
+        <item>3,000원</item>
+        <item>3,000원</item>
+        <item>3,000원</item>
+    </string-array>
+
+    <string-array name="blendingtea_price">
+        <item>3,000원</item>
+        <item>3,000원</item>
+        <item>3,000원</item>
+    </string-array>
+
+    <string-array name="bubblemilktea_price">
+        <item>3,000원</item>
+        <item>3,000원</item>
+        <item>3,000원</item>
+    </string-array>
+
+    <string-array name="flatccino_price">
+        <item>3,000원</item>
+        <item>3,000원</item>
+        <item>3,000원</item>
+    </string-array>
+
+    <string-array name="shake_price">
+        <item>3,000원</item>
+        <item>3,000원</item>
+        <item>3,000원</item>
+    </string-array>
+
+    <string-array name="ade_price">
+        <item>3,000원</item>
+        <item>3,000원</item>
+        <item>3,000원</item>
+    </string-array>
+
+    <!-- 카테고리_메뉴 이미지 정보 -->
+    <string-array name="coffee_img">
+        <item>@drawable/coffee_menu1</item>
+        <item>@drawable/coffee_menu2</item>
+        <item>@drawable/coffee_menu3</item>
+    </string-array>
+
+
+
+
+
+
+
+
 </resources>
