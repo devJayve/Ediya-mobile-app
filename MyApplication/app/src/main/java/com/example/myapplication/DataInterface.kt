@@ -1,6 +1,7 @@
-package com.example.myapplication
+package com.example.forlecture
 
 interface DataInterface {
 
-    fun dataPass(data : String)
+    fun datapass(data: String)
+
 }
