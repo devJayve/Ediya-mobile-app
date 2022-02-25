@@ -4,102 +4,222 @@
     <!-- 카테고리_메뉴이름 정보 -->
     <string-array name="coffee_name">
         <item>아메리카노</item>
-        <item>아메리카노2</item>
-        <item>아메리카노3</item>
+        <item>카라멜 마끼아또</item>
+        <item>카푸치노</item>
+        <item>민트 모카</item>
+        <item>콜드브루 화이트 비엔나</item>
+        <item>아인슈페너</item>
+        <item>흑당 콜드브루</item>
+        <item>연유 카페라떼</item>
+        <item>연유 콜드브루</item>
+        <item>콜드브루 라떼</item>
     </string-array>
 
     <string-array name="beverage_name">
-        <item>베버러지</item>
-        <item>베버러지2</item>
-        <item>베버러지3</item>
+        <item>딸기 라떼</item>
+        <item>생강차</item>
+        <item>쌍화차</item>
+        <item>달고나 라떼</item>
+        <item>흑당 라떼</item>
+        <item>화이트 초콜릿</item>
+        <item>녹차 라떼</item>
     </string-array>
 
     <string-array name="blendingtea_name">
-        <item>블랜딩 티1</item>
-        <item>블랜딩 티2</item>
-        <item>블랜딩 티3</item>
+        <item>생딸기 피치 히비스커스</item>
+        <item>복분자 뱅쇼</item>
+        <item>복분자 뱅쇼 콤부차</item>
+        <item>샤인 히비스커스</item>
+        <item>그린루이보스</item>
+        <item>스프링 캐모마일</item>
     </string-array>
 
     <string-array name="bubblemilktea_name">
-        <item>버블 밀크 티1</item>
-        <item>버블 밀크 티2</item>
-        <item>버블 밀크 티3</item>
+        <item>버블 흑당 라떼</item>
+        <item>버블 크림 밀크티</item>
+        <item>버블 흑당 콜드브루</item>
     </string-array>
 
     <string-array name="flatccino_name">
-        <item>플랫치노1</item>
-        <item>플랫치노2</item>
-        <item>플랫치노3</item>
+        <item>생딸기 연유 플랫치노</item>
+        <item>토피넛 플랫치노</item>
+        <item>꿀복숭아 플랫치노</item>
+        <item>커피 플랫치노</item>
+        <item>망고 플랫치노</item>
+        <item>모카 플랫치노</item>
+        <item>카라멜 플랫치노</item>
+        <item>자몽 플랫치노</item>
+
     </string-array>
 
     <string-array name="shake_name">
-        <item>쉐이크 1</item>
-        <item>쉐이크 2</item>
-        <item>쉐이크 3</item>
+        <item>오리진 쉐이크</item>
+        <item>딸기 쉐이크</item>
+        <item>초코쿠키 쉐이크</item>
     </string-array>
 
     <string-array name="ade_name">
-        <item>에이드 1</item>
-        <item>에이드 2</item>
-        <item>에이드 3</item>
+        <item>레몬 에이드</item>
+        <item>자몽 에이드</item>
+        <item>청포도 에이드</item>
+    </string-array>
+
+    <string-array name="bakery_name">
+        <item>플레인 크로플</item>
+        <item>플레인 꽈루아상</item>
+        <item>플레인 미니스콘</item>
+        <item>토피넛 꽈루아상</item>
+        <item>생딸기 연유 브레드</item>
+        <item>생딸기 와플</item>
+        <item>생딸기 크로플</item>
+        <item>토피넛 크로플</item>
     </string-array>
 
     <!-- 카테고리_가격 정보 -->
 
     <string-array name="coffee_price">
-        <item>3,000원</item>
-        <item>3,000원</item>
-        <item>3,000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
     </string-array>
 
     <string-array name="beverage_price">
-        <item>3,000원</item>
-        <item>3,000원</item>
-        <item>3,000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
     </string-array>
 
     <string-array name="blendingtea_price">
-        <item>3,000원</item>
-        <item>3,000원</item>
-        <item>3,000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
     </string-array>
 
     <string-array name="bubblemilktea_price">
-        <item>3,000원</item>
-        <item>3,000원</item>
-        <item>3,000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
     </string-array>
 
     <string-array name="flatccino_price">
-        <item>3,000원</item>
-        <item>3,000원</item>
-        <item>3,000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
     </string-array>
 
     <string-array name="shake_price">
-        <item>3,000원</item>
-        <item>3,000원</item>
-        <item>3,000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
     </string-array>
 
     <string-array name="ade_price">
-        <item>3,000원</item>
-        <item>3,000원</item>
-        <item>3,000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+    </string-array>
+
+    <string-array name="bakery_price">
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
+        <item>3000원</item>
     </string-array>
 
     <!-- 카테고리_메뉴 이미지 정보 -->
-    <string-array name="coffee_img">
-        <item>@drawable/coffee_menu1</item>
-        <item>@drawable/coffee_menu2</item>
-        <item>@drawable/coffee_menu3</item>
+    <array name="coffee_img">
+        <item>@drawable/coffee_drawable_1</item>
+        <item>@drawable/coffee_drawable_2</item>
+        <item>@drawable/coffee_drawable_3</item>
+        <item>@drawable/coffee_drawable_4</item>
+        <item>@drawable/coffee_drawable_5</item>
+        <item>@drawable/coffee_drawable_6</item>
+        <item>@drawable/coffee_drawable_7</item>
+        <item>@drawable/coffee_drawable_8</item>
+        <item>@drawable/coffee_drawable_9</item>
+        <item>@drawable/coffee_drawable_10</item>
+    </array>
+
+    <string-array name="beverage_img">
+        <item>@drawable/beverage_drawable_1</item>
+        <item>@drawable/beverage_drawable_2</item>
+        <item>@drawable/beverage_drawable_3</item>
+        <item>@drawable/beverage_drawable_4</item>
+        <item>@drawable/beverage_drawable_5</item>
+        <item>@drawable/beverage_drawable_6</item>
+        <item>@drawable/beverage_drawable_7</item>
     </string-array>
 
+    <string-array name="blendingtea_img">
+        <item>@drawable/blendingtea_drawable_1</item>
+        <item>@drawable/blendingtea_drawable_2</item>
+        <item>@drawable/blendingtea_drawable_3</item>
+        <item>@drawable/blendingtea_drawable_4</item>
+        <item>@drawable/blendingtea_drawable_5</item>
+        <item>@drawable/blendingtea_drawable_6</item>
+    </string-array>
 
+    <string-array name="bubblemilktea_img">
+        <item>@drawable/bubblemilktea_drawable_1</item>
+        <item>@drawable/bubblemilktea_drawable_2</item>
+        <item>@drawable/bubblemilktea_drawable_3</item>
+    </string-array>
 
+    <string-array name="flatccino_img">
+        <item>@drawable/flatccino_drawable_1</item>
+        <item>@drawable/flatccino_drawable_2</item>
+        <item>@drawable/flatccino_drawable_3</item>
+        <item>@drawable/flatccino_drawable_4</item>
+        <item>@drawable/flatccino_drawable_5</item>
+        <item>@drawable/flatccino_drawable_6</item>
+        <item>@drawable/flatccino_drawable_7</item>
+        <item>@drawable/flatccino_drawable_8</item>
+    </string-array>
 
+    <string-array name="shake_img">
+        <item>@drawable/shake_drawable_1</item>
+        <item>@drawable/shake_drawable_2</item>
+        <item>@drawable/shake_drawable_3</item>
+    </string-array>
 
+    <string-array name="ade_img">
+        <item>@drawable/ade_drawable_1</item>
+        <item>@drawable/ade_drawable_2</item>
+        <item>@drawable/ade_drawable_3</item>
+    </string-array>
 
-
+    <array name="bakery_img">
+        <item>@drawable/bakery_drawable_1</item>
+        <item>@drawable/bakery_drawable_2</item>
+        <item>@drawable/bakery_drawable_3</item>
+        <item>@drawable/bakery_drawable_4</item>
+        <item>@drawable/bakery_drawable_5</item>
+        <item>@drawable/bakery_drawable_6</item>
+        <item>@drawable/bakery_drawable_7</item>
+        <item>@drawable/bakery_drawable_8</item>
+    </array>
 
 </resources>

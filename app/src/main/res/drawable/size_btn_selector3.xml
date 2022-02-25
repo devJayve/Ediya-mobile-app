@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/sizebtn_pressed3"
-        android:state_pressed="true" />
+        android:state_pressed="true">
+        <stroke android:color="@color/ediya_color"
+            android:width="1dp"/>
+    </item>
     <item android:drawable="@drawable/sizebtn_pressed3"
-        android:state_focused="true" />
-    <item android:drawable="@drawable/sizebtn_icon3" />
+        android:state_selected="true">
+        <stroke android:color="@color/ediya_color"
+            android:width="1dp"/>
+    </item>
+    <item android:drawable="@drawable/sizebtn_icon3"/>
 </selector>

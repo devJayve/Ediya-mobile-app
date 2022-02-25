@@ -3,7 +3,7 @@ package com.example.ediya_kiosk
 import android.graphics.drawable.Drawable
 import android.util.Log
 
-class MenuData(val category: String, val menuName: String, val menuPrice: String, val menuPhotoImg: Drawable ) {
+class MenuData(val category: String, val menuName: String, val menuPrice: String, val menuPhotoImg: String) {
 
     val TAG: String = "로그"
 

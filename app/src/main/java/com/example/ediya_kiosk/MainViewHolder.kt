@@ -21,14 +21,14 @@ class MainViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         menuNameTextView.text = menuData.menuName
         menuPriceTextView.text = menuData.menuPrice
         menuCategoryTextView.text = menuData.category
-        menuImgView.setImageDrawable(menuData.menuPhotoImg)
+        menuImgView.setImageResource(menuData.menuPhotoImg!!.toInt())
 
         //이미지 뷰와 실제 이미지 결합
-        Glide
-            .with(App.instance)
-            .load(menuData.menuPhotoImg)
-            .placeholder(menuData.menuPhotoImg)
-            .into(menuImgView)
+//        Glide
+//            .with(App.instance)
+//            .load(menuData.menuPhotoImg)
+//            .placeholder(menuData.menuPhotoImg)
+//            .into(menuImgView)
     }
 
 }

@@ -1,22 +1,17 @@
 package com.example.ediya_kiosk
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
-import android.graphics.drawable.Drawable
+import android.content.res.TypedArray
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ediya_kiosk.fragment.basket_fragment
 import com.example.ediya_kiosk.fragment.menu_detail_fragment
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.android.synthetic.main.main_layout.view.*
 
 class MainFragment : Fragment() {
 
@@ -51,9 +46,10 @@ class MainFragment : Fragment() {
                 var fragment = menu_detail_fragment()
                 bundle.putString("name",menuList[position].menuName)
                 bundle.putString("price",menuList[position].menuPrice)
+                bundle.putString("img",menuList[position].menuPhotoImg)
 
                 fragment.arguments = bundle
-                mainActivity?.openOtherFragmentforBundle(4,fragment)}
+                mainActivity?.openOtherFragmentforBundle(2,fragment)}
         })
         return view
     }
@@ -64,17 +60,18 @@ class MainFragment : Fragment() {
         val res = resources
         var name = res.getStringArray(R.array.coffee_name)
         var price = res.getStringArray(R.array.coffee_price)
-        var img = res.getStringArray(R.array.coffee_img)
+        var img = context?.resources?.obtainTypedArray(R.array.coffee_img)
 
         initRecyclerView(name, price, "COFFEE", img)
         clickCategoryEvent(view)
     }
 
 
-    fun initRecyclerView(name: Array<String>, price: Array<String>, cateogry: String, img: Array<Drawable>) {
+    fun initRecyclerView(name: Array<String>, price: Array<String>, cateogry: String, img: TypedArray?) {
         this.menuList.clear()
         for (i in name.indices) {
-            val menuData = MenuData("$cateogry", "${name[i]}", "${price[i]}", "${img[i]}")
+            var imgInt : Int = img?.getResourceId(i,-1)!!.toInt()
+            val menuData = MenuData("$cateogry", "${name[i]}", "${price[i]}", "${imgInt}")
             this.menuList.add(menuData)
 
             //어답터 인스턴스 생성
@@ -102,6 +99,7 @@ class MainFragment : Fragment() {
             var shakeBtn = view.findViewById<Button>(R.id.shakeBtn)
             var flatccinoBtn = view.findViewById<Button>(R.id.flatccinoBtn)
             var bubbleMilkTeaBtn = view.findViewById<Button>(R.id.bubbleMilkTeaBtn)
+            var bakeryBtn = view.findViewById<Button>(R.id.bakeryBtn)
             var buttonList = listOf<Button>(
                 coffeeBtn,
                 beverageBtn,
@@ -109,9 +107,10 @@ class MainFragment : Fragment() {
                 adeBtn,
                 shakeBtn,
                 flatccinoBtn,
-                bubbleMilkTeaBtn
+                bubbleMilkTeaBtn,
+                bakeryBtn
             )
-            var categoryList = listOf("COFFEE", "베버러지", "블렌딩 티", "에이드", "쉐이크", "플랫치노", "버블 밀크티")
+            var categoryList = arrayListOf<String>("COFFEE", "베버러지", "블렌딩 티", "에이드", "쉐이크", "플랫치노", "버블 밀크티","베이커리")
             var nameArrayList = listOf(
                 R.array.coffee_name,
                 R.array.beverage_name,
@@ -119,7 +118,8 @@ class MainFragment : Fragment() {
                 R.array.ade_name,
                 R.array.shake_name,
                 R.array.flatccino_name,
-                R.array.bubblemilktea_name
+                R.array.bubblemilktea_name,
+                R.array.bakery_name
             )
             var priceArrayList = listOf(
                 R.array.coffee_price,
@@ -128,14 +128,25 @@ class MainFragment : Fragment() {
                 R.array.ade_price,
                 R.array.shake_price,
                 R.array.flatccino_price,
-                R.array.bubblemilktea_price
+                R.array.bubblemilktea_price,
+                R.array.bakery_price
+            )
+            var imageArrayList = listOf(
+                R.array.coffee_img,
+                R.array.beverage_img,
+                R.array.blendingtea_img,
+                R.array.ade_img,
+                R.array.shake_img,
+                R.array.flatccino_img,
+                R.array.bubblemilktea_img,
+                R.array.bakery_img
             )
 
-            for (index in 0..4) {
+            for (index in 0..7) {
                 buttonList.get(index).setOnClickListener {
                     var name = res.getStringArray(nameArrayList.get(index))
                     var price = res.getStringArray(priceArrayList.get(index))
-                    var photo = res.getStringArray(R.array.coffee_img)
+                    var photo = context?.resources?.obtainTypedArray(imageArrayList.get(index))
                     initRecyclerView(name, price, categoryList[index],photo)
                 }
             }
