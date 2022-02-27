@@ -14,4 +14,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/stop_music_btn"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:text="음악 멈추기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/to_cofirm_btn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

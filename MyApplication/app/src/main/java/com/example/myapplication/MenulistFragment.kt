@@ -1,4 +1,4 @@
-package com.example.forlecture
+package com.example.myapplication
 
 import android.content.Context
 import android.os.Bundle
@@ -17,7 +17,11 @@ class MenulistFragment: Fragment() {
         super.onAttach(context)
         dataInterface = context as DataInterface
     }
-    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         var view = inflater.inflate(R.layout.main_menulist_fragment,container,false)
 
         //argumets = getarguments
@@ -29,6 +33,13 @@ class MenulistFragment: Fragment() {
         toConfirm.setOnClickListener {
             dataInterface.datapass("컨펌 페이지로 이동 요청")
         }
+
+        val stopBtn = view.findViewById<Button>(R.id.stop_music_btn)
+        stopBtn!!.setOnClickListener {
+            val mainActivity = activity as MainActivity
+            mainActivity.musicServiceStop()
+        }
+
         return view
     }
 }

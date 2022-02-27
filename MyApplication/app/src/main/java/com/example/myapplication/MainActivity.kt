@@ -1,5 +1,6 @@
-package com.example.forlecture
+package com.example.myapplication
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,12 +30,22 @@ class MainActivity : AppCompatActivity(), DataInterface {
         }
     }
 
+    fun musicServiceStart() {
+            val intent = Intent(this, MusicService::class.java)
+            startService(intent)
+        }
+
+    fun musicServiceStop() {
+            val intent = Intent(this, MusicService::class.java)
+            stopService(intent)
+    }
+
     fun toConfirmFragment(){
         var fragment = ConfirmFragment()
         var myBundle = Bundle()
         myBundle.putString("title","컨펌으로 이동")
         fragment.arguments = myBundle
-        supportFragmentManager.beginTransaction().replace(R.id.framentArea,fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentArea,fragment).commit()
     }
 
     fun toMenuListFragment(){
@@ -42,7 +53,7 @@ class MainActivity : AppCompatActivity(), DataInterface {
         var myBundle = Bundle()
         myBundle.putString("title","메뉴 리스트로 이동")
         fragment.arguments = myBundle
-        supportFragmentManager.beginTransaction().replace(R.id.framentArea,fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentArea,fragment).commit()
     }
 
     override fun datapass(data: String) {

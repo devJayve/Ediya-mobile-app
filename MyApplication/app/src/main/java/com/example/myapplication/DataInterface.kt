@@ -1,4 +1,4 @@
-package com.example.forlecture
+package com.example.myapplication
 
 interface DataInterface {
 
