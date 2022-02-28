@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     fun serviceBind() {
         val intent = Intent(this, BasketService::class.java)
-        startService(Intent(this, ForegroundService::class.java))
         bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
@@ -46,10 +45,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun updateNotification() {
+        var serviceIntent = Intent(this, ForegroundService::class.java)
+        serviceIntent.putIntegerArrayListExtra("basketData",loadNotificationInformation())
+        startService(serviceIntent)
+    }
+
     fun passBasketData(menuName : String, menuTemp: String, menuSize : String,
                        menuPrice : Int, menuTotalPrice : Int, menuImg : String) {
         if (isConService) {
             basketService?.getMenuData(menuName,menuTemp,menuSize,menuPrice,menuTotalPrice,menuImg)
+            loadNotificationInformation()
         }
     }
 
@@ -62,9 +68,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun loadNotificationInformation() : ArrayList<Int>{
+        var basketArrayList = basketService!!.getNotificationInformation()
+        Log.d("Message","${basketArrayList!![0]}")
+        return basketArrayList
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
+
+        startService(Intent(this, ForegroundService::class.java))
 
         var fragment = MainFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_area, fragment).commit()
@@ -138,5 +152,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         transaction.commit()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        serviceUnBind()
     }
 }

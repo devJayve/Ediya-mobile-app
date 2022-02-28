@@ -110,6 +110,7 @@ class menu_detail_fragment : Fragment() {
                 }
 
                 mainActivity!!.passBasketData(menuName.toString(),menuTemp,menuSize,menuPriceInt,totalcost,menuImg)
+                mainActivity!!.updateNotification()
                 Toast.makeText(mainActivity, "장바구니에 메뉴를 담았습니다.", Toast.LENGTH_SHORT).show()
                 intoBasketDialog()
             }

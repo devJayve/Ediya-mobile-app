@@ -61,7 +61,7 @@ class basket_fragment : Fragment() {
         basketTotalPrice.text = totalPriceTxt.toString().plus("원")
 
         if (name != null) {
-            for ((index, i) in (0 until name.size).withIndex()) {
+            for ((i) in (0 until name.size).withIndex()) {
                 val layoutInflater =
                     mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 val containView = layoutInflater.inflate(R.layout.bakset_menu_layout, null)

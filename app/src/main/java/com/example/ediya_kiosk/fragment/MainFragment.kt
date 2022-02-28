@@ -14,6 +14,7 @@ import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.recycler_view.MainRvAdapter
 import com.example.ediya_kiosk.recycler_view.MenuData
 import com.example.ediya_kiosk.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_fragment.*
 
 class MainFragment : Fragment() {
@@ -43,7 +44,7 @@ class MainFragment : Fragment() {
         var view = inflater.inflate(R.layout.main_fragment, container, false)
 
         // basket 으로 이동
-        var basketBtn = view.findViewById<Button>(R.id.basketBtn)
+        var basketBtn = view.findViewById<FloatingActionButton>(R.id.basketBtn)
         basketBtn.setOnClickListener {
             mainActivity!!.loadBasketFrag()
         }
@@ -60,12 +61,6 @@ class MainFragment : Fragment() {
                 fragment.arguments = bundle
                 mainActivity?.openOtherFragmentforBundle(2,fragment)}
         })
-
-        // payment 로 이동
-        var paymentBtn = view.findViewById<Button>(R.id.paymentBtn)
-        paymentBtn.setOnClickListener {
-            mainActivity!!.serviceUnBind()
-        }
 
         return view
     }

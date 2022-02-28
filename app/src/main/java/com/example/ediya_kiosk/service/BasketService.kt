@@ -61,6 +61,17 @@ class BasketService : Service() {
         return frag
     }
 
+    fun getNotificationInformation(): ArrayList<Int> {
+        var totalPriceTxt = 0
+        var menuNum = 0
+        for (price in menuTotalPriceList!!) {
+            menuNum++
+            totalPriceTxt += price
+        }
+        Log.d("Message", "1) $menuNum, $totalPriceTxt")
+        return arrayListOf(menuNum, totalPriceTxt)
+    }
+
     override fun onCreate() {
         super.onCreate()
         menuNameList = arrayListOf()
