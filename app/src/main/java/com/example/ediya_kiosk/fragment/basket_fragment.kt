@@ -48,6 +48,12 @@ class basket_fragment : Fragment() {
              mainActivity!!.openOtherFragmentforBundle(5,this)
          }
 
+        //payment 로 이동
+        val paymentBtn = view.findViewById<Button>(R.id.orderBtnInBasket)
+        paymentBtn.setOnClickListener {
+            mainActivity!!.loadPaymentFrag()
+        }
+
         return view
     }
 

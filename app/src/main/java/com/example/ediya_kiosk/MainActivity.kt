@@ -61,11 +61,16 @@ class MainActivity : AppCompatActivity() {
 
     fun loadBasketFrag() {
         if (isConService) {
-            var basket_frag = basketService!!.putMenuData()
+            var basket_frag = basketService!!.putMenuData(basket_fragment())
             var transaction = this.supportFragmentManager.beginTransaction()
 
             transaction.replace(R.id.fragment_area, basket_frag).commit()
         }
+    }
+
+    fun loadPaymentFrag() {
+        var payment_frag = basketService!!.putMenuData(PaymentFragment())
+        this.supportFragmentManager.beginTransaction().replace(R.id.fragment_area,payment_frag).commit()
     }
 
     fun loadNotificationInformation() : ArrayList<Int>{
@@ -82,22 +87,6 @@ class MainActivity : AppCompatActivity() {
 
         var fragment = MainFragment()
         supportFragmentManager.beginTransaction().replace(R.id.fragment_area, fragment).commit()
-    }
-
-    fun openOtherFragment(int: Int){
-        val transaction = supportFragmentManager.beginTransaction()
-        when(int){
-            1 -> {
-                transaction.add(R.id.fragment_area, basket_fragment())
-                transaction.addToBackStack(null)
-            }
-
-            3 -> {
-                transaction.add(R.id.fragment_area, menu_detail_fragment())
-                transaction.addToBackStack(null)
-            }
-        }
-        transaction.commit()
     }
 
     fun openOtherFragmentforBundle(int: Int,frag : Fragment) {
@@ -149,6 +138,9 @@ class MainActivity : AppCompatActivity() {
                     if (frag.isHidden) transaction.show(frag)
                     if (!main_frag.isHidden) transaction.hide(main_frag)
                     if (!detail_frag.isHidden) transaction.hide(main_frag)
+            }
+            7 -> {
+                transaction.replace(R.id.fragment_area,PaymentFragment())
             }
         }
         transaction.commit()

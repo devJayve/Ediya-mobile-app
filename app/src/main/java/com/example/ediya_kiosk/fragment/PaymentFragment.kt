@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.HorizontalScrollView
+import android.widget.RadioGroup
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.R
@@ -33,36 +34,44 @@ class PaymentFragment : Fragment() {
 
         val ediyaPayBtn = view.findViewById<Button>(R.id.ediyaPayBtn)
         val otherPayBtn = view.findViewById<Button>(R.id.otherPayBtn)
+        var orderBtn = view.findViewById<Button>(R.id.paymentBtn)
         val payContainer = view.findViewById<HorizontalScrollView>(R.id.ediyaPayContainer)
-        val otherPayContainer = view.findViewById<HorizontalScrollView>(R.id.otherPayContainer)
+        val otherPayContainer = view.findViewById<RadioGroup>(R.id.otherPayContainer)
+
+        payContainer.visibility = View.GONE
+        otherPayContainer.visibility = View.GONE
 
         ediyaPayBtn.setOnClickListener {
-            setPayContent(ediyaPayBtn,payContainer)
+            setPayContent(ediyaPayBtn)
         }
 
         otherPayBtn.setOnClickListener {
-            setPayContent(otherPayBtn,otherPayContainer)
+            setPayContent(otherPayBtn)
+        }
+
+        orderBtn.setOnClickListener {
+            payTotalCost()
         }
 
 
         return view
     }
 
-    fun setPayContent (btn : Button, container : HorizontalScrollView) {
-        val layoutInflater =
-            mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    private fun setPayContent (btn : Button) {
         btn?.isSelected = true
         if (btn == ediyaPayBtn) {
-            otherPayBtn?.isSelected = false
-            var payContainView = layoutInflater.inflate(R.layout.payment_ediyapay_layout, null)
-            container.addView(payContainView)
-        } else {
-            ediyaPayBtn?.isSelected = false
-            var payContainView = layoutInflater.inflate(R.layout.payment_ediyapay_layout, null)
-            container.addView(payContainView)
+            otherPayBtn.isSelected = false
+            ediyaPayContainer.visibility = View.VISIBLE
+            otherPayContainer.visibility = View.GONE
+            }
+        else {
+            ediyaPayBtn.isSelected = false
+            otherPayContainer.visibility = View.VISIBLE
+            ediyaPayContainer.visibility = View.GONE
         }
+    }
 
-
+    fun payTotalCost() {
 
     }
 }

@@ -146,6 +146,12 @@ class menu_detail_fragment : Fragment() {
             }
         }
 
+        // 결제창 전환
+        val paymentBtn = view.findViewById<Button>(R.id.goPaymentBtn)
+        paymentBtn.setOnClickListener {
+            mainActivity!!.loadPaymentFrag()
+        }
+
         //뒤로가기
         val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn)
         backBtn.setOnClickListener {

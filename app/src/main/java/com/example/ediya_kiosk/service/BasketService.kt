@@ -44,9 +44,8 @@ class BasketService : Service() {
         menuImgList.add(menuImg)
     }
 
-    fun putMenuData() : Fragment {
+    fun putMenuData(frag : Fragment) : Fragment {
         var bundle = Bundle()
-        var frag = basket_fragment()
 
         bundle.putStringArrayList("nameList",menuNameList)
         Log.d("Message","$menuNameList add in BasketService")

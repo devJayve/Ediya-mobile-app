@@ -49,6 +49,7 @@ class MainFragment : Fragment() {
             mainActivity!!.loadBasketFrag()
         }
 
+
         myadapter.setItemClickListener(object : MainRvAdapter.ItemClickListener {
             override fun onClick(view: View, position: Int) {
                 Log.d("Message", "${position}번 리스트 선택")
