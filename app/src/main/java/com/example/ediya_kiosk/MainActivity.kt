@@ -55,7 +55,6 @@ class MainActivity : AppCompatActivity() {
                        menuPrice : Int, menuTotalPrice : Int, menuImg : String) {
         if (isConService) {
             basketService?.getMenuData(menuName,menuTemp,menuSize,menuPrice,menuTotalPrice,menuImg)
-            loadNotificationInformation()
         }
     }
 

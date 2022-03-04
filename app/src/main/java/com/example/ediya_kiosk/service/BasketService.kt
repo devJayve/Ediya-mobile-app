@@ -77,6 +77,7 @@ class BasketService : Service() {
         menuSizeList.clear()
         menuPriceList.clear()
         menuImgList.clear()
+        menuTotalPriceList.clear()
     }
 
     override fun onCreate() {

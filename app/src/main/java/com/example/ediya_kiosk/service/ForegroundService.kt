@@ -23,7 +23,7 @@ class ForegroundService : Service() {
 
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
         var notiInformation = intent.getIntegerArrayListExtra("basketData")
-        Log.d("Message", "$notiInformation")
+        Log.d("Message", "notification $notiInformation")
         if (intent?.action != null && intent.action!!.equals(
                 ACTION_STOP, ignoreCase = true)) {
                     stopForeground(true)
@@ -82,6 +82,7 @@ class ForegroundService : Service() {
             var menuNum = notiInformation[0]
             var menuPrice = notiInformation[1]
             var content = "장바구니 메뉴 개수 : $menuNum | 총 가격 : $menuPrice 원"
+            Log.d("Message", "$content")
             generateForegroundNotification(content)
         }
         else generateForegroundNotification("장바구니 메뉴 개수 : 0 | 총 가격 : 0 원")
