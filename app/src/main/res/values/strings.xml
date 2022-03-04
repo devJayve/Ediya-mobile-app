@@ -222,4 +222,10 @@
         <item>@drawable/bakery_drawable_8</item>
     </array>
 
+    <string-array name="spinner_mobile">
+        <item>SKT</item>
+        <item>KT</item>
+        <item>LG U+</item>
+    </string-array>
+
 </resources>

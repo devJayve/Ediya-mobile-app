@@ -71,6 +71,14 @@ class BasketService : Service() {
         return arrayListOf(menuNum, totalPriceTxt)
     }
 
+    fun initializeList() {
+        menuNameList.clear()
+        menuTempList.clear()
+        menuSizeList.clear()
+        menuPriceList.clear()
+        menuImgList.clear()
+    }
+
     override fun onCreate() {
         super.onCreate()
         menuNameList = arrayListOf()
@@ -82,14 +90,6 @@ class BasketService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int { //서비스가 실행될 때
-
-        // TO::DO 내가 서비스를 통해 하고 싶은 것
-        //backgroundMusic.start()
-
         return super.onStartCommand(intent, flags, startId)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }

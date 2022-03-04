@@ -1,16 +1,19 @@
 package com.example.ediya_kiosk.fragment
 
+import android.app.AlertDialog
 import android.content.Context
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.HorizontalScrollView
-import android.widget.RadioGroup
+import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.ediya_kiosk.CouponOptionDialog
 import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.R
+import com.example.ediya_kiosk.optionDialog
 import kotlinx.android.synthetic.main.menu_detail_layout.*
 import kotlinx.android.synthetic.main.payment_layout.*
 
@@ -34,12 +37,63 @@ class PaymentFragment : Fragment() {
 
         val ediyaPayBtn = view.findViewById<Button>(R.id.ediyaPayBtn)
         val otherPayBtn = view.findViewById<Button>(R.id.otherPayBtn)
-        var orderBtn = view.findViewById<Button>(R.id.paymentBtn)
+        var orderBtn = view.findViewById<Button>(R.id.paymentBtnInPayment)
+        var phoneEditText = view.findViewById<EditText>(R.id.phoneNumberET)
+        var phoneCheckBtn = view.findViewById<Button>(R.id.phoneCheckBtn)
         val payContainer = view.findViewById<HorizontalScrollView>(R.id.ediyaPayContainer)
         val otherPayContainer = view.findViewById<RadioGroup>(R.id.otherPayContainer)
 
         payContainer.visibility = View.GONE
         otherPayContainer.visibility = View.GONE
+
+        //phone spinner
+        var mobileList = resources.getStringArray(R.array.spinner_mobile)
+        var mobileSpinner = view.findViewById<Spinner>(R.id.mobileSpinner)
+        mobileSpinner?.adapter = ArrayAdapter(mainActivity,
+            android.R.layout.simple_spinner_item,mobileList) as SpinnerAdapter
+        mobileSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val type = parent?.getItemAtPosition(position).toString()
+            }
+        }
+
+        //phone
+        phoneEditText?.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+        phoneCheckBtn.setOnClickListener {
+            if (phoneEditText.length() == 0) {
+                loadAlertDialog("전화번호를 입력해주세요.")
+            }
+            else if(phoneEditText.length() < 11) {
+                loadAlertDialog("전화번호 11자리를 입력해주세요.")
+            }
+            else {
+                loadAlertDialog("전화번호가 확인되었습니다.")
+                !phoneCheckBtn.isSelected
+            }
+        }
+
+        //coupon
+        val couponBtn = view.findViewById<Button>(R.id.showCouponBtn)
+        couponBtn.setOnClickListener {
+            val dialog = CouponOptionDialog(mainActivity)
+            dialog.showDialog(mainActivity)
+            dialog.setOnClickListener(object : CouponOptionDialog.OnDialogClickListener {
+                override fun onClicked(cost: Int) {
+
+                }
+            })
+        }
+
+
+        //return Main
+        orderBtn.setOnClickListener {
+            Log.d("Message","orderBtn click")
+            mainActivity!!.loadFrag(3)
+            Toast.makeText(mainActivity,"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show()
+        }
 
         ediyaPayBtn.setOnClickListener {
             setPayContent(ediyaPayBtn)
@@ -48,11 +102,6 @@ class PaymentFragment : Fragment() {
         otherPayBtn.setOnClickListener {
             setPayContent(otherPayBtn)
         }
-
-        orderBtn.setOnClickListener {
-            payTotalCost()
-        }
-
 
         return view
     }
@@ -71,7 +120,12 @@ class PaymentFragment : Fragment() {
         }
     }
 
-    fun payTotalCost() {
 
+    private fun loadAlertDialog(message : String) {
+        val phoneDialogBuilder = AlertDialog.Builder(mainActivity)
+        //phoneDialogBuilder.setTitle("Error")
+        phoneDialogBuilder.setMessage("$message")
+        phoneDialogBuilder.setPositiveButton("확인",null)
+        phoneDialogBuilder.show()
     }
 }

@@ -100,7 +100,6 @@ class optionDialog(context: Context)
             dialog.cancelBtn.setOnClickListener {
                 dialog.dismiss()
             }
-
         }
     }
 

@@ -73,6 +73,30 @@ class MainActivity : AppCompatActivity() {
         this.supportFragmentManager.beginTransaction().replace(R.id.fragment_area,payment_frag).commit()
     }
 
+    fun loadFrag(frag_num : Int) {
+        Log.d("Message","loadFrag($frag_num)")
+        var transaction = this.supportFragmentManager.beginTransaction()
+        when (frag_num) {
+            1 -> {
+                var basket_frag = basketService!!.putMenuData(basket_fragment())
+                transaction.replace(R.id.fragment_area, basket_frag).commit()
+            }
+            2 -> {
+                var payment_frag = basketService!!.putMenuData(PaymentFragment())
+                transaction.replace(R.id.fragment_area, payment_frag).commit()
+            }
+            3 -> {
+                Log.d("Message","loadFrag2(3)")
+                basketService!!.initializeList()
+                updateNotification()
+                transaction.replace(R.id.fragment_area, MainFragment()).commit()
+            }
+            else -> {
+                Log.d("Message","null")
+            }
+        }
+    }
+
     fun loadNotificationInformation() : ArrayList<Int>{
         var basketArrayList = basketService!!.getNotificationInformation()
         Log.d("Message","${basketArrayList!![0]}")
