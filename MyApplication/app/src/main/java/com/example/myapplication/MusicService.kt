@@ -15,7 +15,7 @@ class MusicService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        backgroundMusic = MediaPlayer.create(this, R.raw.bgm)
+        //backgroundMusic = MediaPlayer.create(this, R.raw.bgm)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int { //서비스가 실행될 때
