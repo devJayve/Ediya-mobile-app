@@ -6,7 +6,7 @@ import android.widget.*
 import kotlinx.android.synthetic.main.cost_option_dialog_layout.*
 import android.content.Context as Context
 
-class optionDialog(context: Context)
+class optionDialog(context: Context,num : Int)
 {
     private val dialog = Dialog(context)
     private lateinit var onClickListener: OnDialogClickListener

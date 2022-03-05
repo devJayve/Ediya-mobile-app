@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#13235D"
+    >
+
+    <ImageView
+        android:id="@+id/logo_Image"
+        android:layout_width="359dp"
+        android:layout_height="377dp"
+        android:layout_marginTop="56dp"
+        android:src="@drawable/eidiya_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.292" />
+
+
+    <TextView
+        android:id="@+id/idTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp"
+        android:text="user ID"
+        android:textColor="#A9FFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_Image" />
+
+    <EditText
+        android:id="@+id/idET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textColorHint="#80FFFFFF"
+        android:selectAllOnFocus="true"
+        android:maxLength="10"
+        android:backgroundTint="#80FFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idTV" />
+
+    <TextView
+        android:id="@+id/pwTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp"
+        android:text="Password"
+        android:textColor="#A9FFFFFF"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idET" />
+
+    <EditText
+        android:id="@+id/pwET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:textColorHint="#80FFFFFF"
+        android:backgroundTint="#80FFFFFF"
+        android:selectAllOnFocus="true"
+        android:maxLength="20"
+        android:inputType="textPassword"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pwTV"/>
+    <Button
+        android:id="@+id/loginBtn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="10dp"
+        android:text="로그인"
+        android:textStyle="bold"
+        android:textColor="@color/ediya_color"
+        android:textAllCaps="false"
+        android:background="@drawable/rounded_corner_ediyacolor_stroke"
+        app:layout_constraintTop_toBottomOf="@id/pwET"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginRight="10dp"
+        android:text="신규 가입이신가요?"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        android:textAllCaps="false"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn"
+        app:layout_constraintRight_toLeftOf="@id/registerBtn"/>
+    <Button
+        android:id="@+id/registerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginLeft="100dp"
+        android:text="회원가입"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:background="00000000"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/loginBtn"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

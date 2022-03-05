@@ -1,11 +1,9 @@
 package com.example.ediya_kiosk
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.example.ediya_kiosk.service.ForegroundService
 import kotlinx.android.synthetic.main.start_layout.*
 
 class StartActivity : AppCompatActivity() {
@@ -13,7 +11,7 @@ class StartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.start_layout)
+        setContentView(R.layout.login_layout)
 
         var takeInBtn = findViewById<Button>(R.id.takeInBtn)
         var takeOutBtn = findViewById<Button>(R.id.takeOutBtn)

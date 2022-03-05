@@ -76,7 +76,7 @@ class menu_detail_fragment : Fragment() {
         //option dialog 띄우기
         val goOptionBtn = view.findViewById<Button>(R.id.costOptionBtn)
         goOptionBtn.setOnClickListener {
-            val dialog = optionDialog(mainActivity)
+            val dialog = optionDialog(mainActivity,1)
             dialog.showDialog(mainActivity)
             dialog.setOnClickListener(object : optionDialog.OnDialogClickListener {
                 override fun onClicked(cost: Int) {
@@ -142,7 +142,6 @@ class menu_detail_fragment : Fragment() {
                 menuOutputNum.text = menuNum.toString()
                 totalcost -= (totalcost / (menuNum + 1))
                 menucost.text = (totalcost.toString()).plus("원")
-
             }
         }
 

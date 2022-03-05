@@ -86,14 +86,18 @@ class MainActivity : AppCompatActivity() {
             }
             3 -> {
                 Log.d("Message","loadFrag2(3)")
-                basketService!!.initializeList()
-                updateNotification()
+                initialize()
                 transaction.replace(R.id.fragment_area, MainFragment()).commit()
             }
             else -> {
                 Log.d("Message","null")
             }
         }
+    }
+
+    fun initialize() {
+        basketService!!.initializeList()
+        updateNotification()
     }
 
     fun loadNotificationInformation() : ArrayList<Int>{

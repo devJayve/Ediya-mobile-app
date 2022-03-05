@@ -2,6 +2,7 @@ package com.example.ediya_kiosk.fragment
 
 import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
@@ -71,20 +72,34 @@ class PaymentFragment : Fragment() {
             }
             else {
                 loadAlertDialog("전화번호가 확인되었습니다.")
-                !phoneCheckBtn.isSelected
+                !phoneCheckBtn.isClickable
             }
         }
 
         //coupon
         val couponBtn = view.findViewById<Button>(R.id.showCouponBtn)
+        var couponNum : Int? = null
         couponBtn.setOnClickListener {
-            val dialog = CouponOptionDialog(mainActivity)
+            Log.d("Message", "click couponBtn $couponNum")
+            val dialog = CouponOptionDialog(mainActivity,couponNum)
             dialog.showDialog(mainActivity)
             dialog.setOnClickListener(object : CouponOptionDialog.OnDialogClickListener {
-                override fun onClicked(cost: Int) {
-
+                override fun onClicked(num: Int) {
+                    Log.d("Message", "onClicked coupon num $num")
+                    couponNum = num
                 }
             })
+        }
+
+
+        //back btn
+        val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn)
+        backBtn.setOnClickListener {
+            val backDialog = AlertDialog.Builder(mainActivity)
+            backDialog.setMessage("결제를 취소하시겠습니까 ?")
+            backDialog.setPositiveButton("확인",null)
+            backDialog.setNegativeButton("취소",null)
+            backDialog.show()
         }
 
 

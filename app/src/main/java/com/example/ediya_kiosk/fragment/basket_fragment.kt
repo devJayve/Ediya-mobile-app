@@ -54,6 +54,12 @@ class basket_fragment : Fragment() {
             mainActivity!!.loadPaymentFrag()
         }
 
+        val removeAllBtn = view.findViewById<Button>(R.id.removeAllBtn)
+        removeAllBtn.setOnClickListener {
+            mainActivity!!.initialize()
+            mainActivity!!.loadFrag(1)
+        }
+
         return view
     }
 

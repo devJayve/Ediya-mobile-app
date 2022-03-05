@@ -15,31 +15,35 @@
             <RadioButton
                 android:id="@+id/couponBtn1"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:button="@null"
-                android:background="@drawable/coupon_selector"/>
+                android:background="@drawable/coupon_selector"
+                android:layout_marginBottom="10dp"/>
             <RadioButton
                 android:id="@+id/couponBtn2"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:button="@null"
-                android:background="@drawable/coupon_selector"/>
+                android:background="@drawable/coupon_selector"
+                android:layout_marginBottom="10dp"/>
             <RadioButton
                 android:id="@+id/couponBtn3"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:button="@null"
-                android:background="@drawable/coupon_selector"/>
+                android:background="@drawable/coupon_selector"
+                android:layout_marginBottom="10dp"/>
             <RadioButton
                 android:id="@+id/couponBtn4"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:button="@null"
-                android:background="@drawable/coupon_selector"/>
+                android:background="@drawable/coupon_selector"
+                android:layout_marginBottom="10dp"/>
             <RadioButton
                 android:id="@+id/couponBtn5"
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="150dp"
                 android:button="@null"
                 android:background="@drawable/coupon_selector"
                 android:layout_marginBottom="50dp"/>
