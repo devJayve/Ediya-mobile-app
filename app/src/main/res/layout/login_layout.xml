@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="55dp"
-        android:text="user ID"
+        android:text="아이디"
         android:textColor="#A9FFFFFF"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo_Image" />
@@ -50,7 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="55dp"
-        android:text="Password"
+        android:text="비밀번호"
         android:textColor="#A9FFFFFF"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idET" />
@@ -97,7 +97,7 @@
         android:id="@+id/registerBtn"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginLeft="100dp"
+        android:layout_marginLeft="120dp"
         android:text="회원가입"
         android:textSize="10dp"
         android:textStyle="bold"
