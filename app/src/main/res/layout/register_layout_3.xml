@@ -4,14 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F4F4F4"
+    >
 
     <ImageButton
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="00000000"
+        android:background="#00000000"
         android:src="@drawable/back_icon_black"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="60dp"
         android:text="회원 정보를"
         android:textColor="@color/black"
         android:textSize="30sp"
@@ -70,7 +72,7 @@
             android:orientation="horizontal"
             android:paddingBottom="5dp">
             <EditText
-                android:id="@+id/ET1"
+                android:id="@+id/idETInRegister"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
@@ -78,6 +80,7 @@
                 android:textSize="15sp"
                 android:layout_weight="6"/>
             <Button
+                android:id="@+id/overCheckBtn"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:text="중복확인"
@@ -94,6 +97,7 @@
             android:textSize="20sp"
             android:textColor="@color/black"/>
         <EditText
+            android:id="@+id/pwETInRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="20자 이내/한글,영문자,특수기호 사용"
@@ -108,6 +112,7 @@
             android:textSize="20sp"
             android:textColor="@color/black"/>
         <EditText
+            android:id="@+id/rePwETInRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="비밀번호 재입력"
@@ -127,6 +132,7 @@
             android:orientation="horizontal"
             android:gravity="center">
             <EditText
+                android:id="@+id/emailET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="이메일 주소"
@@ -138,28 +144,21 @@
                 android:layout_height="wrap_content"
                 android:text="@"/>
             <Spinner
+                android:id="@+id/emailSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"/>
-
-
-
         </LinearLayout>
-
-
-
     </LinearLayout>
 
-
-
     <Button
+        android:id="@+id/nextStepBtn3"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:text="다음"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@color/ediya_color"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

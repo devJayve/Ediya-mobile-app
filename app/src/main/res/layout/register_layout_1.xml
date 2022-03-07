@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F4F4"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageButton
-        android:id="@+id/backBtn"
+        android:id="@+id/backBtnInRegister1"
          android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -24,7 +25,7 @@
         android:layout_marginTop="50dp"
         android:src="@drawable/ediya_logo_white"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/backBtn" />
+        app:layout_constraintTop_toBottomOf="@id/backBtnInRegister1" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -59,7 +60,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <RadioButton
-        android:id="@+id/allClickBtn"
+        android:id="@+id/allAgreeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -75,7 +76,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="15dp"
         android:background="#858585"
-        app:layout_constraintTop_toBottomOf="@id/allClickBtn" />
+        app:layout_constraintTop_toBottomOf="@id/allAgreeBtn" />
     <LinearLayout
         android:id="@+id/agree_linear1"
         android:layout_width="match_parent"
@@ -93,7 +94,7 @@
             android:layout_gravity="center"
             android:layout_weight="5"/>
         <ImageButton
-            android:id="@+id/intoBtn1"
+            android:id="@+id/agreeIntoBtn1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/back_icon_black"
@@ -117,6 +118,7 @@
             android:text="개인정보 수집 및 이용 동의(필수)"
             android:layout_weight="5"/>
         <ImageButton
+            android:id="@+id/agreeIntoBtn2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:src="@drawable/back_icon_black"
@@ -144,6 +146,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Button
+        android:id="@+id/nextStepBtn1"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="다음"
