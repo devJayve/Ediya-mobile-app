@@ -57,7 +57,7 @@ class PaymentFragment : Fragment() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val type = parent?.getItemAtPosition(position).toString()
+                var doamain = mobileSpinner.selectedItem.toString()
             }
         }
 

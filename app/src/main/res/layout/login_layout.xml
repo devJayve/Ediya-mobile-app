@@ -66,6 +66,7 @@
         android:textColorHint="#80FFFFFF"
         android:backgroundTint="#80FFFFFF"
         android:selectAllOnFocus="true"
+        android:textColor="@color/white"
         android:maxLength="20"
         android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="parent"

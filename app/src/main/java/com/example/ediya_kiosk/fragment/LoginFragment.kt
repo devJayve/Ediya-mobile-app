@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.LoginActivity
 import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.R
+import kotlinx.android.synthetic.main.login_layout.*
 
 class LoginFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
+    private var isExistBlank = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -30,7 +33,7 @@ class LoginFragment : Fragment() {
         var registerBtn = view?.findViewById<Button>(R.id.registerBtn)
 
         loginBtn!!.setOnClickListener {
-            loginActivity!!.login()
+            loginEvent(view)
         }
 
         registerBtn!!.setOnClickListener {
@@ -38,5 +41,17 @@ class LoginFragment : Fragment() {
         }
 
         return view
+    }
+
+    fun loginEvent(view: View) {
+        var loginId = view.findViewById<EditText>(R.id.idET).text.toString()
+        var loginPw = view.findViewById<EditText>(R.id.pwET).text.toString()
+
+        if (loginId.isEmpty() || loginPw.isEmpty()) {
+            isExistBlank = true
+        }
+        if
+        loginActivity!!.login()
+
     }
 }
