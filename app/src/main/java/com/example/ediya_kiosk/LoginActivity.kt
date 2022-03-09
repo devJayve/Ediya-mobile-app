@@ -3,7 +3,6 @@ package com.example.ediya_kiosk
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import com.example.ediya_kiosk.fragment.*
 import kotlinx.android.synthetic.main.login_layout.*
 
@@ -25,25 +24,25 @@ class LoginActivity : AppCompatActivity() {
 
     fun register(step : Int) {
         var transaction = this.supportFragmentManager.beginTransaction()
-        var register_frag_1 = RegisterFragment_1st()
-        var register_frag_2 = RegisterFragment_2nd()
-        var register_frag_3 = RegisterFragment_3rd()
-        var register_frag_4 = RegisterFragment_4th()
+        var registerFrag1 = RegisterFirstFragment()
+        var registerFrag2 = RegisterSecondFragment()
+        var registerFrag3 = RegisterThirdFragment()
+        var registerFrag4 = RegisterForthFragment()
         when (step) {
             1 -> {
-                transaction.add(R.id.start_fragment_area, register_frag_1)
+                transaction.add(R.id.start_fragment_area, registerFrag1)
                 transaction.addToBackStack(null)
             }
             2 -> {
-                transaction.add(R.id.start_fragment_area, register_frag_2)
+                transaction.add(R.id.start_fragment_area, registerFrag2)
                 transaction.addToBackStack(null)
             }
             3 -> {
-                transaction.add(R.id.start_fragment_area, register_frag_3)
+                transaction.add(R.id.start_fragment_area, registerFrag3)
                 transaction.addToBackStack(null)
             }
             4 -> {
-                transaction.replace(R.id.start_fragment_area, register_frag_4)
+                transaction.replace(R.id.start_fragment_area, registerFrag4)
             }
             5 -> {
                 transaction.replace(R.id.start_fragment_area, LoginFragment())

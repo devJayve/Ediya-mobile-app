@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.LoginActivity
 import com.example.ediya_kiosk.R
 
-class RegisterFragment_4th : Fragment() {
+class RegisterForthFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
 
     override fun onAttach(context: Context) {

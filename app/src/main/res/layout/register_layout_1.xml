@@ -60,7 +60,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <RadioButton
-        android:id="@+id/allAgreeBtn"
+        android:id="@+id/termsAllAgreeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -76,7 +76,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="15dp"
         android:background="#858585"
-        app:layout_constraintTop_toBottomOf="@id/allAgreeBtn" />
+        app:layout_constraintTop_toBottomOf="@id/termsAllAgreeBtn" />
     <LinearLayout
         android:id="@+id/agree_linear1"
         android:layout_width="match_parent"
@@ -87,7 +87,7 @@
         app:layout_constraintTop_toBottomOf="@id/line"
         app:layout_constraintLeft_toLeftOf="parent">
         <RadioButton
-            android:id="@+id/agreeBtn1"
+            android:id="@+id/termsAgreeBtn_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="이용약관 동의(필수)"
@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@id/agree_linear1"
         app:layout_constraintLeft_toLeftOf="parent">
         <RadioButton
-            android:id="@+id/agreeBtn2"
+            android:id="@+id/termsAgreeBtn_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="개인정보 수집 및 이용 동의(필수)"
@@ -127,7 +127,7 @@
     </LinearLayout>
 
     <RadioButton
-        android:id="@+id/agreeBtn3"
+        android:id="@+id/termsAgreeBtn_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
@@ -136,13 +136,14 @@
         app:layout_constraintTop_toBottomOf="@id/agree_linear2"
         app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView
+        android:id="@+id/TV3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="47dp"
         android:layout_marginTop="5dp"
         android:text="다양한 프로모션 소식 및 신규매장 정보를 보내드립니다."
         android:textSize="12sp"
-        app:layout_constraintTop_toBottomOf="@id/agreeBtn3"
+        app:layout_constraintTop_toBottomOf="@id/termsAgreeBtn_3"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Button
@@ -153,6 +154,7 @@
         android:textSize="17sp"
         android:textColor="@color/white"
         android:background="@color/ediya_color"
+        app:layout_constraintBottom_toTopOf="TV3"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

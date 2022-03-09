@@ -69,6 +69,8 @@
         android:layout_marginTop="100dp"
         android:hint="이름 입력"
         android:textSize="20sp"
+        android:inputType="textPersonName"
+        android:maxLength="5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/TV3" />
 
@@ -84,11 +86,13 @@
         app:layout_constraintTop_toBottomOf="@id/nameInputET">
 
         <EditText
-            android:id="@+id/birthInputET1"
+            android:id="@+id/FrontBirthInputET"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="생년월일 6자리"
             android:textSize="20sp"
+            android:inputType="number"
+            android:maxLength="6"
             android:layout_weight="6"/>
 
         <TextView
@@ -100,7 +104,7 @@
             android:layout_weight="1"/>
 
         <EditText
-            android:id="@+id/birthInputET2"
+            android:id="@+id/BackBirthInputET"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
@@ -189,6 +193,8 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="40dp"
         android:hint="'-'없이 숫자만 입력"
+        android:inputType="number"
+        android:maxLength="11"
         app:layout_constraintTop_toBottomOf="@id/mobileRadioGroup"
         android:textSize="20sp" />
 

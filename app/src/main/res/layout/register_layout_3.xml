@@ -72,7 +72,7 @@
             android:orientation="horizontal"
             android:paddingBottom="5dp">
             <EditText
-                android:id="@+id/idETInRegister"
+                android:id="@+id/idInRegisterET"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="15dp"
@@ -80,7 +80,7 @@
                 android:textSize="15sp"
                 android:layout_weight="6"/>
             <Button
-                android:id="@+id/overCheckBtn"
+                android:id="@+id/idOverlapCheckBtn"
                 android:layout_width="0dp"
                 android:layout_height="40dp"
                 android:text="중복확인"
@@ -97,7 +97,7 @@
             android:textSize="20sp"
             android:textColor="@color/black"/>
         <EditText
-            android:id="@+id/pwETInRegister"
+            android:id="@+id/pwInRegisterET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="20자 이내/한글,영문자,특수기호 사용"
@@ -112,7 +112,7 @@
             android:textSize="20sp"
             android:textColor="@color/black"/>
         <EditText
-            android:id="@+id/rePwETInRegister"
+            android:id="@+id/rePwInRegisterET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="비밀번호 재입력"
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:text="@"/>
             <Spinner
-                android:id="@+id/emailSpinner"
+                android:id="@+id/domainSpinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"/>
