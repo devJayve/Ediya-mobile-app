@@ -60,7 +60,7 @@
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <RadioButton
-        android:id="@+id/termsAllAgreeBtn"
+        android:id="@+id/termsAllAgree_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -76,7 +76,7 @@
         android:layout_height="1dp"
         android:layout_marginTop="15dp"
         android:background="#858585"
-        app:layout_constraintTop_toBottomOf="@id/termsAllAgreeBtn" />
+        app:layout_constraintTop_toBottomOf="@id/termsAllAgree_Btn" />
     <LinearLayout
         android:id="@+id/agree_linear1"
         android:layout_width="match_parent"
@@ -144,6 +144,8 @@
         android:text="다양한 프로모션 소식 및 신규매장 정보를 보내드립니다."
         android:textSize="12sp"
         app:layout_constraintTop_toBottomOf="@id/termsAgreeBtn_3"
+        app:layout_constraintBottom_toTopOf="@id/nextStepBtn1"
+        android:layout_marginBottom="130dp"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
     <Button
@@ -154,7 +156,6 @@
         android:textSize="17sp"
         android:textColor="@color/white"
         android:background="@color/ediya_color"
-        app:layout_constraintBottom_toTopOf="TV3"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 

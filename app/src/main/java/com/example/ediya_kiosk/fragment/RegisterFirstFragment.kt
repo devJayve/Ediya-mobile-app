@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.LoginActivity
 import com.example.ediya_kiosk.R
+import kotlinx.android.synthetic.main.register_layout_1.*
 
 class RegisterFirstFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
@@ -30,7 +31,7 @@ class RegisterFirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.register_layout_1, container, false)
-        val termsAllAgreeBtn = view.findViewById<RadioButton>(R.id.termsAllAgreeBtn)
+        val termsAllAgreeBtn = view.findViewById<RadioButton>(R.id.termsAllAgree_Btn)
         val termsAgreeBtn1 = view.findViewById<RadioButton>(R.id.termsAgreeBtn_1)
         val termsAgreeBtn2 = view.findViewById<RadioButton>(R.id.termsAgreeBtn_2)
         val termsAgreeBtn3 = view.findViewById<RadioButton>(R.id.termsAgreeBtn_3)
@@ -39,14 +40,14 @@ class RegisterFirstFragment : Fragment() {
 
         termsAllAgreeBtn.setOnClickListener {
             isAllSelected = if (isAllSelected) {
-                termsAgreeBtn1.isSelected
-                termsAgreeBtn2.isSelected
-                termsAgreeBtn3.isSelected
+                termsAgreeBtn_1.isSelected
+                termsAgreeBtn_2.isSelected
+                termsAgreeBtn_3.isSelected
                 true
             } else {
-                termsAgreeBtn1.isSelected
-                termsAgreeBtn2.isSelected
-                termsAgreeBtn3.isSelected
+                termsAgreeBtn1.isChecked
+                termsAgreeBtn2.isChecked
+                termsAgreeBtn3.isChecked
                 false
             }
         }
@@ -67,8 +68,7 @@ class RegisterFirstFragment : Fragment() {
             backDialog.setPositiveButton("네", DialogInterface.OnClickListener { dialog, id ->
                 loginActivity!!.register(5)
             })
-            backDialog.setNegativeButton("계속 할래요", null)
-            backDialog.show()
+            backDialog.setNegativeButton("계속 할래요", null).show()
         }
 
 

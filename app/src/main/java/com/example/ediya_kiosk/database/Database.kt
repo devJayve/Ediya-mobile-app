@@ -8,10 +8,10 @@ class Database(context: Context?, name : String, factory: SQLiteDatabase.CursorF
     : SQLiteOpenHelper(context, name, factory, version) {
 
     override fun onCreate(database: SQLiteDatabase?) {
-        val accountSql = "CREATE TABLE IF NOT EXISTS account(id INTEGER, password TEXT, email TEXT,certification_num INTEGER,phone_num INTEGER)"
-        val basketSql = "CREATE TABLE IF NOT EXISTS basket(id INTEGER, basket_index PRIMARY KEY AUTOINCREMENT, INTEGER, menu_name TEXT, menu_price INTEGER, menu_count INTEGER, menu_size INTEGER, menu_temp BOOLEAN, option_cost INTEGER, total_cost INTEGER)"
-        val interfaceSql = "CREATE TABLE IF NOT EXISTS interface(id INTEGER, isMode BOOLEAN, isLanguage BOOLEAN)"
-        val orderSql = "CREATE TABLE IF NOT EXISTS basketOrder(id INTEGER PRIMARY KEY AUTOINCREMENT, order_index INTEGER PRIMARY KEY AUTOINCREMENT, menu_name TEXT, menu_price INTEGER, menu_count INTEGER)"
+        val accountSql = "CREATE TABLE IF NOT EXISTS account(id TEXT, password TEXT, email TEXT, name TEXT,certification_num TEXT,phone_num TEXT)"
+        val basketSql = "CREATE TABLE IF NOT EXISTS basket(id TEXT, basket_index INTEGER PRIMARY KEY AUTOINCREMENT, menu_name TEXT, menu_price INTEGER, menu_count INTEGER, menu_size TEXT, menu_temp BOOLEAN, option_cost INTEGER, total_cost INTEGER)"
+        val interfaceSql = "CREATE TABLE IF NOT EXISTS interface(id TEXT, isMode BOOLEAN, isLanguage BOOLEAN)"
+        val orderSql = "CREATE TABLE IF NOT EXISTS basketOrder(id TEXT, order_index INTEGER PRIMARY KEY AUTOINCREMENT, menu_name TEXT, menu_price INTEGER, menu_count INTEGER)"
 
         database!!.execSQL(accountSql)
         database!!.execSQL(basketSql)

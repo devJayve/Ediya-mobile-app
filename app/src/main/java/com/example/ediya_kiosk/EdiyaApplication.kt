@@ -2,15 +2,13 @@ package com.example.ediya_kiosk
 
 import android.app.Application
 
-class App : Application() {
-
+class EdiyaApplication : Application() {
     companion object {
-        lateinit var instance: App
-            private set
+        lateinit var prefs: PreferenceUtil
     }
 
     override fun onCreate() {
+        prefs = PreferenceUtil(applicationContext)
         super.onCreate()
-        instance = this
     }
 }

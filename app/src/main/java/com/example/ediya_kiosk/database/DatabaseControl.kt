@@ -2,6 +2,7 @@ package com.example.ediya_kiosk.database
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 
 class DatabaseControl {
     fun readData(database : SQLiteDatabase, table : String, returnColumnList: ArrayList<String>, selectionList : ArrayList<String>,selectionArgsList :ArrayList<String>)
@@ -11,10 +12,10 @@ class DatabaseControl {
         var columnArray = returnColumnList.toArray(arrayOfNulls<String>(returnColumnList.size))
         var selectionArgsArray = selectionArgsList.toArray(arrayOfNulls<String>(selectionArgsList.size))
 
-        var whereSql = "${selectionList[0]} =?"
+        var whereSql = "${selectionList[0]}=?"
         if (selectionList.size > 1) {
-            for ((i) in (0 until selectionList.size).withIndex()) {
-                whereSql + "and ${selectionList[i+1]}"
+            for (i in 0 until selectionList.size) {
+                whereSql = whereSql.plus("and ${selectionList[i]}=?")
             }
         }
 
@@ -45,6 +46,7 @@ class DatabaseControl {
     fun createData(database: SQLiteDatabase, table : String, columnList : ArrayList<String>, valueList : ArrayList<String>) {
         var values = ContentValues().apply {
             for ((i) in (0 until columnList.size).withIndex()) {
+                Log.d("TAG","$i")
                 put(columnList[i],valueList[i])
             }
         }
