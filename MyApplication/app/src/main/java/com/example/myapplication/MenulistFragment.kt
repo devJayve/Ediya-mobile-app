@@ -24,7 +24,7 @@ class MenulistFragment: Fragment() {
     ): View {
         var view = inflater.inflate(R.layout.main_menulist_fragment,container,false)
 
-        //argumets = getarguments
+        //arguments = getArguments
         var requestValue = arguments?.getString("title")
 
         Log.d("Message",requestValue!!)
