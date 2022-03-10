@@ -12,7 +12,7 @@ import com.example.ediya_kiosk.*
 import kotlinx.android.synthetic.main.menu_detail_layout.*
 import android.os.Bundle as Bundle1
 
-class menu_detail_fragment : Fragment() {
+class MenuDetailFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
 
@@ -109,7 +109,7 @@ class menu_detail_fragment : Fragment() {
                     else -> "Venti"
                 }
 
-                mainActivity!!.passBasketData(menuName.toString(),menuTemp,menuSize,menuPriceInt,totalcost,menuImg)
+                mainActivity!!.passBasketData(menuName.toString(),menuTemp,menuSize,menuPriceInt.toString(),totalcost.toString(),menuImg)
                 mainActivity!!.updateNotification()
                 Toast.makeText(mainActivity, "장바구니에 메뉴를 담았습니다.", Toast.LENGTH_SHORT).show()
                 intoBasketDialog()

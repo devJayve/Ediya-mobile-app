@@ -32,8 +32,8 @@ class basket_fragment : Fragment() {
         var nameList = arguments?.getStringArrayList("nameList")
         var tempList  = arguments?.getStringArrayList("tempList")
         var sizeList = arguments?.getStringArrayList("sizeList")
-        var priceList = arguments?.getIntegerArrayList("priceList")
-        var totalPriceList = arguments?.getIntegerArrayList("totalPriceList")
+        var priceList = arguments?.getStringArrayList("priceList")
+        var totalPriceList = arguments?.getStringArrayList("totalPriceList")
         var imgList = arguments?.getStringArrayList("imgList")
         val basketTotalPrice = view.findViewById<TextView>(R.id.totalPriceTV)
 
@@ -64,11 +64,11 @@ class basket_fragment : Fragment() {
     }
 
     private fun setContent(layout: LinearLayout?, name:ArrayList<String>?, temp:ArrayList<String>?,size:ArrayList<String>?,
-                            price:ArrayList<Int>?,totalPrice:ArrayList<Int>?,img:ArrayList<String>?,basketTotalPrice:TextView) {
+                            price:ArrayList<String>?,totalPrice:ArrayList<String>?,img:ArrayList<String>?,basketTotalPrice:TextView) {
         // 총 가격 구해주기
         var totalPriceTxt = 0
         for (price in totalPrice!!) {
-            totalPriceTxt += price
+            totalPriceTxt += price.toInt()
         }
         basketTotalPrice.text = totalPriceTxt.toString().plus("원")
 
@@ -87,8 +87,8 @@ class basket_fragment : Fragment() {
                 menuName.text = name[i]
                 menuTemp.text = temp!![i].plus(" |")
                 menuSize.text = size!![i].plus(" |")
-                menuPrice.text = price!![i].toString().plus("원")
-                menuTotalPrice.text = totalPrice!![i].toString().plus("원")
+                menuPrice.text = price!![i].plus("원")
+                menuTotalPrice.text = totalPrice!![i].plus("원")
                 menuImg.setImageResource(img!![i].toInt())
                 layout?.addView(containView)
             }

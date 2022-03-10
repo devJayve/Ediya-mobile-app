@@ -4,17 +4,16 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.RadioButton
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.LoginActivity
 import com.example.ediya_kiosk.R
 import kotlinx.android.synthetic.main.register_layout_1.*
+
 
 class RegisterFirstFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
@@ -31,26 +30,13 @@ class RegisterFirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.register_layout_1, container, false)
-        val termsAllAgreeBtn = view.findViewById<RadioButton>(R.id.termsAllAgree_Btn)
-        val termsAgreeBtn1 = view.findViewById<RadioButton>(R.id.termsAgreeBtn_1)
-        val termsAgreeBtn2 = view.findViewById<RadioButton>(R.id.termsAgreeBtn_2)
-        val termsAgreeBtn3 = view.findViewById<RadioButton>(R.id.termsAgreeBtn_3)
+        var termsAllAgreeBtn = view.findViewById<CheckBox>(R.id.termsAllAgree_Btn)
+        var termsAgreeBtn1 = view.findViewById<CheckBox>(R.id.termsAgreeBtn_1)
+        var termsAgreeBtn2 = view.findViewById<CheckBox>(R.id.termsAgreeBtn_2)
+        var termsAgreeBtn3 = view.findViewById<CheckBox>(R.id.termsAgreeBtn_3)
         val nextPageBtn = view.findViewById<Button>(R.id.nextStepBtn1)
         val backPageBtn = view.findViewById<ImageButton>(R.id.backBtnInRegister1)
 
-        termsAllAgreeBtn.setOnClickListener {
-            isAllSelected = if (isAllSelected) {
-                termsAgreeBtn_1.isSelected
-                termsAgreeBtn_2.isSelected
-                termsAgreeBtn_3.isSelected
-                true
-            } else {
-                termsAgreeBtn1.isChecked
-                termsAgreeBtn2.isChecked
-                termsAgreeBtn3.isChecked
-                false
-            }
-        }
 
         nextPageBtn.setOnClickListener {
             if (!termsAgreeBtn1.isChecked || !termsAgreeBtn2.isChecked) {
@@ -60,6 +46,37 @@ class RegisterFirstFragment : Fragment() {
                 loginActivity!!.register(2)
             }
         }
+
+        //약관 동의
+        termsAllAgreeBtn.setOnCheckedChangeListener { buttonView, isChecked ->
+            when (isChecked){
+                true -> {
+                    Log.d("TAG","checked")
+                    if (termsAgreeBtn1.isChecked || termsAgreeBtn2.isChecked || termsAgreeBtn3.isChecked) {
+                        Log.d("TAG","check1")
+                        termsAgreeBtn1.isChecked = true
+                        termsAgreeBtn2.isChecked = true
+                        termsAgreeBtn3.isChecked = true
+                    } else if (!termsAgreeBtn1.isChecked && !termsAgreeBtn2.isChecked && !termsAgreeBtn3.isChecked){
+                        termsAgreeBtn1.isChecked = true
+                        termsAgreeBtn2.isChecked = true
+                        termsAgreeBtn3.isChecked = true
+                    }
+                }
+                false -> {
+                    if (!termsAgreeBtn1.isChecked || !termsAgreeBtn2.isChecked || !termsAgreeBtn3.isChecked) {
+                        termsAgreeBtn1.isChecked = false
+                        termsAgreeBtn2.isChecked = false
+                        termsAgreeBtn3.isChecked = false
+                    } else if (termsAgreeBtn1.isChecked && termsAgreeBtn2.isChecked && termsAgreeBtn3.isChecked){
+                        termsAgreeBtn1.isChecked = false
+                        termsAgreeBtn2.isChecked = false
+                        termsAgreeBtn3.isChecked = false
+                    }
+                }
+            }
+        }
+
 
         // 뒤로 가기
         backPageBtn.setOnClickListener {

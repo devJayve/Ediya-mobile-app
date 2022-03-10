@@ -33,7 +33,9 @@ class RegisterSecondFragment : Fragment() {
         var view = inflater.inflate(R.layout.register_layout_2, container, false)
 
         val pref = loginActivity.getPreferences(0)
-        if (pref.getBoolean("step2",false)) setSavedMemoryInPref()
+        val editor = pref.edit()
+        editor.putBoolean("step2",true)
+        editor.apply()
 
         val nameInput = view.findViewById<EditText>(R.id.nameInputET).text.toString()
         val frontBirthInput = view.findViewById<EditText>(R.id.FrontBirthInputET)
@@ -56,6 +58,8 @@ class RegisterSecondFragment : Fragment() {
             }
         }
 
+
+
         // 예외처리
         val nextPageBtn = view.findViewById<Button>(R.id.nextStepBtn2)
         nextPageBtn.setOnClickListener {
@@ -72,7 +76,9 @@ class RegisterSecondFragment : Fragment() {
     private fun moveToNextPage() {
         if (TextUtils.isEmpty(nameInputET.text)) {
             Toast.makeText(loginActivity, "이름을 입력해주세요.", Toast.LENGTH_SHORT).show()
-        } else if ((TextUtils.isEmpty(FrontBirthInputET.text) || TextUtils.isEmpty(BackBirthInputET.text)) || FrontBirthInputET.text.count() != 6) {
+        } else if (Pattern.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*",nameInputET.text)) {
+                Toast.makeText(loginActivity, "한글로 입력해주세요.", Toast.LENGTH_SHORT).show()
+            } else if ((TextUtils.isEmpty(FrontBirthInputET.text) || TextUtils.isEmpty(BackBirthInputET.text)) || FrontBirthInputET.text.count() != 6) {
             Toast.makeText(loginActivity, "주민등록번호를 확인해주세요.", Toast.LENGTH_SHORT).show()
         } else if (!mobileSktBtn.isChecked && !mobileKtBtn.isChecked && !mobileLGBtn.isChecked && !mobileCheapBtn.isChecked ) {
             Toast.makeText(loginActivity, "통신사를 선택해주세요.", Toast.LENGTH_SHORT).show()
@@ -96,30 +102,6 @@ class RegisterSecondFragment : Fragment() {
         editor.putInt("mobileIndex",mobileIndex)
         editor.putInt("phoneNum",phoneNum.toInt())
         editor.apply()
-    }
-
-    private fun setSavedMemoryInPref() {
-        val nameInput = view?.findViewById<EditText>(R.id.nameInputET)
-        val frontBirthInput = view?.findViewById<EditText>(R.id.FrontBirthInputET)
-        val backBirthInput = view?.findViewById<EditText>(R.id.BackBirthInputET)
-        val phoneNumInput = view?.findViewById<EditText>(R.id.phoneNumberET)
-        val mobileRadioBtn1 = view?.findViewById<RadioButton>(R.id.mobileSktBtn)
-        val mobileRadioBtn2 = view?.findViewById<RadioButton>(R.id.mobileKtBtn)
-        val mobileRadioBtn3 = view?.findViewById<RadioButton>(R.id.mobileLGBtn)
-        val mobileRadioBtn4 = view?.findViewById<RadioButton>(R.id.mobileCheapBtn)
-
-        val pref = loginActivity.getPreferences(0)
-
-        nameInput?.setText(pref.getString("name",""))
-        frontBirthInput?.setText(pref.getInt("frontBirth",0))
-        backBirthInput?.setText(pref.getInt("backBirth",0))
-        when (pref.getInt("mobileIndex",0)) {
-            1 -> mobileRadioBtn1?.isSelected
-            2 -> mobileRadioBtn2?.isSelected
-            3 -> mobileRadioBtn3?.isSelected
-            4 -> mobileRadioBtn4?.isSelected
-        }
-        phoneNumInput?.setText(pref.getInt("phoneNum",0))
     }
 
     private fun moveToBackPage() {

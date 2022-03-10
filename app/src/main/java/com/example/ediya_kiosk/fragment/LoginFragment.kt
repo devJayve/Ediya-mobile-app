@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
         val pref = loginActivity.getPreferences(0)
         var prefStep1 = pref.getBoolean("step2",false)
         var prefStep2 = pref.getBoolean("step3",false)
-        Log.d("Message","step1 is $prefStep1, step2 is $prefStep2")
+        Log.d("TAG","$prefStep1,$prefStep2")
         if (prefStep1) {
             val moveToMiddleDialog = AlertDialog.Builder(loginActivity)
             moveToMiddleDialog.setMessage("회원가입을 이어서 진행하시겠습니까?")
@@ -60,6 +60,7 @@ class LoginFragment : Fragment() {
         var registerBtn = view?.findViewById<Button>(R.id.registerBtn)
 
         loginBtn!!.setOnClickListener {
+            Log.d("TAG","login btn click")
             loginEvent()
         }
 
@@ -74,9 +75,9 @@ class LoginFragment : Fragment() {
         var loginId = view?.findViewById<EditText>(R.id.idET)?.text.toString()
         var loginPw = view?.findViewById<EditText>(R.id.pwET)?.text.toString()
 
-        var columnList = arrayListOf("id","password")
+        var columnArray = arrayOf("id","password")
         var selectionList = arrayListOf("id","password")
-        var selectionArgsList = arrayListOf("$loginId","$loginPw")
+        var selectionArgsArray = arrayOf("$loginId","$loginPw")
 
 
         if (loginId.isEmpty() || loginPw.isEmpty()) {
@@ -87,11 +88,11 @@ class LoginFragment : Fragment() {
             val db = Database(loginActivity, "ediya.db",null,1)
             val readableDb = db.readableDatabase
             val dbControl = DatabaseControl()
-            var dataList = dbControl.readData(readableDb,"account",columnList,selectionList,selectionArgsList)
+            var dataList = dbControl.readData(readableDb,"account",columnArray,selectionList,selectionArgsArray)
+            Log.d("TAG","dataList $dataList")
             if (dataList.size != 0) {
                 loginActivity!!.login()
-            }
-            else {
+            } else {
                 Toast.makeText(loginActivity,"아이디 또는 비밀번호를 다시 확인해주세요.",Toast.LENGTH_LONG).show()
             }
         }

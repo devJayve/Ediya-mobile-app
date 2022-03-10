@@ -1,6 +1,8 @@
 package com.example.ediya_kiosk.fragment
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.res.TypedArray
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ediya_kiosk.MainActivity
@@ -53,7 +56,7 @@ class MainFragment : Fragment() {
             override fun onClick(view: View, position: Int) {
                 Log.d("Message", "${position}번 리스트 선택")
                 var bundle =  Bundle()
-                var fragment = menu_detail_fragment()
+                var fragment = MenuDetailFragment()
                 bundle.putString("name",menuList[position].menuName)
                 bundle.putString("price",menuList[position].menuPrice)
                 bundle.putString("img",menuList[position].menuPhotoImg)
@@ -61,6 +64,17 @@ class MainFragment : Fragment() {
                 fragment.arguments = bundle
                 mainActivity?.openOtherFragmentforBundle(2,fragment)}
         })
+
+        // 뒤로 가기
+        var backBtn = view.findViewById<Button>(R.id.logoutBtn)
+        backBtn.setOnClickListener {
+            val backDialog = AlertDialog.Builder(mainActivity)
+            backDialog.setMessage("로그아웃 하시겠습니까?")
+            backDialog.setPositiveButton("네", DialogInterface.OnClickListener { dialog, id ->
+                mainActivity.finish()
+            })
+            backDialog.setNegativeButton("아니요", null).show()
+        }
 
         return view
     }

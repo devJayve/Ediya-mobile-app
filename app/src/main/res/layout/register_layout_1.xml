@@ -59,7 +59,7 @@
         app:layout_constraintTop_toBottomOf="@id/TV1"
         app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/termsAllAgree_Btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,6 +67,7 @@
         android:layout_marginLeft="20dp"
         android:text="약관 전체 동의"
         android:textSize="15sp"
+        android:buttonTint="@color/ediya_color"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/TV2"/>
 
@@ -86,13 +87,15 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/line"
         app:layout_constraintLeft_toLeftOf="parent">
-        <RadioButton
+        <CheckBox
             android:id="@+id/termsAgreeBtn_1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="이용약관 동의(필수)"
             android:layout_gravity="center"
-            android:layout_weight="5"/>
+            android:layout_weight="5"
+            android:buttonTint="@color/ediya_color"
+            />
         <ImageButton
             android:id="@+id/agreeIntoBtn1"
             android:layout_width="0dp"
@@ -111,11 +114,12 @@
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/agree_linear1"
         app:layout_constraintLeft_toLeftOf="parent">
-        <RadioButton
+        <CheckBox
             android:id="@+id/termsAgreeBtn_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="개인정보 수집 및 이용 동의(필수)"
+            android:buttonTint="@color/ediya_color"
             android:layout_weight="5"/>
         <ImageButton
             android:id="@+id/agreeIntoBtn2"
@@ -126,13 +130,14 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
-    <RadioButton
+    <CheckBox
         android:id="@+id/termsAgreeBtn_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:text="E-mail 및 SMS 광고성 정보 수신동의(선택)"
+        android:buttonTint="@color/ediya_color"
         app:layout_constraintTop_toBottomOf="@id/agree_linear2"
         app:layout_constraintLeft_toLeftOf="parent"/>
     <TextView

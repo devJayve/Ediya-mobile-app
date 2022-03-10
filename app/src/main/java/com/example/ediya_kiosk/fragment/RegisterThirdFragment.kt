@@ -1,5 +1,6 @@
 package com.example.ediya_kiosk.fragment
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -10,14 +11,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.LoginActivity
 import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.register_layout_2.*
 import kotlinx.android.synthetic.main.register_layout_3.*
 import java.util.regex.Pattern
+import kotlin.math.log
 
 class RegisterThirdFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
@@ -29,6 +33,7 @@ class RegisterThirdFragment : Fragment() {
         loginActivity = activity as LoginActivity
     }
 
+    @SuppressLint("ResourceType")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,6 +54,7 @@ class RegisterThirdFragment : Fragment() {
         val writableDb = db.writableDatabase
 
         val idInRegisterET = view.findViewById<EditText>(R.id.idInRegisterET)
+        val pwET = view.findViewById<EditText>(R.id.pwInRegisterET)
         val idInRegister = idInRegisterET.text.toString()
         val idOverlapBtn = view.findViewById<Button>(R.id.idOverlapCheckBtn)
         val nextPageBtn = view.findViewById<Button>(R.id.nextStepBtn3)
@@ -71,10 +77,30 @@ class RegisterThirdFragment : Fragment() {
                 var doamain = domainSpinner.selectedItem.toString()
                 isDomainSelected = true
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+
+        //비밀번호
+        val pwInputLayout = view.findViewById<TextInputLayout>(R.id.pwInputLayout)
+        pwInputLayout.isCounterEnabled = true
+        pwET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (pwET.length() < 8) {
+                    pwInputLayout.error = "8자 이상 입력해주세요."
+                } else {
+                    pwInputLayout.error = null
+                    pwET.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    pwInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+        })
+
 
         // 아이디 중복 체크
         idOverlapBtn.setOnClickListener {
@@ -82,9 +108,9 @@ class RegisterThirdFragment : Fragment() {
             val idData = dbControl.readData(
                 readableDb,
                 "account",
+                arrayOf("id"),
                 arrayListOf("id"),
-                arrayListOf("id"),
-                arrayListOf("$idInRegister")
+                arrayOf("$idInRegister")
             )
             isOverlapCheck = if (idData.size != 0) {
                 showToastWarning("중복된 아이디 입니다.")
@@ -187,19 +213,19 @@ class RegisterThirdFragment : Fragment() {
 
         val dbControl = DatabaseControl()
 
-        val accountColumnList = arrayListOf("id","password","email","certification_num","phone_num")
+        val accountColumnList = arrayListOf("id","password","email","name","certification_num","phone_num")
         val basketColumnList = arrayListOf("id")
         val basketOrderColumnList = arrayListOf("id")
         val interfaceColumnList = arrayListOf("id","isMode","isLanguage")
 
         val pref = loginActivity.getPreferences(0)
 
-        var name = pref.getString("name","")
+        var name = pref.getString("name","").toString()
         var certificationNum = pref.getInt("frontBirth",0).plus(pref.getInt("backBirth",0))
         var phoneNum = pref.getInt("phoneNum",0)
         var domain = domainSpinner?.selectedItem.toString()
         var totalEmail = "$email@$domain"
-        var accountValueList = arrayListOf(id,pw,totalEmail,certificationNum.toString(),phoneNum.toString())
+        var accountValueList = arrayListOf(id,pw,totalEmail,name,certificationNum.toString(),phoneNum.toString())
 
         dbControl.createData(writableDb,"account",accountColumnList,accountValueList)
         dbControl.createData(writableDb,"basket", arrayListOf("id"), arrayListOf(id))

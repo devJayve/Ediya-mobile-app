@@ -17,8 +17,8 @@ class BasketService : Service() {
     lateinit var menuNameList : ArrayList<String>
     lateinit var menuTempList : ArrayList<String>
     lateinit var menuSizeList : ArrayList<String>
-    lateinit var menuPriceList : ArrayList<Int>
-    lateinit var menuTotalPriceList : ArrayList<Int>
+    lateinit var menuPriceList : ArrayList<String>
+    lateinit var menuTotalPriceList : ArrayList<String>
     lateinit var menuImgList : ArrayList<String>
 
 
@@ -33,10 +33,9 @@ class BasketService : Service() {
     }
 
     fun getMenuData(menuName : String, menuTemp: String, menuSize : String,
-                    menuPrice : Int, menuTotalPrice : Int, menuImg : String) {
+                    menuPrice : String, menuTotalPrice : String, menuImg : String) {
 
         menuNameList.add(menuName)
-        Log.d("Message","$menuName add in BasketService")
         menuTempList.add(menuTemp)
         menuSizeList.add(menuSize)
         menuPriceList.add(menuPrice)
@@ -44,20 +43,15 @@ class BasketService : Service() {
         menuImgList.add(menuImg)
     }
 
-    fun putMenuData(frag : Fragment) : Fragment {
-        var bundle = Bundle()
+    fun putMenuData() : ArrayList<ArrayList<String>> {
+//        var bundle = Bundle()
+        var bundleStringArrayList = arrayListOf<ArrayList<String>>(menuNameList,menuTempList,menuSizeList,menuPriceList,menuTotalPriceList,menuImgList)
+//
+//
+//        frag.arguments = bundle
 
-        bundle.putStringArrayList("nameList",menuNameList)
-        Log.d("Message","$menuNameList add in BasketService")
-        bundle.putStringArrayList("tempList",menuTempList)
-        bundle.putStringArrayList("sizeList",menuSizeList)
-        bundle.putIntegerArrayList("priceList",menuPriceList)
-        bundle.putIntegerArrayList("totalPriceList",menuTotalPriceList)
-        bundle.putStringArrayList("imgList",menuImgList)
 
-        frag.arguments = bundle
-
-        return frag
+        return bundleStringArrayList
     }
 
     fun getNotificationInformation(): ArrayList<Int> {
@@ -65,7 +59,7 @@ class BasketService : Service() {
         var menuNum = 0
         for (price in menuTotalPriceList!!) {
             menuNum++
-            totalPriceTxt += price
+            totalPriceTxt += price.toInt()
         }
         Log.d("Message", "1) $menuNum, $totalPriceTxt")
         return arrayListOf(menuNum, totalPriceTxt)

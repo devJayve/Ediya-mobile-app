@@ -5,23 +5,27 @@ import android.database.sqlite.SQLiteDatabase
 import android.util.Log
 
 class DatabaseControl {
-    fun readData(database : SQLiteDatabase, table : String, returnColumnList: ArrayList<String>, selectionList : ArrayList<String>,selectionArgsList :ArrayList<String>)
+    fun readData(database : SQLiteDatabase, table : String, returnColumnArray: Array<String>, selectionList : ArrayList<String>,selectionArgsArray :Array<String>)
     : ArrayList<ArrayList<String>> {
+        Log.d("TAG","readData")
 
-        val returnDataList = ArrayList<ArrayList<String>>()
-        var columnArray = returnColumnList.toArray(arrayOfNulls<String>(returnColumnList.size))
-        var selectionArgsArray = selectionArgsList.toArray(arrayOfNulls<String>(selectionArgsList.size))
+        var returnDataList = arrayListOf<ArrayList<String>>()
 
         var whereSql = "${selectionList[0]}=?"
         if (selectionList.size > 1) {
-            for (i in 0 until selectionList.size) {
-                whereSql = whereSql.plus("and ${selectionList[i]}=?")
+            for (i in 1 until selectionList.size) {
+                whereSql = whereSql.plus(" and ${selectionList[i]}=?")
+                Log.d("DATABASE","whereSql is $whereSql")
             }
         }
 
+        Log.d("DATABASE","whereSql is $whereSql")
+        Log.d("DATABASE","${selectionArgsArray[0]}")
+        Log.d("DATABASE","${returnColumnArray[1]}")
+
         val cursor = database.query(
             table,
-            columnArray,
+            returnColumnArray,
             whereSql,
             selectionArgsArray,
             null,
@@ -31,12 +35,14 @@ class DatabaseControl {
 
         while (cursor.moveToNext()) {
             val row = arrayListOf<String>()
-            for ((i) in (0 until returnColumnList.size).withIndex()) {
+            for ((i) in (returnColumnArray.indices).withIndex()) {
                 val value = cursor.getString(i)
                 row.add(value)
             }
             returnDataList.add(row)
         }
+
+        Log.d("DATABASE","$returnDataList")
 
         cursor.close()
 

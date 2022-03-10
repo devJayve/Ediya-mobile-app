@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun passBasketData(menuName : String, menuTemp: String, menuSize : String,
-                       menuPrice : Int, menuTotalPrice : Int, menuImg : String) {
+                       menuPrice : String, menuTotalPrice : String, menuImg : String) {
         if (isConService) {
             basketService?.getMenuData(menuName,menuTemp,menuSize,menuPrice,menuTotalPrice,menuImg)
         }
@@ -60,29 +60,62 @@ class MainActivity : AppCompatActivity() {
 
     fun loadBasketFrag() {
         if (isConService) {
-            var basket_frag = basketService!!.putMenuData(basket_fragment())
-            var transaction = this.supportFragmentManager.beginTransaction()
+            var bundle = Bundle()
+            var basketFrag = basket_fragment()
+            var basketDataList = basketService!!.putMenuData()
 
-            transaction.replace(R.id.fragment_area, basket_frag).commit()
+            bundle.putStringArrayList("nameList",basketDataList[0])
+            bundle.putStringArrayList("tempList",basketDataList[1])
+            bundle.putStringArrayList("sizeList",basketDataList[2])
+            bundle.putStringArrayList("priceList",basketDataList[3])
+            bundle.putStringArrayList("totalPriceList",basketDataList[4])
+            bundle.putStringArrayList("imgList",basketDataList[5])
+            basketFrag.arguments = bundle
+
+            var transaction = this.supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_area,basketFrag).commit()
         }
     }
 
     fun loadPaymentFrag() {
-        var payment_frag = basketService!!.putMenuData(PaymentFragment())
-        this.supportFragmentManager.beginTransaction().replace(R.id.fragment_area,payment_frag).commit()
+        var bundle = Bundle()
+        var paymentFrag = PaymentFragment()
+        var basketDataList = basketService!!.putMenuData()
+
+        bundle.putStringArrayList("nameList",basketDataList[0])
+        bundle.putStringArrayList("tempList",basketDataList[1])
+        bundle.putStringArrayList("sizeList",basketDataList[2])
+        bundle.putStringArrayList("priceList",basketDataList[3])
+        bundle.putStringArrayList("totalPriceList",basketDataList[4])
+        bundle.putStringArrayList("imgList",basketDataList[5])
+        paymentFrag.arguments = bundle
+
+        this.supportFragmentManager.beginTransaction().replace(R.id.fragment_area, paymentFrag).commit()
     }
 
     fun loadFrag(frag_num : Int) {
         Log.d("Message","loadFrag($frag_num)")
         var transaction = this.supportFragmentManager.beginTransaction()
+        var bundle = Bundle()
+        var paymentFrag = PaymentFragment()
+        var basketFrag = basket_fragment()
+        var basketDataList = basketService!!.putMenuData()
+
+        bundle.putStringArrayList("nameList",basketDataList[0])
+        bundle.putStringArrayList("tempList",basketDataList[1])
+        bundle.putStringArrayList("sizeList",basketDataList[2])
+        bundle.putStringArrayList("priceList",basketDataList[3])
+        bundle.putStringArrayList("totalPriceList",basketDataList[4])
+        bundle.putStringArrayList("imgList",basketDataList[5])
+
         when (frag_num) {
             1 -> {
-                var basket_frag = basketService!!.putMenuData(basket_fragment())
-                transaction.replace(R.id.fragment_area, basket_frag).commit()
+                basketFrag.arguments = bundle
+                transaction.replace(R.id.fragment_area, basketFrag).commit()
             }
             2 -> {
-                var payment_frag = basketService!!.putMenuData(PaymentFragment())
-                transaction.replace(R.id.fragment_area, payment_frag).commit()
+                paymentFrag.arguments = bundle
+                transaction.replace(R.id.fragment_area, paymentFrag).commit()
             }
             3 -> {
                 Log.d("Message","loadFrag2(3)")
@@ -120,7 +153,7 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         val main_frag = MainFragment()
         val basket_frag = basket_fragment()
-        val detail_frag = menu_detail_fragment()
+        val detail_frag = MenuDetailFragment()
 
         when(int){
             1 -> {
