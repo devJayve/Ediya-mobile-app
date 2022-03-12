@@ -17,7 +17,6 @@ import kotlinx.android.synthetic.main.register_layout_1.*
 
 class RegisterFirstFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
-    private var isAllSelected = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -30,6 +29,8 @@ class RegisterFirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.register_layout_1, container, false)
+
+        //Button
         var termsAllAgreeBtn = view.findViewById<CheckBox>(R.id.termsAllAgree_Btn)
         var termsAgreeBtn1 = view.findViewById<CheckBox>(R.id.termsAgreeBtn_1)
         var termsAgreeBtn2 = view.findViewById<CheckBox>(R.id.termsAgreeBtn_2)
@@ -37,7 +38,7 @@ class RegisterFirstFragment : Fragment() {
         val nextPageBtn = view.findViewById<Button>(R.id.nextStepBtn1)
         val backPageBtn = view.findViewById<ImageButton>(R.id.backBtnInRegister1)
 
-
+        //다음 페이지로 이동
         nextPageBtn.setOnClickListener {
             if (!termsAgreeBtn1.isChecked || !termsAgreeBtn2.isChecked) {
                 Toast.makeText(loginActivity,"약관에 동의해주세요.",Toast.LENGTH_SHORT).show()
@@ -77,7 +78,6 @@ class RegisterFirstFragment : Fragment() {
             }
         }
 
-
         // 뒤로 가기
         backPageBtn.setOnClickListener {
             val backDialog = AlertDialog.Builder(loginActivity)
@@ -87,7 +87,6 @@ class RegisterFirstFragment : Fragment() {
             })
             backDialog.setNegativeButton("계속 할래요", null).show()
         }
-
 
         return view
     }

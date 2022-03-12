@@ -106,6 +106,7 @@ class PaymentFragment : Fragment() {
         //return Main
         orderBtn.setOnClickListener {
             Log.d("Message","orderBtn click")
+
             mainActivity!!.loadFrag(3)
             Toast.makeText(mainActivity,"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show()
         }

@@ -82,18 +82,17 @@ class LoginFragment : Fragment() {
 
         if (loginId.isEmpty() || loginPw.isEmpty()) {
             isExistBlank = true
-            Toast.makeText(loginActivity,"아이디 또는 비밀번호를 입력해주세요.",Toast.LENGTH_LONG).show()
+            Toast.makeText(loginActivity,"아이디 또는 비밀번호를 입력해주세요.",Toast.LENGTH_SHORT).show()
         }
         else {
             val db = Database(loginActivity, "ediya.db",null,1)
             val readableDb = db.readableDatabase
             val dbControl = DatabaseControl()
             var dataList = dbControl.readData(readableDb,"account",columnArray,selectionList,selectionArgsArray)
-            Log.d("TAG","dataList $dataList")
             if (dataList.size != 0) {
-                loginActivity!!.login()
+                loginActivity!!.login(dataList[0][0])
             } else {
-                Toast.makeText(loginActivity,"아이디 또는 비밀번호를 다시 확인해주세요.",Toast.LENGTH_LONG).show()
+                Toast.makeText(loginActivity,"아이디 또는 비밀번호를 다시 확인해주세요.",Toast.LENGTH_SHORT).show()
             }
         }
     }

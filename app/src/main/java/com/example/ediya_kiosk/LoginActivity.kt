@@ -20,13 +20,13 @@ class LoginActivity : AppCompatActivity() {
         var fragment = LoginFragment()
         supportFragmentManager.beginTransaction().replace(R.id.start_fragment_area, fragment)
             .commit()
-
-        Database(this, "ediya.db",null,1)
-        DebugDB.getAddressLog()
     }
 
-    fun login() {
+    var db = Database(this, "ediya.db",null,1)
+
+    fun login(id : String) {
         val mainIntent = Intent(this, MainActivity::class.java)
+        mainIntent.putExtra("id",id)
         startActivity(mainIntent)
     }
 

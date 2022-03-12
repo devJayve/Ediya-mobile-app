@@ -37,6 +37,7 @@ class MenuDetailFragment : Fragment() {
         var menuimg = view.findViewById<ImageView>(R.id.menuIVforDetail)
         var menucost = view.findViewById<TextView>(R.id.totalCostInDetail)
         var optioncost = 0
+        var menuNum = 1
         var menuPriceInt = (menuPrice!!.substring(0, 4)).toInt()
         var totalcost = menuPriceInt + optioncost
 
@@ -109,7 +110,16 @@ class MenuDetailFragment : Fragment() {
                     else -> "Venti"
                 }
 
-                mainActivity!!.passBasketData(menuName.toString(),menuTemp,menuSize,menuPriceInt.toString(),totalcost.toString(),menuImg)
+                mainActivity!!.passBasketData(arrayListOf(
+                    menuName.toString(), // 메뉴 이름
+                    menuNum.toString(), // 메뉴 개수
+                    menuTemp, // 메뉴 온도
+                    menuSize, // 메뉴 사이즈
+                    menuPriceInt.toString(), // 단품 가격
+                    menuImg, // 이미지
+                    optioncost.toString(), // 옵션 가격
+                    totalcost.toString()) // 메뉴 총 가격
+                )
                 mainActivity!!.updateNotification()
                 Toast.makeText(mainActivity, "장바구니에 메뉴를 담았습니다.", Toast.LENGTH_SHORT).show()
                 intoBasketDialog()
@@ -120,7 +130,6 @@ class MenuDetailFragment : Fragment() {
         val menuPlusBtn = view.findViewById<ImageButton>(R.id.detailPlusBtn_1)
         val menuMinusBtn = view.findViewById<ImageButton>(R.id.detailMinusBtn_1)
         val menuOutputNum = view.findViewById<TextView>(R.id.detailQuantity_1)
-        var menuNum = 1
 
         menuPlusBtn.setOnClickListener {
             menuNum++
@@ -148,7 +157,7 @@ class MenuDetailFragment : Fragment() {
         // 결제창 전환
         val paymentBtn = view.findViewById<Button>(R.id.goPaymentBtn)
         paymentBtn.setOnClickListener {
-            mainActivity!!.loadPaymentFrag()
+            mainActivity!!.loadFrag(2)
         }
 
         //뒤로가기
@@ -170,7 +179,7 @@ class MenuDetailFragment : Fragment() {
         }
     }
 
-    fun sizeOnClick(btn: ImageButton) {
+    private fun sizeOnClick(btn: ImageButton) {
         btn?.isSelected = btn?.isSelected != true
         if (btn == sizeBtn1) {
             sizeBtn2?.isSelected = false
@@ -190,7 +199,7 @@ class MenuDetailFragment : Fragment() {
         dlg.setMessage("장바구니에 메뉴가 담겼습니다.") // 메시지
         dlg.setCancelable(true)
         dlg.setNegativeButton("바로가기") { dialog, which ->
-            mainActivity!!.loadBasketFrag()
+            mainActivity!!.loadFrag(1)
         }
         dlg.setPositiveButton("확인") { dialog, which ->
             mainActivity!!.openOtherFragmentforBundle(1, MainFragment())

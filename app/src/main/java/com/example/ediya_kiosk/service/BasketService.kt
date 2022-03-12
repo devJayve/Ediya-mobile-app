@@ -14,12 +14,24 @@ class BasketService : Service() {
     val binder = BasketServiceBinder()
 
     // Menu Data
-    lateinit var menuNameList : ArrayList<String>
-    lateinit var menuTempList : ArrayList<String>
-    lateinit var menuSizeList : ArrayList<String>
-    lateinit var menuPriceList : ArrayList<String>
-    lateinit var menuTotalPriceList : ArrayList<String>
-    lateinit var menuImgList : ArrayList<String>
+    var menuNameList : ArrayList<String> = arrayListOf() //이름
+    var menuCountList : ArrayList<String> = arrayListOf() //개수
+    var menuTempList : ArrayList<String> = arrayListOf() //온도
+    var menuSizeList : ArrayList<String> = arrayListOf() //사이즈
+    var menuPriceList : ArrayList<String> = arrayListOf() //단품 가격
+    var menuImgList : ArrayList<String> = arrayListOf() //이미지
+    var optionCostList : ArrayList<String> = arrayListOf() //옵션 가격
+    var totalCostList : ArrayList<String> = arrayListOf() //메뉴 총 가격
+    var menuDataList = arrayListOf(
+        menuNameList,
+        menuCountList,
+        menuTempList,
+        menuSizeList,
+        menuPriceList,
+        menuImgList,
+        optionCostList,
+        totalCostList
+    )
 
 
     inner class BasketServiceBinder : Binder() {
@@ -32,57 +44,30 @@ class BasketService : Service() {
         return binder
     }
 
-    fun getMenuData(menuName : String, menuTemp: String, menuSize : String,
-                    menuPrice : String, menuTotalPrice : String, menuImg : String) {
-
-        menuNameList.add(menuName)
-        menuTempList.add(menuTemp)
-        menuSizeList.add(menuSize)
-        menuPriceList.add(menuPrice)
-        menuTotalPriceList.add(menuTotalPrice)
-        menuImgList.add(menuImg)
+    fun getMenuData(dataList : ArrayList<String>) { //데이터 담기
+        for (index in dataList.indices) {
+            menuDataList[index].add(dataList[index])
+        }
     }
 
-    fun putMenuData() : ArrayList<ArrayList<String>> {
-//        var bundle = Bundle()
-        var bundleStringArrayList = arrayListOf<ArrayList<String>>(menuNameList,menuTempList,menuSizeList,menuPriceList,menuTotalPriceList,menuImgList)
-//
-//
-//        frag.arguments = bundle
-
-
-        return bundleStringArrayList
+    fun putMenuData() : ArrayList<ArrayList<String>> { //데이터 전송
+        return menuDataList
     }
 
     fun getNotificationInformation(): ArrayList<Int> {
         var totalPriceTxt = 0
         var menuNum = 0
-        for (price in menuTotalPriceList!!) {
+        for (price in totalCostList!!) {
             menuNum++
             totalPriceTxt += price.toInt()
         }
-        Log.d("Message", "1) $menuNum, $totalPriceTxt")
         return arrayListOf(menuNum, totalPriceTxt)
     }
 
-    fun initializeList() {
-        menuNameList.clear()
-        menuTempList.clear()
-        menuSizeList.clear()
-        menuPriceList.clear()
-        menuImgList.clear()
-        menuTotalPriceList.clear()
+    fun clearList() {
+        for (data in menuDataList) data.clear()
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        menuNameList = arrayListOf()
-        menuTempList = arrayListOf()
-        menuSizeList = arrayListOf()
-        menuPriceList = arrayListOf()
-        menuTotalPriceList = arrayListOf()
-        menuImgList = arrayListOf()
-    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int { //서비스가 실행될 때
         return super.onStartCommand(intent, flags, startId)

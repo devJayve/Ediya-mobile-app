@@ -26,7 +26,12 @@ import kotlin.math.log
 class RegisterThirdFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
     private var isOverlapCheck = false
+    private var isPwStated = false
+    private var isRePwStated = false
+    private var isIdStated = false
+    private var isEmailStated = false
     private var isDomainSelected = false
+    private var stateArray = arrayOf(isOverlapCheck,isPwStated,isRePwStated,isIdStated,isEmailStated,isDomainSelected)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,7 +44,7 @@ class RegisterThirdFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        var view = inflater.inflate(R.layout.register_layout_3, container, false)
+        val view = inflater.inflate(R.layout.register_layout_3, container, false)
 
         val pref = loginActivity.getPreferences(0)
         val editor = pref.edit()
@@ -53,20 +58,29 @@ class RegisterThirdFragment : Fragment() {
         val readableDb = db.readableDatabase
         val writableDb = db.writableDatabase
 
-        val idInRegisterET = view.findViewById<EditText>(R.id.idInRegisterET)
+        //editText
+        val idET = view.findViewById<EditText>(R.id.idInRegisterET)
         val pwET = view.findViewById<EditText>(R.id.pwInRegisterET)
-        val idInRegister = idInRegisterET.text.toString()
+        val rePwET = view.findViewById<EditText>(R.id.rePwInRegisterET)
+        val emailET = view.findViewById<EditText>(R.id.emailET)
+
+        //Button
         val idOverlapBtn = view.findViewById<Button>(R.id.idOverlapCheckBtn)
         val nextPageBtn = view.findViewById<Button>(R.id.nextStepBtn3)
         val backPageBtn = view.findViewById<ImageButton>(R.id.backBtnInRegister3)
 
+        //inputLayout
+        val idInputLayout = view.findViewById<TextInputLayout>(R.id.idInputLayout)
+        val rePwInputLayout = view.findViewById<TextInputLayout>(R.id.rePwInputLayout)
+        val pwInputLayout = view.findViewById<TextInputLayout>(R.id.pwInputLayout)
+        val emailInputLayout = view.findViewById<TextInputLayout>(R.id.emailInputLayout)
+
         // domain Spinner
-        var domainList = resources.getStringArray(R.array.domain_array)
-        var domainSpinner = view.findViewById<Spinner>(R.id.domainSpinner)
+        val domainList = resources.getStringArray(R.array.domain_array)
+        val domainSpinner = view.findViewById<Spinner>(R.id.domainSpinner)
         domainSpinner?.adapter = ArrayAdapter(
             loginActivity,
-            android.R.layout.simple_spinner_item, domainList
-        )
+            android.R.layout.simple_spinner_item, domainList)
         domainSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -81,26 +95,85 @@ class RegisterThirdFragment : Fragment() {
             }
         }
 
-        //비밀번호
-        val pwInputLayout = view.findViewById<TextInputLayout>(R.id.pwInputLayout)
+        //아이디 예외처리
+        idET.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                isIdStated = false
+                isOverlapCheck = false
+                idOverlapBtn.isEnabled = true
+                if (idET.length() < 4) {
+                    idInputLayout.error = "4자 이상 입력해주세요."
+                    idOverlapBtn.isEnabled = false
+                } else if (!Pattern.matches("^[A-Za-z0-9]*$",idET.text)) {
+                    idInputLayout.error = "아이디 형식에 부합하지 않습니다."
+                    idOverlapBtn.isEnabled = false
+                } else {
+                    idInputLayout.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    idInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    idInputLayout.error = null
+                    idOverlapBtn.isEnabled = true
+                }
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+        })
+
+        //비밀번호 예외처리
         pwInputLayout.isCounterEnabled = true
         pwET.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (pwET.length() < 8) {
                     pwInputLayout.error = "8자 이상 입력해주세요."
+                } else if (!Pattern.matches(
+                        "^(?=.*\\d)(?=.*[~`!@#$%^&*()-])(?=.*[a-zA-Z]).{8,20}$",
+                        pwInRegisterET.text
+                    )) {
+                    pwInputLayout.error = "비밀번호 형식이 올바르지 않습니다."
                 } else {
                     pwInputLayout.error = null
                     pwET.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
                     pwInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    isPwStated = true
                 }
             }
+            override fun afterTextChanged(p0: Editable?) = Unit
+        })
 
+        //비밀번호 재입력 예외처리
+        rePwInputLayout.isCounterEnabled = true
+        rePwET.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (pwET.text != rePwET.text) {
+                    rePwInputLayout.error = "비밀번호가 일치하지 않습니다."
+                } else {
+                    rePwInputLayout.error = null
+                    rePwET.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    rePwInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    isRePwStated = true
+                }
+            }
             override fun afterTextChanged(p0: Editable?) {}
         })
 
+        //이메일 예외처리
+        emailET.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                isEmailStated = false
+                if (emailET.length() < 1) {
+                    emailInputLayout.error = "이메일을 입력해주세요."
+                }  else {
+                    emailInputLayout.error = null
+                    emailInputLayout.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    emailInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    isEmailStated = true
+                }
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+        })
 
         // 아이디 중복 체크
         idOverlapBtn.setOnClickListener {
@@ -110,36 +183,33 @@ class RegisterThirdFragment : Fragment() {
                 "account",
                 arrayOf("id"),
                 arrayListOf("id"),
-                arrayOf("$idInRegister")
+                arrayOf(idET.text.toString())
             )
-            isOverlapCheck = if (idData.size != 0) {
-                showToastWarning("중복된 아이디 입니다.")
-                false
-            } else {
-                showToastWarning("사용 가능한 아이디입니다.")
-                !idOverlapBtn.isEnabled
-                true
+            if (idET.length() != 0) {
+                isOverlapCheck = if (idData.size != 0) {
+                    idInputLayout.error = "중복된 아이디 입니다."
+                    false
+                } else {
+                    showToastWarning("사용 가능한 아이디입니다.")
+                    idInputLayout.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    idInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    isIdStated = true
+                    idOverlapBtn.isEnabled = false
+                    true
+                }
             }
         }
 
-        idInRegisterET.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(p0: Editable?) {
-                isOverlapCheck = false
-                idOverlapBtn.isEnabled
-            }
-
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                isOverlapCheck = false
-                idOverlapBtn.isEnabled
-            }
-        })
-
         // 회원가입 완료
         nextPageBtn.setOnClickListener {
-            finishRegister()
+            var isFinish = true
+            for (state in stateArray) if (!state) {
+                isFinish = false
+            }
+            if (isFinish) {
+                saveInLocalDb(idET.text.toString(),pwET.text.toString(),emailET.text.toString())
+                finishRegister()
+            }
         }
 
         //뒤로 가기
@@ -155,7 +225,6 @@ class RegisterThirdFragment : Fragment() {
     }
 
     private fun finishRegister() {
-        exceptionHandling()
         val pref = loginActivity.getPreferences(0)
         val editor = pref.edit()
         editor.remove("step3")
@@ -165,37 +234,8 @@ class RegisterThirdFragment : Fragment() {
         editor.remove("mobileIndex")
         editor.remove("phoneNum")
         editor.apply()
-
         loginActivity!!.register(4)
     }
-
-
-    private fun exceptionHandling() {
-        var password = view?.findViewById<EditText>(R.id.pwInRegisterET)?.text.toString()
-        var rePassword = view?.findViewById<EditText>(R.id.pwInRegisterET)?.text.toString()
-
-        if (TextUtils.isEmpty(idInRegisterET.text)) {
-            showToastWarning("아이디를 입력해주세요.")
-        } else if (!isOverlapCheck) {
-            showToastWarning("아이디가 중복 체크되지 않았습니다.")
-        } else if (TextUtils.isEmpty(pwInRegisterET.text)) {
-            showToastWarning("비밀번호를 확인해주세요.")
-        } else if (!Pattern.matches(
-                "^(?=.*\\d)(?=.*[~`!@#$%\\^&*()-])(?=.*[a-zA-Z]).{8,20}$",pwInRegisterET.text)
-        ) {
-            showToastWarning("비밀번호 형식이 올바르지 않습니다.")
-        } else if (password != rePassword) {
-            Log.d("TAG","pw : ${pwInRegisterET.text}, rePw : ${rePwInRegisterET.text}")
-            showToastWarning("비밀번호가 서로 일치하지 않습니다.")
-        } else if (TextUtils.isEmpty(emailET.text)) {
-            showToastWarning("이메일 주소를 입력해주세요.")
-        } else if (!isDomainSelected) {
-            showToastWarning("도메인 주소를 선택해주세요.")
-        } else {
-            saveInLocalDb(idInRegisterET.text.toString(),pwInRegisterET.text.toString(),emailET.text.toString())
-        }
-    }
-
 
     private fun moveToBackPage() {
         val pref = loginActivity.getPreferences(0)
@@ -207,19 +247,13 @@ class RegisterThirdFragment : Fragment() {
 
     private fun saveInLocalDb(id: String,pw: String,email: String) {
         val db = Database(loginActivity, "ediya.db", null, 1)
-        val readableDb = db.readableDatabase
         val writableDb = db.writableDatabase
         var domainSpinner = view?.findViewById<Spinner>(R.id.domainSpinner)
-
         val dbControl = DatabaseControl()
 
         val accountColumnList = arrayListOf("id","password","email","name","certification_num","phone_num")
-        val basketColumnList = arrayListOf("id")
-        val basketOrderColumnList = arrayListOf("id")
-        val interfaceColumnList = arrayListOf("id","isMode","isLanguage")
 
         val pref = loginActivity.getPreferences(0)
-
         var name = pref.getString("name","").toString()
         var certificationNum = pref.getInt("frontBirth",0).plus(pref.getInt("backBirth",0))
         var phoneNum = pref.getInt("phoneNum",0)
@@ -228,8 +262,8 @@ class RegisterThirdFragment : Fragment() {
         var accountValueList = arrayListOf(id,pw,totalEmail,name,certificationNum.toString(),phoneNum.toString())
 
         dbControl.createData(writableDb,"account",accountColumnList,accountValueList)
-        dbControl.createData(writableDb,"basket", arrayListOf("id"), arrayListOf(id))
-        dbControl.createData(writableDb,"basketOrder",arrayListOf("id"), arrayListOf(id))
-        dbControl.createData(writableDb, "interface",arrayListOf("id"), arrayListOf(id))
+//        dbControl.createData(writableDb,"basket", arrayListOf("id"),arrayListOf(id))
+//        dbControl.createData(writableDb,"basketOrder",arrayListOf("id"),arrayListOf(id))
+        dbControl.createData(writableDb, "interface",arrayListOf("id","isMode","isLanguage"), arrayListOf(id,"0","0"))
     }
 }

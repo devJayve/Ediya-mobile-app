@@ -3,6 +3,7 @@ package com.example.ediya_kiosk.fragment
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
 import android.content.res.TypedArray
 import android.os.Bundle
 import android.util.Log
@@ -49,7 +50,7 @@ class MainFragment : Fragment() {
         // basket 으로 이동
         var basketBtn = view.findViewById<FloatingActionButton>(R.id.basketBtn)
         basketBtn.setOnClickListener {
-            mainActivity!!.loadBasketFrag()
+            mainActivity!!.loadFrag(1)
         }
 
         myadapter.setItemClickListener(object : MainRvAdapter.ItemClickListener {
@@ -71,7 +72,8 @@ class MainFragment : Fragment() {
             val backDialog = AlertDialog.Builder(mainActivity)
             backDialog.setMessage("로그아웃 하시겠습니까?")
             backDialog.setPositiveButton("네", DialogInterface.OnClickListener { dialog, id ->
-                mainActivity.finish()
+                mainActivity!!.logout()
+
             })
             backDialog.setNegativeButton("아니요", null).show()
         }

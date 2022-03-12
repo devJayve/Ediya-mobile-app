@@ -93,7 +93,7 @@
                 android:textColor="@color/register_text_selector"
                 android:paddingTop="-10dp"
                 android:textSize="15sp"
-                android:background="@drawable/rounded_corner_black_transparent"
+                android:background="@drawable/register_btn_selector"
                 android:layout_weight="2"/>
         </LinearLayout>
         <TextView
