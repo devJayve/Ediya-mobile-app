@@ -27,7 +27,7 @@
             android:src="@drawable/back_icon"
             android:background="@color/ediya_color"/>
         <View
-            android:layout_width="0"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@color/ediya_color"
             android:layout_weight="5"/>
@@ -65,7 +65,7 @@
                 android:paddingBottom="10dp"
                 android:text="id"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
         <ImageView

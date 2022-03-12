@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ediya_kiosk.MainActivity
@@ -42,6 +43,11 @@ class MainFragment : Fragment() {
     ): View {
         var view = inflater.inflate(R.layout.main_fragment, container, false)
 
+        //아이디 세팅
+        var userId = arguments?.getString("userId").toString()
+        var userIdTV = view.findViewById<TextView>(R.id.userIdTV)
+        userIdTV.text = userId.plus("님")
+
         // basket 으로 이동
         var basketBtn = view.findViewById<FloatingActionButton>(R.id.basketBtn)
         basketBtn.setOnClickListener {
@@ -62,7 +68,7 @@ class MainFragment : Fragment() {
         })
 
         // 뒤로 가기
-        var backBtn = view.findViewById<Button>(R.id.logoutBtn)
+        var backBtn = view.findViewById<ImageButton>(R.id.logoutBtn)
         backBtn.setOnClickListener {
             val backDialog = AlertDialog.Builder(mainActivity)
             backDialog.setMessage("로그아웃 하시겠습니까?")

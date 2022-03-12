@@ -130,6 +130,7 @@ class MainActivity : AppCompatActivity() {
         var bundle = Bundle()
         var paymentFrag = PaymentFragment()
         var basketFrag = basket_fragment()
+        var mainFrag = MainFragment()
         var basketDataList = readBasketData()
 
 
@@ -140,6 +141,10 @@ class MainActivity : AppCompatActivity() {
         bundle.putString("userId",userId)
 
         when (frag_num) {
+            0 -> {
+                mainFrag.arguments = bundle
+                transaction.replace(R.id.fragment_area, mainFrag).commit()
+            }
             1 -> {
                 basketFrag.arguments = bundle
                 transaction.replace(R.id.fragment_area, basketFrag).commit()
@@ -243,9 +248,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_area, MainFragment()).commit()
-
         userId = intent.getStringExtra("id").toString()
+        var mainFrag = MainFragment()
+        var bundle = Bundle()
+        bundle.putString("userId",userId)
+        mainFrag.arguments = bundle
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_area, mainFrag).commit()
 
         startService(Intent(this, ForegroundService::class.java))
         serviceBind()

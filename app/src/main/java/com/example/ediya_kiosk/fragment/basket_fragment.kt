@@ -49,7 +49,7 @@ class basket_fragment : Fragment() {
         // 뒤로 가기
         val backBtn = view.findViewById<Button>(R.id.backBtn)
          backBtn.setOnClickListener {
-             mainActivity.openOtherFragmentforBundle(5,this)
+             mainActivity.loadFrag(0)
          }
 
         //payment 로 이동
