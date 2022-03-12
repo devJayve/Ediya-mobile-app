@@ -8,35 +8,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/topLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/ediya_color"
+        android:paddingTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <ImageButton
+            android:paddingTop="10dp"
+            android:id="@+id/logoutBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="left"
+            android:src="@drawable/back_icon"
+            android:background="@color/ediya_color"/>
+        <View
+            android:layout_width="0"
+            android:layout_height="match_parent"
+            android:background="@color/ediya_color"
+            android:layout_weight="5"/>
+        <ImageButton
+            android:paddingTop="10dp"
+            android:id="@+id/historyBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="right"
+            android:src="@drawable/notice_icon"
+            android:background="@color/ediya_color"/>
+    </LinearLayout>
+
+
+    <LinearLayout
         android:id="@+id/top_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/ediya_color"
+        app:layout_constraintTop_toBottomOf="@id/topLinear">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="@color/ediya_color"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/logoutBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/ediya_color"
-                android:drawableLeft="@drawable/back_icon"/>
-
             <TextView
+                android:id="@+id/userIdTV"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/ediya_color"
                 android:gravity="bottom"
-                android:paddingLeft="10dp"
+                android:paddingLeft="20dp"
                 android:paddingBottom="10dp"
-                android:text="이디야 오더"
+                android:text="id"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
         </LinearLayout>
         <ImageView
@@ -172,6 +201,17 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/settingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bakset_icon"
+        android:backgroundTint="@color/ediya_color"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toTopOf="@id/basketBtn"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/basketBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -183,16 +223,6 @@
         />
 
 
-<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--        android:id="@+id/bottomNavigationView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/top_shadow_rounded_box"-->
-<!--        app:itemBackground="@color/white"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:menu="@menu/main_menu" />-->
 
 
 

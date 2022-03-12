@@ -18,15 +18,16 @@ class MainActivity : AppCompatActivity() {
     var basketService: BasketService? = null
     var isConService = false
     val menuColumnList = arrayListOf(
+        "id",
         "menu_name",
         "menu_count",
-        "menu_Temp",
+        "menu_temp",
         "menu_size",
         "menu_price",
         "menu_img",
         "option_cost",
         "total_cost")
-    val userId = intent.getStringExtra("id").toString()
+    lateinit var userId : String
     val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             val BSbinder = service as BasketService.BasketServiceBinder
@@ -62,20 +63,55 @@ class MainActivity : AppCompatActivity() {
         startService(serviceIntent)
     }
 
-    fun setBasketData() {
+    fun readBasketData() : ArrayList<ArrayList<String>> {
         val db = Database(this, "ediya.db", null, 1)
         val readableDb = db.writableDatabase
         val dbControl = DatabaseControl()
 
+        var menuNameList : ArrayList<String> = arrayListOf() //이름
+        var menuCountList : ArrayList<String> = arrayListOf() //개수
+        var menuTempList : ArrayList<String> = arrayListOf() //온도
+        var menuSizeList : ArrayList<String> = arrayListOf() //사이즈
+        var menuPriceList : ArrayList<String> = arrayListOf() //단품 가격
+        var menuImgList : ArrayList<String> = arrayListOf() //이미지
+        var optionCostList : ArrayList<String> = arrayListOf() //옵션 가격
+        var totalCostList : ArrayList<String> = arrayListOf() //메뉴 총 가격
+        var menuDataList = arrayListOf(
+            menuNameList,
+            menuCountList,
+            menuTempList,
+            menuSizeList,
+            menuPriceList,
+            menuImgList,
+            optionCostList,
+            totalCostList)
+
         var basketData = dbControl.readData(
-            readableDb, "basket",
-            menuColumnList.toArray(arrayOfNulls<String>(menuColumnList.size)),
+            readableDb,
+            "basket",
+            arrayOf("menu_name",
+                "menu_count",
+                "menu_temp",
+                "menu_size",
+                "menu_price",
+                "menu_img",
+                "option_cost",
+                "total_cost"),
             arrayListOf("id"),
             arrayOf(userId)
         )
+
         if (basketData.size > 0) {
-            for (i in basketData.indices) passBasketData(basketData[i])
+            for (i in basketData[0].indices) {
+                for (j in basketData.indices) {
+                    menuDataList[i].add(basketData[j][i])
+                }
+            }
+            for (i in menuDataList.indices) {
+                Log.d("TAG", "${menuDataList[i]}")
+            }
         }
+        return menuDataList
     }
 
     fun passBasketData(menuDataList: ArrayList<String>) {
@@ -84,7 +120,7 @@ class MainActivity : AppCompatActivity() {
             val db = Database(this, "ediya.db",null,1)
             val writableDb = db.writableDatabase
             val dbControl = DatabaseControl()
-
+            menuDataList.add(0,userId)
             dbControl.createData(writableDb,"basket",menuColumnList,menuDataList)
         }
     }
@@ -94,11 +130,14 @@ class MainActivity : AppCompatActivity() {
         var bundle = Bundle()
         var paymentFrag = PaymentFragment()
         var basketFrag = basket_fragment()
-        var basketDataList = basketService!!.putMenuData()
+        var basketDataList = readBasketData()
+
 
         for (i in basketDataList.indices) {
-            bundle.putStringArrayList(menuColumnList[i],basketDataList[i])
+            bundle.putStringArrayList(menuColumnList[i+1],basketDataList[i])
+            Log.d("TAG","put ${menuColumnList[i+1]}, ${basketDataList[i]}")
         }
+        bundle.putString("userId",userId)
 
         when (frag_num) {
             1 -> {
@@ -206,8 +245,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.main_layout)
         supportFragmentManager.beginTransaction().replace(R.id.fragment_area, MainFragment()).commit()
 
+        userId = intent.getStringExtra("id").toString()
+
         startService(Intent(this, ForegroundService::class.java))
-        setBasketData()
+        serviceBind()
     }
 
     override fun onDestroy() {

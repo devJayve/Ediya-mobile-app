@@ -35,11 +35,6 @@ class MainFragment : Fragment() {
     // 데이터를 담는 배열
     var menuList = ArrayList<MenuData>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        mainActivity!!.serviceBind()
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

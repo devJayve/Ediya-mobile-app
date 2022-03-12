@@ -14,6 +14,8 @@ import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.CouponOptionDialog
 import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.R
+import com.example.ediya_kiosk.database.Database
+import com.example.ediya_kiosk.database.DatabaseControl
 import com.example.ediya_kiosk.optionDialog
 import kotlinx.android.synthetic.main.menu_detail_layout.*
 import kotlinx.android.synthetic.main.payment_layout.*
@@ -34,50 +36,24 @@ class PaymentFragment : Fragment() {
     ): View {
         var view = inflater.inflate(R.layout.payment_layout, container, false)
 
-        var totalPrice = arguments?.getInt("totalPrice")
+        val userId = arguments?.getString("userId").toString()
+        val menuNameList = arguments?.getStringArrayList("menu_name")
+        val menuPriceList = arguments?.getStringArrayList("total_cost")
+        val menuCountList = arguments?.getStringArrayList("menu_count")
 
         val ediyaPayBtn = view.findViewById<Button>(R.id.ediyaPayBtn)
         val otherPayBtn = view.findViewById<Button>(R.id.otherPayBtn)
         var orderBtn = view.findViewById<Button>(R.id.paymentBtnInPayment)
-        var phoneEditText = view.findViewById<EditText>(R.id.phoneNumberET)
-        var phoneCheckBtn = view.findViewById<Button>(R.id.phoneCheckBtn)
+        val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn)
+        val couponBtn = view.findViewById<Button>(R.id.showCouponBtn)
+
         val payContainer = view.findViewById<HorizontalScrollView>(R.id.ediyaPayContainer)
         val otherPayContainer = view.findViewById<RadioGroup>(R.id.otherPayContainer)
 
         payContainer.visibility = View.GONE
         otherPayContainer.visibility = View.GONE
 
-        //phone spinner
-        var mobileList = resources.getStringArray(R.array.spinner_mobile)
-        var mobileSpinner = view.findViewById<Spinner>(R.id.mobileSpinner)
-        mobileSpinner?.adapter = ArrayAdapter(mainActivity,
-            android.R.layout.simple_spinner_item,mobileList) as SpinnerAdapter
-        mobileSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                var doamain = mobileSpinner.selectedItem.toString()
-            }
-        }
-
-        //phone
-        phoneEditText?.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-        phoneCheckBtn.setOnClickListener {
-            if (phoneEditText.length() == 0) {
-                loadAlertDialog("전화번호를 입력해주세요.")
-            }
-            else if(phoneEditText.length() < 11) {
-                loadAlertDialog("전화번호 11자리를 입력해주세요.")
-            }
-            else {
-                loadAlertDialog("전화번호가 확인되었습니다.")
-                !phoneCheckBtn.isClickable
-            }
-        }
-
         //coupon
-        val couponBtn = view.findViewById<Button>(R.id.showCouponBtn)
         var couponNum : Int? = null
         couponBtn.setOnClickListener {
             Log.d("Message", "click couponBtn $couponNum")
@@ -93,7 +69,6 @@ class PaymentFragment : Fragment() {
 
 
         //back btn
-        val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn)
         backBtn.setOnClickListener {
             val backDialog = AlertDialog.Builder(mainActivity)
             backDialog.setMessage("결제를 취소하시겠습니까 ?")
@@ -102,21 +77,35 @@ class PaymentFragment : Fragment() {
             backDialog.show()
         }
 
-
-        //return Main
-        orderBtn.setOnClickListener {
-            Log.d("Message","orderBtn click")
-
-            mainActivity!!.loadFrag(3)
-            Toast.makeText(mainActivity,"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show()
-        }
-
         ediyaPayBtn.setOnClickListener {
             setPayContent(ediyaPayBtn)
         }
 
         otherPayBtn.setOnClickListener {
             setPayContent(otherPayBtn)
+        }
+
+        //결제 완료
+        orderBtn.setOnClickListener {
+            Log.d("Message","orderBtn click")
+            val db = Database(mainActivity, "ediya.db",null,1)
+            val readableDb = db.readableDatabase
+            val writableDb = db.writableDatabase
+            val dbControl = DatabaseControl()
+
+            var orderIndexList = dbControl.readData(readableDb,"basket_order", arrayOf("order_index"), arrayListOf("id"), arrayOf(userId))
+            var index = orderIndexList[-1][0]
+
+            for (i in menuNameList!!.indices) {
+                dbControl.createData(
+                    writableDb,
+                    "basket_order",
+                    arrayListOf("id", "order_index", "menu_name", "menu_price", "menu_count"),
+                    arrayListOf(userId, index+1,menuNameList[i],menuPriceList!![i],menuCountList!![i])
+                )
+            }
+            mainActivity!!.loadFrag(3)
+            Toast.makeText(mainActivity,"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show()
         }
 
         return view

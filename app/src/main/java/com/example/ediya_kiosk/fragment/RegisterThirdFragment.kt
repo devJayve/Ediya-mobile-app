@@ -25,13 +25,8 @@ import kotlin.math.log
 
 class RegisterThirdFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
-    private var isOverlapCheck = false
-    private var isPwStated = false
-    private var isRePwStated = false
-    private var isIdStated = false
-    private var isEmailStated = false
-    private var isDomainSelected = false
-    private var stateArray = arrayOf(isOverlapCheck,isPwStated,isRePwStated,isIdStated,isEmailStated,isDomainSelected)
+    private val myTag = "TAG"
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -57,6 +52,13 @@ class RegisterThirdFragment : Fragment() {
         val db = Database(loginActivity, "ediya.db", null, 1)
         val readableDb = db.readableDatabase
         val writableDb = db.writableDatabase
+
+        //state
+        var isOverlapCheck = false
+        var isPwStated = false
+        var isRePwStated = false
+        var isIdStated = false
+        var isEmailStated = false
 
         //editText
         val idET = view.findViewById<EditText>(R.id.idInRegisterET)
@@ -89,7 +91,6 @@ class RegisterThirdFragment : Fragment() {
                 id: Long
             ) {
                 var doamain = domainSpinner.selectedItem.toString()
-                isDomainSelected = true
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
@@ -99,23 +100,24 @@ class RegisterThirdFragment : Fragment() {
         idET.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                isIdStated = false
-                isOverlapCheck = false
-                idOverlapBtn.isEnabled = true
                 if (idET.length() < 4) {
+                    isIdStated = false
+                    isOverlapCheck = false
                     idInputLayout.error = "4자 이상 입력해주세요."
                     idOverlapBtn.isEnabled = false
                 } else if (!Pattern.matches("^[A-Za-z0-9]*$",idET.text)) {
                     idInputLayout.error = "아이디 형식에 부합하지 않습니다."
                     idOverlapBtn.isEnabled = false
                 } else {
-                    idInputLayout.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    isIdStated = true
+                    idET.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
                     idInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
                     idInputLayout.error = null
                     idOverlapBtn.isEnabled = true
                 }
             }
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
         })
 
         //비밀번호 예외처리
@@ -124,6 +126,7 @@ class RegisterThirdFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (pwET.length() < 8) {
+                    isPwStated = false
                     pwInputLayout.error = "8자 이상 입력해주세요."
                 } else if (!Pattern.matches(
                         "^(?=.*\\d)(?=.*[~`!@#$%^&*()-])(?=.*[a-zA-Z]).{8,20}$",
@@ -146,13 +149,15 @@ class RegisterThirdFragment : Fragment() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (pwET.text != rePwET.text) {
+                if (pwET.text.toString() != rePwET.text.toString()) {
+                    isRePwStated = false
                     rePwInputLayout.error = "비밀번호가 일치하지 않습니다."
                 } else {
                     rePwInputLayout.error = null
                     rePwET.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
                     rePwInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
                     isRePwStated = true
+                    Log.d(myTag,"$isRePwStated")
                 }
             }
             override fun afterTextChanged(p0: Editable?) {}
@@ -161,13 +166,13 @@ class RegisterThirdFragment : Fragment() {
         //이메일 예외처리
         emailET.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                isEmailStated = false
                 if (emailET.length() < 1) {
+                    isEmailStated = false
                     emailInputLayout.error = "이메일을 입력해주세요."
                 }  else {
                     emailInputLayout.error = null
-                    emailInputLayout.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
-                    emailInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                    emailET.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.gray)
+                    emailInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.gray)
                     isEmailStated = true
                 }
             }
@@ -194,22 +199,20 @@ class RegisterThirdFragment : Fragment() {
                     idInputLayout.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
                     idInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
                     isIdStated = true
-                    idOverlapBtn.isEnabled = false
                     true
                 }
             }
         }
 
+
         // 회원가입 완료
         nextPageBtn.setOnClickListener {
-            var isFinish = true
-            for (state in stateArray) if (!state) {
-                isFinish = false
-            }
-            if (isFinish) {
+
+            if (isOverlapCheck && isPwStated && isRePwStated && isIdStated && isEmailStated) {
                 saveInLocalDb(idET.text.toString(),pwET.text.toString(),emailET.text.toString())
                 finishRegister()
             }
+            else Toast.makeText(loginActivity,"회원 정보를 다시 확인해주세요.",Toast.LENGTH_SHORT).show()
         }
 
         //뒤로 가기

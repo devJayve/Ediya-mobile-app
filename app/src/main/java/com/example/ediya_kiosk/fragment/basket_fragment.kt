@@ -12,6 +12,7 @@ import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
+import kotlinx.android.synthetic.main.basket_layout.*
 import kotlinx.android.synthetic.main.menu_item.*
 
 class basket_fragment : Fragment() {
@@ -31,6 +32,7 @@ class basket_fragment : Fragment() {
     ): View {
         var view = inflater.inflate(R.layout.basket_layout,container,false)
 
+        var userId = arguments?.getString("userId")
         var nameList = arguments?.getStringArrayList("menu_name")
         var countList = arguments?.getStringArrayList("menu_count")
         var tempList  = arguments?.getStringArrayList("menu_temp")
@@ -47,35 +49,42 @@ class basket_fragment : Fragment() {
         // 뒤로 가기
         val backBtn = view.findViewById<Button>(R.id.backBtn)
          backBtn.setOnClickListener {
-             mainActivity!!.openOtherFragmentforBundle(5,this)
+             mainActivity.openOtherFragmentforBundle(5,this)
          }
 
         //payment 로 이동
         val paymentBtn = view.findViewById<Button>(R.id.orderBtnInBasket)
         paymentBtn.setOnClickListener {
-            mainActivity!!.loadFrag(2)
+            mainActivity.loadFrag(2)
         }
 
         val removeAllBtn = view.findViewById<Button>(R.id.removeAllBtn)
         removeAllBtn.setOnClickListener {
-
-            mainActivity!!.deleteLocalDb()
-            mainActivity!!.clearBindService()
-            mainActivity!!.loadFrag(1)
+            mainActivity.deleteLocalDb()
+            mainActivity.clearBindService()
+            mainActivity.loadFrag(1)
         }
+
+        var totalPriceTV = view.findViewById<TextView>(R.id.totalPriceTV)
+        // 총 가격 구해주기
+        var totalPriceTxt = 0
+        if (totalPriceList != null) {
+            for (price in totalPriceList!!) {
+                totalPriceTxt += price.toInt()
+            }
+        }
+        totalPriceTV?.text = totalPriceTxt.toString().plus("원")
 
         return view
     }
 
-    private fun setContent(layout: LinearLayout?, name:ArrayList<String>?, temp:ArrayList<String>?,size:ArrayList<String>?,
-                            price:ArrayList<String>?,totalPrice:ArrayList<String>?,img:ArrayList<String>?) {
-        // 총 가격 구해주기
-        var basketTotalPrice = view?.findViewById<TextView>(R.id.totalPriceTV)
-        var totalPriceTxt = 0
-        for (price in totalPrice!!) {
-            totalPriceTxt += price.toInt()
-        }
-        basketTotalPrice?.text = totalPriceTxt.toString().plus("원")
+    private fun setContent(layout: LinearLayout?,
+                           name:ArrayList<String>?,
+                           temp:ArrayList<String>?,
+                           size:ArrayList<String>?,
+                           price:ArrayList<String>?,
+                           totalPrice:ArrayList<String>?,
+                           img:ArrayList<String>?) {
 
         if (name != null) {
             for ((i) in (0 until name.size).withIndex()) {
