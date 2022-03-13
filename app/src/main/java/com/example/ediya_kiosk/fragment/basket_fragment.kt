@@ -86,11 +86,12 @@ class basket_fragment : Fragment() {
                            totalPrice:ArrayList<String>?,
                            img:ArrayList<String>?) {
 
+        val layoutInflater =
+            mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val containView = layoutInflater.inflate(R.layout.bakset_menu_layout, null)
+
         if (name != null) {
             for ((i) in (0 until name.size).withIndex()) {
-                val layoutInflater =
-                    mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                val containView = layoutInflater.inflate(R.layout.bakset_menu_layout, null)
                 var menuName = containView.findViewById<TextView>(R.id.menuNameTV)
                 var menuTemp = containView.findViewById<TextView>(R.id.tempTV)
                 var menuSize = containView.findViewById<TextView>(R.id.sizeTV)
