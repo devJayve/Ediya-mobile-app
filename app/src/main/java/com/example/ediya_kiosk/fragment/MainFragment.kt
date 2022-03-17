@@ -137,7 +137,7 @@ class MainFragment : Fragment() {
                 bubbleMilkTeaBtn,
                 bakeryBtn
             )
-            var categoryList = arrayListOf<String>("COFFEE", "베버러지", "블렌딩 티", "에이드", "쉐이크", "플랫치노", "버블 밀크티","베이커리")
+            var categoryList = arrayListOf("COFFEE", "베버러지", "블렌딩 티", "에이드", "쉐이크", "플랫치노", "버블 밀크티","베이커리")
             var nameArrayList = listOf(
                 R.array.coffee_name,
                 R.array.beverage_name,

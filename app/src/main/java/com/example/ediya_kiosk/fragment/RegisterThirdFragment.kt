@@ -254,7 +254,7 @@ class RegisterThirdFragment : Fragment() {
         var domainSpinner = view?.findViewById<Spinner>(R.id.domainSpinner)
         val dbControl = DatabaseControl()
 
-        val accountColumnList = arrayListOf("id","password","email","name","certification_num","phone_num")
+        val accountColumnList = arrayListOf("id","password","email","name","certification_num","phone_num","point")
 
         val pref = loginActivity.getPreferences(0)
         var name = pref.getString("name","").toString()
@@ -262,11 +262,9 @@ class RegisterThirdFragment : Fragment() {
         var phoneNum = pref.getInt("phoneNum",0)
         var domain = domainSpinner?.selectedItem.toString()
         var totalEmail = "$email@$domain"
-        var accountValueList = arrayListOf(id,pw,totalEmail,name,certificationNum.toString(),phoneNum.toString())
+        var accountValueList = arrayListOf(id,pw,totalEmail,name,certificationNum.toString(),phoneNum.toString(),"2000")
 
         dbControl.createData(writableDb,"account",accountColumnList,accountValueList)
-//        dbControl.createData(writableDb,"basket", arrayListOf("id"),arrayListOf(id))
-//        dbControl.createData(writableDb,"basketOrder",arrayListOf("id"),arrayListOf(id))
         dbControl.createData(writableDb, "interface",arrayListOf("id","isMode","isLanguage"), arrayListOf(id,"0","0"))
     }
 }

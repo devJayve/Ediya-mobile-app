@@ -60,7 +60,6 @@ class basket_fragment : Fragment() {
 
         val removeAllBtn = view.findViewById<Button>(R.id.removeAllBtn)
         removeAllBtn.setOnClickListener {
-            mainActivity.deleteLocalDb()
             mainActivity.clearBindService()
             mainActivity.loadFrag(1)
         }

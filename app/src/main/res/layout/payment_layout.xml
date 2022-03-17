@@ -152,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:text="사용 가능 적립금"/>
                     <TextView
+                        android:id="@+id/point_TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 원"

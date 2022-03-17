@@ -23,6 +23,16 @@ class BasketService : Service() {
     var optionCostList : ArrayList<String> = arrayListOf() //옵션 가격
     var totalCostList : ArrayList<String> = arrayListOf() //메뉴 총 가격
 
+    var menuDataList = arrayListOf(
+        menuNameList,
+        menuCountList,
+        menuTempList,
+        menuSizeList,
+        menuPriceList,
+        menuImgList,
+        optionCostList,
+        totalCostList)
+
 
     inner class BasketServiceBinder : Binder() {
         fun getService() : BasketService {
@@ -36,15 +46,6 @@ class BasketService : Service() {
 
     fun getMenuData(dataList : ArrayList<String>) {
         Log.d("TAG","getMenu $dataList")
-        var menuDataList = arrayListOf(
-            menuNameList,
-            menuCountList,
-            menuTempList,
-            menuSizeList,
-            menuPriceList,
-            menuImgList,
-            optionCostList,
-            totalCostList)
 
         //데이터 담기
         for (i in dataList.indices) {
@@ -53,16 +54,6 @@ class BasketService : Service() {
     }
 
     fun putMenuData() : ArrayList<ArrayList<String>> { //데이터 전송
-        var menuDataList = arrayListOf(
-            menuNameList,
-            menuCountList,
-            menuTempList,
-            menuSizeList,
-            menuPriceList,
-            menuImgList,
-            optionCostList,
-            totalCostList)
-
         return menuDataList
     }
 
@@ -77,15 +68,6 @@ class BasketService : Service() {
     }
 
     fun clearList() {
-        var menuDataList = arrayListOf(
-            menuNameList,
-            menuCountList,
-            menuTempList,
-            menuSizeList,
-            menuPriceList,
-            menuImgList,
-            optionCostList,
-            totalCostList)
         for (data in menuDataList) data.clear()
     }
 

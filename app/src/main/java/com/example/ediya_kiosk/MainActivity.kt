@@ -63,65 +63,9 @@ class MainActivity : AppCompatActivity() {
         startService(serviceIntent)
     }
 
-    fun readBasketData() : ArrayList<ArrayList<String>> {
-        val db = Database(this, "ediya.db", null, 1)
-        val readableDb = db.writableDatabase
-        val dbControl = DatabaseControl()
-
-        var menuNameList : ArrayList<String> = arrayListOf() //이름
-        var menuCountList : ArrayList<String> = arrayListOf() //개수
-        var menuTempList : ArrayList<String> = arrayListOf() //온도
-        var menuSizeList : ArrayList<String> = arrayListOf() //사이즈
-        var menuPriceList : ArrayList<String> = arrayListOf() //단품 가격
-        var menuImgList : ArrayList<String> = arrayListOf() //이미지
-        var optionCostList : ArrayList<String> = arrayListOf() //옵션 가격
-        var totalCostList : ArrayList<String> = arrayListOf() //메뉴 총 가격
-        var menuDataList = arrayListOf(
-            menuNameList,
-            menuCountList,
-            menuTempList,
-            menuSizeList,
-            menuPriceList,
-            menuImgList,
-            optionCostList,
-            totalCostList)
-
-        var basketData = dbControl.readData(
-            readableDb,
-            "basket",
-            arrayOf("menu_name",
-                "menu_count",
-                "menu_temp",
-                "menu_size",
-                "menu_price",
-                "menu_img",
-                "option_cost",
-                "total_cost"),
-            arrayListOf("id"),
-            arrayOf(userId)
-        )
-
-        if (basketData.size > 0) {
-            for (i in basketData[0].indices) {
-                for (j in basketData.indices) {
-                    menuDataList[i].add(basketData[j][i])
-                }
-            }
-            for (i in menuDataList.indices) {
-                Log.d("TAG", "${menuDataList[i]}")
-            }
-        }
-        return menuDataList
-    }
-
     fun passBasketData(menuDataList: ArrayList<String>) {
         if (isConService) {
             basketService?.getMenuData(menuDataList)
-            val db = Database(this, "ediya.db",null,1)
-            val writableDb = db.writableDatabase
-            val dbControl = DatabaseControl()
-            menuDataList.add(0,userId)
-            dbControl.createData(writableDb,"basket",menuColumnList,menuDataList)
         }
     }
 
@@ -131,10 +75,10 @@ class MainActivity : AppCompatActivity() {
         var paymentFrag = PaymentFragment()
         var basketFrag = basket_fragment()
         var mainFrag = MainFragment()
-        var basketDataList = readBasketData()
+        var basketDataList = basketService?.putMenuData()
 
 
-        for (i in basketDataList.indices) {
+        for (i in basketDataList!!.indices) {
             bundle.putStringArrayList(menuColumnList[i+1],basketDataList[i])
             Log.d("TAG","put ${menuColumnList[i+1]}, ${basketDataList[i]}")
         }
@@ -155,21 +99,12 @@ class MainActivity : AppCompatActivity() {
             }
             3 -> {
                 clearBindService()
-                deleteLocalDb()
                 transaction.replace(R.id.fragment_area, MainFragment()).commit()
             }
             else -> {
                 Log.d("Message","null")
             }
         }
-    }
-
-    fun deleteLocalDb() {
-        val db = Database(this, "ediya.db",null,1)
-        val writableDb = db.writableDatabase
-        val dbControl = DatabaseControl()
-
-        dbControl.deleteData(writableDb,"basket", arrayListOf("id"), arrayOf(userId))
     }
 
     fun clearBindService() {
@@ -263,5 +198,4 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         serviceUnBind()
     }
-
 }
