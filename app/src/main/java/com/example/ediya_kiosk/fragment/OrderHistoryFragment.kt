@@ -1,27 +1,26 @@
 package com.example.ediya_kiosk.fragment
 
-import android.annotation.SuppressLint
-import android.app.ActionBar
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
 
+
 class OrderHistoryFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
-    private val userId = arguments?.getString("userId").toString()
+    private lateinit var userId : String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -34,6 +33,9 @@ class OrderHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val view = inflater.inflate(R.layout.order_history_layout, container, false)
+
+        userId = arguments?.getString("userId").toString()
+        Log.d("TAG","user id is $userId")
 
         val historyContainer = view.findViewById<LinearLayout>(R.id.history_container)
         val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn2)
@@ -102,7 +104,6 @@ class OrderHistoryFragment : Fragment() {
             menuDataList[6].add(basketDataList[i][6])
             menuDataList[7].add(basketDataList[i][7])
             menuDataList[8].add(basketDataList[i][8])
-            menuDataList[9].add(basketDataList[i][9])
         }
 
         val paymentDataList = dbControl.readData(
@@ -124,34 +125,50 @@ class OrderHistoryFragment : Fragment() {
 
         val layoutInflater =
             mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val containView = layoutInflater.inflate(R.layout.order_history_layout, null)
 
-        for (i in (0 until paymentDataList[-1][0].toInt())) {
-            val orderIndex = containView.findViewById<TextView>(R.id.history_order_indexTV)
-            val menuName = containView.findViewById<TextView>(R.id.history_menu_nameTV)
-            val payKind = containView.findViewById<TextView>(R.id.history_pay_kindTV)
-            val payCost = containView.findViewById<TextView>(R.id.history_pay_costTV)
-            val orderState = containView.findViewById<TextView>(R.id.history_order_stateTV)
-            val intoInfoBtn = containView.findViewById<ImageButton>(R.id.into_info_btn)
+        if (paymentDataList.size != 0) {
+            Log.d("TAG","$paymentDataList")
+            Log.d("TAG", paymentDataList.last()[0])
+            for (i in (0 until (paymentDataList.last()[0].toInt()+1))) {
+                var historyContainView = layoutInflater.inflate(R.layout.history_layout, null)
+                var orderIndex = historyContainView.findViewById<TextView>(R.id.history_order_indexTV)
+                var menuName = historyContainView.findViewById<TextView>(R.id.history_menu_nameTV)
+                var payKind = historyContainView.findViewById<TextView>(R.id.history_pay_kindTV)
+                var payCost = historyContainView.findViewById<TextView>(R.id.history_pay_costTV)
+                var orderState = historyContainView.findViewById<TextView>(R.id.history_order_stateTV)
+                val intoInfoBtn = historyContainView.findViewById<ImageButton>(R.id.into_info_btn)
 
-            intoInfoBtn.setOnClickListener {
-                Toast.makeText(mainActivity,"$i infoBtn clicked",Toast.LENGTH_SHORT).show()
+                intoInfoBtn.setOnClickListener {
+                    Log.d("TAG","$i clicked")
+                }
+
+
+                val orderList = dbControl.readData(
+                    readableDb,
+                    "basket",
+                    arrayOf("order_index", "menu_name", "menu_temp", "total_cost"),
+                    arrayListOf("order_index"),
+                    arrayOf("$i")
+                )
+                var totalCost = 0
+                for (i in orderList.indices) {
+                    totalCost += orderList[i][3].toInt()
+                }
+                totalCost -= paymentDataList[i][1].toInt()
+
+                Log.d("TAG",orderList[i][0])
+                orderIndex.text = "주문번호 ".plus(orderList[i][0])
+                "${orderList[i][2]} ${(orderList[i][1])} 외 ${orderList.size - 1}건".also {
+                    menuName.text = it
+                }
+                payKind.text = paymentDataList[i][2]
+                payCost.text = "$totalCost".plus("원")
+                orderState.text = "픽업 완료"
+
+                container.addView(historyContainView)
             }
-
-            val orderList = dbControl.readData(readableDb, "basket", arrayOf("order_index","menu_name","menu_temp","total_cost"), arrayListOf("order_index"),arrayOf("$i"))
-            var totalCost = 0
-            for (i in orderList.indices) {
-                totalCost += orderList[i][1].toInt()
-            }
-            totalCost -= orderList[i][1].toInt()
-
-            orderIndex.text = orderList[i][0]
-            "${orderList[i][2]} ${(orderList[i][1])} 외 ${orderList.size-1}건".also { menuName.text = it }
-            payKind.text = paymentDataList[i][2]
-            payCost.text = "$totalCost".plus("원")
-            orderState.text = "픽업 완료"
-
-            container.addView(containView)
+        } else {
+            Log.d("TAG","not history")
         }
     }
 }
