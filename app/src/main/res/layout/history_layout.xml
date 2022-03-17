@@ -26,6 +26,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_weight="9"/>
             <ImageButton
+                android:id="@+id/into_info_btn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/into_icon_gray"

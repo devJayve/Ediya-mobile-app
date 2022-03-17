@@ -43,73 +43,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginLeft="10dp"
-                android:text="전화번호"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-
-            <LinearLayout
-                android:id="@+id/phoneNumLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp"
-                android:weightSum="1">
-
-                <Spinner
-                    android:id="@+id/mobileSpinner"
-                    android:layout_width="74dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="0.2"
-                    android:paddingVertical="10dp"
-                    android:autofillHints="phone"/>
-                <EditText
-                    android:id="@+id/phoneNumberET"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="전화번호를 입력하세요."
-                    android:inputType="phone"
-                    android:textSize="15sp"
-                    android:textColorHint="#919191"
-                    android:layout_weight="0.5"
-                    android:background="@drawable/edit_text_stroke"
-                    android:maxLength="11"
-                    android:paddingRight="20dp"
-                    android:paddingLeft="20dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"/>
-                <Button
-                    android:id="@+id/phoneCheckBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="확 인"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/rounded_corner_ediyacolor"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="#989898"
-                android:layout_marginBottom="10dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp">
                 <TextView
@@ -248,7 +187,7 @@
                                     app:layout_constraintLeft_toLeftOf="parent"
                                     app:layout_constraintTop_toBottomOf="@id/cardLine" />
 
-                                <RadioButton
+                                <CheckBox
                                     android:id="@+id/paymentClickBtn"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -323,7 +262,7 @@
                                     app:layout_constraintLeft_toLeftOf="parent"
                                     app:layout_constraintTop_toBottomOf="@id/cardLine2" />
 
-                                <RadioButton
+                                <CheckBox
                                     android:id="@+id/paymentClickBtn2"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -362,31 +301,70 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <RadioButton
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="30dp"
+                            android:id="@+id/other_pay_btn1"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             android:background="@drawable/selector_radio_kakao"
                             android:button="@null"
-                            android:gravity="center"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
+                            android:layout_gravity="center"/>
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="카카오페이"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="카카오페이"/>
-                        <RadioButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="카카오페이"/>
+                            android:orientation="horizontal"
+                            android:layout_margin="10dp">
+                            <RadioButton
+                                android:id="@+id/other_pay_btn2"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="신용카드"
+                                android:textAlignment="center"
+                                android:textColor="@color/register_text_selector"
+                                android:background="@drawable/register_btn_selector"
+                                android:padding="10dp"
+                                android:layout_margin="5dp"
+                                android:button="@null"
+                                android:layout_weight="1"/>
+                            <RadioButton
+                                android:id="@+id/other_pay_btn3"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="간편 결제"
+                                android:textAlignment="center"
+                                android:textColor="@color/register_text_selector"
+                                android:background="@drawable/register_btn_selector"
+                                android:padding="10dp"
+                                android:layout_margin="5dp"
+                                android:button="@null"
+                                android:layout_weight="1"/>
+                            <RadioButton
+                                android:id="@+id/other_pay_btn4"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="휴대폰"
+                                android:textAlignment="center"
+                                android:textColor="@color/register_text_selector"
+                                android:background="@drawable/register_btn_selector"
+                                android:padding="10dp"
+                                android:layout_margin="5dp"
+                                android:button="@null"
+                                android:layout_weight="1"/>
+
+                        </LinearLayout>
                     </RadioGroup>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_margin="10dp"
+                    android:background="#989898"
+                    android:layout_marginBottom="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="결제 금액"
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_margin="10dp"
-                android:background="#989898"
-                android:layout_marginBottom="10dp"/>
         </LinearLayout>
     </ScrollView>
 

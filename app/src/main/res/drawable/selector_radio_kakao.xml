@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true"
-        android:drawable="@drawable/kakaopay_selected">
+        android:drawable="@drawable/kakao_selected">
         <shape android:shape="rectangle">
             <corners android:radius="4dp"/>
             <solid android:color="#F6E500"/>
         </shape>
     </item>
     <item android:state_checked="false"
-        android:drawable="@drawable/kakaopay_unselected">
+        android:drawable="@drawable/kakao_unselected">
         <shape android:shape="rectangle">
             <corners android:radius="4dp"/>
-            <solid android:color="#FFFFFF"/>
+            <solid android:color="#00000000"/>
         </shape>
     </item>
 </selector>

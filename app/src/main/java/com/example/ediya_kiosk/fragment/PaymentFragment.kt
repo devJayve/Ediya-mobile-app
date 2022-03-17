@@ -62,6 +62,9 @@ class PaymentFragment : Fragment() {
         val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn)
         val couponBtn = view.findViewById<Button>(R.id.showCouponBtn)
 
+        var discount = 0
+        var payment : String
+
         //db
         val db = Database(mainActivity, "ediya.db",null,1)
         val readableDb = db.readableDatabase
@@ -96,7 +99,9 @@ class PaymentFragment : Fragment() {
         backBtn.setOnClickListener {
             val backDialog = AlertDialog.Builder(mainActivity)
             backDialog.setMessage("결제를 취소하시겠습니까 ?")
-            backDialog.setPositiveButton("확인",null)
+            backDialog.setPositiveButton("네", DialogInterface.OnClickListener { _, _ ->
+                mainActivity.loadFrag(1)
+            })
             backDialog.setNegativeButton("취소",null)
             backDialog.show()
         }

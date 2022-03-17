@@ -1,13 +1,17 @@
 package com.example.ediya_kiosk.fragment
 
+import android.annotation.SuppressLint
+import android.app.ActionBar
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.R
@@ -17,7 +21,7 @@ import com.example.ediya_kiosk.database.DatabaseControl
 class OrderHistoryFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
-    private lateinit var userId : String
+    private val userId = arguments?.getString("userId").toString()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -31,62 +35,36 @@ class OrderHistoryFragment : Fragment() {
     ): View {
         val view = inflater.inflate(R.layout.order_history_layout, container, false)
 
-        val container = view.findViewById<LinearLayout>(R.id.history_container)
-        userId = arguments?.getString("userId").toString()
+        val historyContainer = view.findViewById<LinearLayout>(R.id.history_container)
+        val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn2)
 
-        //data list
-        var orderIndexList : ArrayList<String> = arrayListOf() //주문번호
-        var menuNameList : ArrayList<String> = arrayListOf() //이름
-        var menuCountList : ArrayList<String> = arrayListOf() //개수
-        var menuPriceList : ArrayList<String> = arrayListOf() //가격
+        // 기록 불러오기
+        setHistoryContent(historyContainer)
 
-        //history 불러오기
-        val db = Database(mainActivity, "ediya.db",null,1)
-        val readableDb = db.readableDatabase
-        val dbControl = DatabaseControl()
-        var historyDataList = dbControl.readData(readableDb,
-            "basket_order",
-            arrayOf("order_index","menu_name","menu_price","menu_count"),
-            arrayListOf("id"),
-            arrayOf(userId)
-        )
-        var finalOrderIndex = historyDataList[-1][0].toInt()
-        for (i in (0 until finalOrderIndex)) {
-            dbControl.readData(
-                readableDb,
-                "basket_order",
-                arrayOf("order_index", "menu_name", "menu_price", "menu_count"),
-                arrayListOf("id", "order_index"),
-                arrayOf(userId,i.toString())
-            )
-
-
-        }
-
-
-        if (historyDataList.size > 0) {
-            setHistoryContent(finalOrderIndex,historyDataList)
-        } else {
-
+        //뒤로 가기
+        backBtn.setOnClickListener {
+            mainActivity.loadFrag(0)
         }
 
         return view
     }
 
-    fun readBasketData() : ArrayList<ArrayList<String>> {
+    private fun readBasketData() : Pair<ArrayList<ArrayList<String>>,ArrayList<ArrayList<String>>> {
         val db = Database(mainActivity, "ediya.db", null, 1)
         val readableDb = db.writableDatabase
         val dbControl = DatabaseControl()
 
-        var menuNameList : ArrayList<String> = arrayListOf() //이름
-        var menuCountList : ArrayList<String> = arrayListOf() //개수
-        var menuTempList : ArrayList<String> = arrayListOf() //온도
-        var menuSizeList : ArrayList<String> = arrayListOf() //사이즈
-        var menuPriceList : ArrayList<String> = arrayListOf() //단품 가격
-        var menuImgList : ArrayList<String> = arrayListOf() //이미지
-        var optionCostList : ArrayList<String> = arrayListOf() //옵션 가격
-        var totalCostList : ArrayList<String> = arrayListOf() //메뉴 총 가격
-        var menuDataList = arrayListOf(
+        val basketIndexList : ArrayList<String> = arrayListOf()
+        val menuNameList : ArrayList<String> = arrayListOf() //이름
+        val menuCountList : ArrayList<String> = arrayListOf() //개수
+        val menuTempList : ArrayList<String> = arrayListOf() //온도
+        val menuSizeList : ArrayList<String> = arrayListOf() //사이즈
+        val menuPriceList : ArrayList<String> = arrayListOf() //단품 가격
+        val menuImgList : ArrayList<String> = arrayListOf() //이미지
+        val optionCostList : ArrayList<String> = arrayListOf() //옵션 가격
+        val totalCostList : ArrayList<String> = arrayListOf() //메뉴 총 가격
+        val menuDataList = arrayListOf(
+            basketIndexList,
             menuNameList,
             menuCountList,
             menuTempList,
@@ -94,55 +72,86 @@ class OrderHistoryFragment : Fragment() {
             menuPriceList,
             menuImgList,
             optionCostList,
-            totalCostList)
+            totalCostList
+        )
 
-        var basketData = dbControl.readData(
+        var basketDataList = dbControl.readData(
             readableDb,
             "basket",
-            arrayOf("menu_name",
+            arrayOf(
+                "order_index",
+                "menu_name",
                 "menu_count",
                 "menu_temp",
                 "menu_size",
                 "menu_price",
                 "menu_img",
                 "option_cost",
-                "total_cost"),
+                "total_cost"
+            ),
+            arrayListOf("id"),
+            arrayOf(userId)
+        )
+        for (i in basketDataList.indices) {
+            menuDataList[0].add(basketDataList[i][0])
+            menuDataList[1].add(basketDataList[i][1])
+            menuDataList[2].add(basketDataList[i][2])
+            menuDataList[3].add(basketDataList[i][3])
+            menuDataList[4].add(basketDataList[i][4])
+            menuDataList[5].add(basketDataList[i][5])
+            menuDataList[6].add(basketDataList[i][6])
+            menuDataList[7].add(basketDataList[i][7])
+            menuDataList[8].add(basketDataList[i][8])
+            menuDataList[9].add(basketDataList[i][9])
+        }
+
+        val paymentDataList = dbControl.readData(
+            readableDb,
+            "payment",
+            arrayOf("order_index","discount","payment"),
             arrayListOf("id"),
             arrayOf(userId)
         )
 
-        if (basketData.size > 0) {
-            for (i in basketData[0].indices) {
-                for (j in basketData.indices) {
-                    menuDataList[i].add(basketData[j][i])
-                }
-            }
-            for (i in menuDataList.indices) {
-                Log.d("TAG", "${menuDataList[i]}")
-            }
-        }
-        return menuDataList
+        return Pair(basketDataList,paymentDataList)
     }
 
-    private fun setHistoryContent(orderCount : Int,DataList : ArrayList<ArrayList<String>>) {
+    private fun setHistoryContent(container: LinearLayout) {
+        val (basketDataList, paymentDataList) = readBasketData()
+        val db = Database(mainActivity, "ediya.db", null, 1)
+        val readableDb = db.writableDatabase
+        val dbControl = DatabaseControl()
 
         val layoutInflater =
             mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val containView = layoutInflater.inflate(R.layout.order_history_layout, null)
 
-        for (i in (0 until orderCount)) {
-            var orderIndex = containView.findViewById<TextView>(R.id.history_order_indexTV)
-            var menuName = containView.findViewById<TextView>(R.id.history_menu_nameTV)
-            var payKind = containView.findViewById<TextView>(R.id.history_pay_kindTV)
-            var payCost = containView.findViewById<TextView>(R.id.history_pay_costTV)
-            var orderState = containView.findViewById<TextView>(R.id.history_order_stateTV)
+        for (i in (0 until paymentDataList[-1][0].toInt())) {
+            val orderIndex = containView.findViewById<TextView>(R.id.history_order_indexTV)
+            val menuName = containView.findViewById<TextView>(R.id.history_menu_nameTV)
+            val payKind = containView.findViewById<TextView>(R.id.history_pay_kindTV)
+            val payCost = containView.findViewById<TextView>(R.id.history_pay_costTV)
+            val orderState = containView.findViewById<TextView>(R.id.history_order_stateTV)
+            val intoInfoBtn = containView.findViewById<ImageButton>(R.id.into_info_btn)
 
-                orderIndex.text = DataList[i][0]
-                menuName.text = DataList[i][1]
-                payKind.text = "이디야페이"
+            intoInfoBtn.setOnClickListener {
+                Toast.makeText(mainActivity,"$i infoBtn clicked",Toast.LENGTH_SHORT).show()
+            }
 
+            val orderList = dbControl.readData(readableDb, "basket", arrayOf("order_index","menu_name","menu_temp","total_cost"), arrayListOf("order_index"),arrayOf("$i"))
+            var totalCost = 0
+            for (i in orderList.indices) {
+                totalCost += orderList[i][1].toInt()
+            }
+            totalCost -= orderList[i][1].toInt()
 
+            orderIndex.text = orderList[i][0]
+            "${orderList[i][2]} ${(orderList[i][1])} 외 ${orderList.size-1}건".also { menuName.text = it }
+            payKind.text = paymentDataList[i][2]
+            payCost.text = "$totalCost".plus("원")
+            orderState.text = "픽업 완료"
 
+            container.addView(containView)
         }
     }
 }
