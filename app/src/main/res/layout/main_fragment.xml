@@ -199,12 +199,40 @@
             app:layout_constraintTop_toBottomOf="@id/line1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/settingBtn"
+        android:id="@+id/set_language_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/bakset_icon"
+        android:src="@drawable/language_icon"
+        android:backgroundTint="#989EBD"
+        android:layout_margin="16dp"
+        app:fabSize="mini"
+        app:layout_constraintTop_toTopOf="@id/setting_btn"
+        app:layout_constraintBottom_toBottomOf="@id/setting_btn"
+        app:layout_constraintStart_toStartOf="@id/setting_btn"
+        app:layout_constraintEnd_toEndOf="@id/setting_btn"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/dark_mode_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dark_mode_icon"
+        android:backgroundTint="#989EBD"
+        android:layout_margin="16dp"
+        app:fabSize="mini"
+        app:layout_constraintTop_toTopOf="@id/setting_btn"
+        app:layout_constraintBottom_toBottomOf="@id/setting_btn"
+        app:layout_constraintStart_toStartOf="@id/setting_btn"
+        app:layout_constraintEnd_toEndOf="@id/setting_btn"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/setting_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/setting_icon"
+
         android:backgroundTint="@color/ediya_color"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toTopOf="@id/basketBtn"

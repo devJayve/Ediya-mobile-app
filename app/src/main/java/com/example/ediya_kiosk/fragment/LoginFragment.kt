@@ -87,7 +87,9 @@ class LoginFragment : Fragment() {
         else {
             val db = Database(loginActivity, "ediya.db",null,1)
             val readableDb = db.readableDatabase
+            val writableDb = db.writableDatabase
             val dbControl = DatabaseControl()
+
             var dataList = dbControl.readData(readableDb,"account",columnArray,selectionList,selectionArgsArray)
             if (dataList.size != 0) {
                 loginActivity!!.login(dataList[0][0])

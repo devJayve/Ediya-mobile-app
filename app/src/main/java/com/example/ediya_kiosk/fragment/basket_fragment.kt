@@ -6,14 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.MainActivity
 import com.example.ediya_kiosk.R
-import com.example.ediya_kiosk.database.Database
-import com.example.ediya_kiosk.database.DatabaseControl
-import kotlinx.android.synthetic.main.basket_layout.*
-import kotlinx.android.synthetic.main.menu_item.*
+
 
 class basket_fragment : Fragment() {
 
@@ -23,7 +23,6 @@ class basket_fragment : Fragment() {
         super.onAttach(context)
         mainActivity = activity as MainActivity
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +41,7 @@ class basket_fragment : Fragment() {
         var optionCostList = arguments?.getStringArrayList("option_cost")
         var totalPriceList = arguments?.getStringArrayList("total_cost")
 
-        val container = view.findViewById<LinearLayout>(R.id.basket_container)
+        var container = view.findViewById<LinearLayout>(R.id.basket_container)
 
         setContent(container,nameList,tempList,sizeList,priceList,totalPriceList,imgList)
 
@@ -85,12 +84,12 @@ class basket_fragment : Fragment() {
                            totalPrice:ArrayList<String>?,
                            img:ArrayList<String>?) {
 
-        val layoutInflater =
-            mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val containView = layoutInflater.inflate(R.layout.bakset_menu_layout, null)
-
         if (name != null) {
+            var layoutInflater =
+                mainActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
             for ((i) in (0 until name.size).withIndex()) {
+                var containView = layoutInflater.inflate(R.layout.bakset_menu_layout, null)
                 var menuName = containView.findViewById<TextView>(R.id.menuNameTV)
                 var menuTemp = containView.findViewById<TextView>(R.id.tempTV)
                 var menuSize = containView.findViewById<TextView>(R.id.sizeTV)
@@ -107,5 +106,10 @@ class basket_fragment : Fragment() {
                 layout?.addView(containView)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("TAG","destroy view")
     }
 }

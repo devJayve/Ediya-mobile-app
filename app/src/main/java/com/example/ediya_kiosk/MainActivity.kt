@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
         var paymentFrag = PaymentFragment()
         var basketFrag = basket_fragment()
         var mainFrag = MainFragment()
+        val historyFrag = OrderHistoryFragment()
         var basketDataList = basketService?.putMenuData()
 
 
@@ -83,6 +84,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("TAG","put ${menuColumnList[i+1]}, ${basketDataList[i]}")
         }
         bundle.putString("userId",userId)
+        Log.d("TAG","bundle put String $userId")
 
         when (frag_num) {
             0 -> {
@@ -99,7 +101,12 @@ class MainActivity : AppCompatActivity() {
             }
             3 -> {
                 clearBindService()
-                transaction.replace(R.id.fragment_area, MainFragment()).commit()
+                mainFrag.arguments = bundle
+                transaction.replace(R.id.fragment_area, mainFrag).commit()
+            }
+            4 -> {
+                historyFrag.arguments = bundle
+                transaction.replace(R.id.fragment_area, historyFrag).commit()
             }
             else -> {
                 Log.d("Message","null")

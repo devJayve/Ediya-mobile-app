@@ -23,7 +23,7 @@ import kotlinx.android.synthetic.main.payment_layout.*
 class PaymentFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
-    val userId = arguments?.getString("userId").toString()
+    private lateinit var userId : String
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,10 +37,14 @@ class PaymentFragment : Fragment() {
     ): View {
         var view = inflater.inflate(R.layout.payment_layout, container, false)
 
+        userId = arguments?.getString("userId").toString()
+        Log.d("TAG","user id is $userId")
+
         val menuNameList = arguments?.getStringArrayList("menu_name")
         val menuCountList = arguments?.getStringArrayList("menu_count")
         val menuTempList = arguments?.getStringArrayList("menu_temp")
         val menuSizeList = arguments?.getStringArrayList("menu_size")
+        var menuPriceList = arguments?.getStringArrayList("menu_price")
         val menuImgList = arguments?.getStringArrayList("menu_img")
         val optionCostList = arguments?.getStringArrayList("option_cost")
         val totalCostList = arguments?.getStringArrayList("total_cost")
@@ -49,6 +53,7 @@ class PaymentFragment : Fragment() {
             menuCountList,
             menuTempList,
             menuSizeList,
+            menuPriceList,
             menuImgList,
             optionCostList,
             totalCostList
@@ -146,7 +151,12 @@ class PaymentFragment : Fragment() {
         val readableDb = db.readableDatabase
         val dbControl = DatabaseControl()
 
-        var orderIndex = dbControl.readData(readableDb, "basket", arrayOf("order_index"), arrayListOf("id"), arrayOf(userId))[-1][0]
+        var orderIndex = "-1"
+        var orderIndexList = dbControl.readData(readableDb, "basket", arrayOf("order_index"), arrayListOf("id"), arrayOf(userId))
+        Log.d("TAG","$orderIndexList")
+        if (orderIndexList.size != 0) {
+            orderIndex = orderIndexList[-1][0]
+        }
 
         for (i in menuDataList[0]!!.indices) {
             dbControl.createData(
@@ -166,7 +176,7 @@ class PaymentFragment : Fragment() {
                 ),
                 arrayListOf(
                     userId,
-                    orderIndex+1,
+                    (orderIndex.toInt()+1).toString(),
                     menuDataList[0]!![i], //name
                     menuDataList[1]!![i], //count
                     menuDataList[2]!![i], //temp
@@ -187,7 +197,7 @@ class PaymentFragment : Fragment() {
                 "discount",
                 "payment"),
             arrayListOf(userId,
-                orderIndex+1,
+                (orderIndex.toInt()+1).toString(),
                 "0",
                 "0")
         )
