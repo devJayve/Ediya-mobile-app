@@ -169,7 +169,7 @@ class MenuDetailFragment : Fragment() {
         //뒤로가기
         val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn)
         backBtn.setOnClickListener {
-            mainActivity.openOtherFragmentforBundle(5, this)
+            mainActivity.loadFrag(0)
         }
 
         return view

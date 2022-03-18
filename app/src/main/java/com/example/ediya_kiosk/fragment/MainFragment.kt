@@ -5,7 +5,9 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.Configuration
 import android.content.res.TypedArray
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,16 +17,23 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ediya_kiosk.MainActivity
+import com.example.ediya_kiosk.OnDayNightStateChanged
 import com.example.ediya_kiosk.recycler_view.MainRvAdapter
 import com.example.ediya_kiosk.recycler_view.MenuData
 import com.example.ediya_kiosk.R
+import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_fragment.*
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), OnDayNightStateChanged {
 
     private lateinit var myadapter: MainRvAdapter
     private lateinit var mainActivity: MainActivity
@@ -84,8 +93,15 @@ class MainFragment : Fragment() {
 
         // 다크모드
         darkModeBtn.setOnClickListener {
-            Toast.makeText(mainActivity, "다크모드 버튼 클릭!", Toast.LENGTH_SHORT).show()
+            if (AppCompatDelegate.getDefaultNightMode() != MODE_NIGHT_YES) {
+                onDayNightApplied(2)
+                Toast.makeText(mainActivity, "다크모드 버튼 클릭!", Toast.LENGTH_SHORT).show()
+            } else {
+                onDayNightApplied(1)
+                Toast.makeText(mainActivity, "다크모드 버튼 클릭!", Toast.LENGTH_SHORT).show()
+            }
         }
+
 
         // 한/영 전환
         languageBtn.setOnClickListener {
@@ -210,25 +226,27 @@ class MainFragment : Fragment() {
     }
 
     private fun toggleFab() {
-
-        // 플로팅 액션 버튼 닫기 - 열려있는 플로팅 버튼 집어넣는 애니메이션 세팅
         if (isFabOpen) {
             ObjectAnimator.ofFloat(dark_mode_btn, "translationY", 0f).apply { start() }
             ObjectAnimator.ofFloat(set_language_btn, "translationY", 0f).apply { start() }
-            //setting_btn.setImageResource(R.drawable.ic_baseline_add_24)
 
-            // 플로팅 액션 버튼 열기 - 닫혀있는 플로팅 버튼 꺼내는 애니메이션 세팅
         } else {
             ObjectAnimator.ofFloat(dark_mode_btn, "translationY", -200f).apply { start() }
             ObjectAnimator.ofFloat(set_language_btn, "translationY", -400f).apply { start() }
-            //fabMain.setImageResource(R.drawable.ic_baseline_clear_24)
         }
         isFabOpen = !isFabOpen
     }
 
-
-
+    override fun onDayNightApplied(state: Int) {
+        if(state == OnDayNightStateChanged.DAY){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            mainActivity.updateInterface(0)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            mainActivity.updateInterface(1)
+        }
     }
+}
 
 
 

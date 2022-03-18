@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.Ediya_Kiosk" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Primary brand color. -->
-<!--        <item name="colorPrimary">@color/purple_500</item>-->
-<!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
-<!--        <item name="colorOnPrimary">@color/white</item>-->
+<!--         Primary brand color. -->
+        <item name="colorPrimary">@color/white_FFFFFF_131313</item>
+        <item name="colorPrimaryVariant">@color/ediya_light_navy_7D88BD_131F5C</item>
+        <item name="colorOnPrimary">@color/ediya_navy_131F5C_7D88BD</item>
         <!-- Secondary brand color. -->
 <!--        <item name="colorSecondary">@color/teal_200</item>-->
 <!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
@@ -15,4 +15,5 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
     </style>
+
 </resources>

@@ -1,11 +1,15 @@
 package com.example.ediya_kiosk
 
 import android.content.*
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
 import com.example.ediya_kiosk.fragment.*
@@ -191,6 +195,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_layout)
         userId = intent.getStringExtra("id").toString()
+
+        val db = Database(this, "ediya.db",null,1)
+        val readableDb = db.readableDatabase
+        val writableDb = db.writableDatabase
+        val dbControl = DatabaseControl()
+
+        val interfaceList =
+            dbControl.readData(readableDb,"interface", arrayOf("isMode","isLanguage"), arrayListOf("id"), arrayOf(userId))
+        var isMode = interfaceList[0][0].toInt()
+        var isLanguage = interfaceList[0][1].toInt()
+
+        when (isMode) {
+            0 -> applyDayNight(OnDayNightStateChanged.DAY)
+            1 -> applyDayNight(OnDayNightStateChanged.NIGHT)
+        }
+
         var mainFrag = MainFragment()
         var bundle = Bundle()
         bundle.putString("userId",userId)
@@ -199,6 +219,57 @@ class MainActivity : AppCompatActivity() {
 
         startService(Intent(this, ForegroundService::class.java))
         serviceBind()
+    }
+
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        Log.d("Message","onConfigurationChanged")
+        val nightMode = newConfig.uiMode and Configuration.UI_MODE_NIGHT_MASK
+
+        when (nightMode) {
+            Configuration.UI_MODE_NIGHT_NO -> {
+                applyDayNight(OnDayNightStateChanged.DAY)
+                Log.d("Message","UI_MODE_NIGHT_NO ")
+            }
+            Configuration.UI_MODE_NIGHT_YES -> {
+                applyDayNight(OnDayNightStateChanged.NIGHT)
+                Log.d("Message","UI_MODE_NIGHT_YES ")
+            }
+        }
+    }
+
+    private fun applyDayNight(state: Int){
+        if (state == OnDayNightStateChanged.DAY){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            updateInterface(0)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            updateInterface(1)
+        }
+
+        supportFragmentManager.fragments.forEach {
+            if(it is OnDayNightStateChanged){
+                it.onDayNightApplied(state)
+            }
+        }
+    }
+
+    fun updateInterface(num : Int) {
+        val db = Database(this, "ediya.db",null,1)
+        val writableDb = db.writableDatabase
+        val dbControl = DatabaseControl()
+
+        when (num) {
+            0 -> {
+                dbControl.updateData(writableDb,"interface", arrayListOf("isMode"), arrayListOf("0"),
+                    arrayListOf("id"), arrayOf(userId))
+            }
+            1 -> {
+                dbControl.updateData(writableDb,"interface", arrayListOf("isMode"), arrayListOf("1"),
+                    arrayListOf("id"), arrayOf(userId))
+            }
+        }
     }
 
     override fun onDestroy() {

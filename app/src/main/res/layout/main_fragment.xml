@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/white_FFFFFF_131313"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
@@ -64,7 +64,7 @@
                 android:paddingLeft="20dp"
                 android:paddingBottom="10dp"
                 android:text="id"
-                android:textColor="@color/white"
+                android:textColor="@color/fixed_white_FFFFFF_FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -80,102 +80,104 @@
     <HorizontalScrollView
         android:id="@+id/btnScrollView"
         android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top_banner">
+        android:layout_height="wrap_content"
+        android:background="@color/white_background_FFFFFF_353535"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_banner">
 
-            <LinearLayout
-                android:id="@+id/btnLayout"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/btnLayout"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#00000000">
 
-                <Button
-                    android:id="@+id/coffeeBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@drawable/btn_selector"
-                    android:layout_weight="1"
-                    android:text="COFFEE"
-                    android:textColor="@color/text_selector"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/coffeeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_selector"
+                android:layout_weight="1"
+                android:text="COFFEE"
+                android:textColor="@color/text_selector"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
-                <Button
-                    android:id="@+id/beverageBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@drawable/btn_selector"
-                    android:text="베버리지"
-                    android:textColor="@color/text_selector"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/beverageBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_selector"
+                android:text="베버리지"
+                android:textColor="@color/text_selector"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
-                <Button
-                    android:id="@+id/blendingTeaBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@drawable/btn_selector"
-                    android:text="블랜딩 티"
-                    android:textColor="@color/text_selector"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
-                <Button
-                    android:id="@+id/adeBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@drawable/btn_selector"
-                    android:text="에이드"
-                    android:textColor="@color/text_selector"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/blendingTeaBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_selector"
+                android:text="블랜딩 티"
+                android:textColor="@color/text_selector"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/adeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_selector"
+                android:text="에이드"
+                android:textColor="@color/text_selector"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
-                <Button
-                    android:id="@+id/shakeBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:background="@drawable/btn_selector"
-                    android:layout_weight="1"
-                    android:text="쉐이크"
-                    android:textColor="@color/text_selector"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/shakeBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_selector"
+                android:layout_weight="1"
+                android:text="쉐이크"
+                android:textColor="@color/text_selector"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
 
-                <Button
-                    android:id="@+id/flatccinoBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_selector"
-                    android:text="플랫치노"
-                    android:textColor="@color/text_selector"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
-                <Button
-                    android:id="@+id/bubbleMilkTeaBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_selector"
-                    android:text="버블 밀크 티"
-                    android:textColor="@color/text_selector"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
-                <Button
-                    android:id="@+id/bakeryBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_selector"
-                    android:text="베이커리"
-                    android:textColor="@color/text_selector"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"/>
-            </LinearLayout>
+            <Button
+                android:id="@+id/flatccinoBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector"
+                android:text="플랫치노"
+                android:textColor="@color/text_selector"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/bubbleMilkTeaBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector"
+                android:text="버블 밀크 티"
+                android:textColor="@color/text_selector"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
+            <Button
+                android:id="@+id/bakeryBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_selector"
+                android:text="베이커리"
+                android:textColor="@color/text_selector"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"/>
+        </LinearLayout>
 
         </HorizontalScrollView>
 
@@ -193,6 +195,7 @@
             android:scrollbars="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white_background_FFFFFF_353535"
             android:layout_marginTop="10dp"
             android:clipToPadding="false"
             android:paddingBottom="300dp"
@@ -204,7 +207,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/language_icon"
-        android:backgroundTint="#989EBD"
+        android:backgroundTint="@color/ediya_light_navy_7D88BD_131F5C"
         android:layout_margin="16dp"
         app:fabSize="mini"
         app:layout_constraintTop_toTopOf="@id/setting_btn"
@@ -218,7 +221,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/dark_mode_icon"
-        android:backgroundTint="#989EBD"
+        android:backgroundTint="@color/ediya_light_navy_7D88BD_131F5C"
         android:layout_margin="16dp"
         app:fabSize="mini"
         app:layout_constraintTop_toTopOf="@id/setting_btn"
@@ -233,7 +236,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/setting_icon"
 
-        android:backgroundTint="@color/ediya_color"
+        android:backgroundTint="@color/ediya_navy_131F5C_7D88BD"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toTopOf="@id/basketBtn"
         app:layout_constraintRight_toRightOf="parent"
@@ -244,7 +247,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/bakset_icon"
-        android:backgroundTint="@color/ediya_color"
+        android:backgroundTint="@color/ediya_navy_131F5C_7D88BD"
         android:layout_margin="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
