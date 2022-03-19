@@ -29,14 +29,20 @@ import com.example.ediya_kiosk.OnDayNightStateChanged
 import com.example.ediya_kiosk.recycler_view.MainRvAdapter
 import com.example.ediya_kiosk.recycler_view.MenuData
 import com.example.ediya_kiosk.R
+import com.example.ediya_kiosk.database.Database
+import com.example.ediya_kiosk.database.DatabaseControl
 import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_fragment.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(), OnDayNightStateChanged {
 
     private lateinit var myadapter: MainRvAdapter
     private lateinit var mainActivity: MainActivity
+    private lateinit var configuration: Configuration
+    private lateinit var userId : String
     private var isFabOpen = false
 
     override fun onAttach(context: Context) {
@@ -64,8 +70,8 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
 
 
         //아이디 세팅
-        var userId = arguments?.getString("userId").toString()
-        var userIdTV = view.findViewById<TextView>(R.id.userIdTV)
+        userId = arguments?.getString("userId").toString()
+        val userIdTV = view.findViewById<TextView>(R.id.userIdTV)
         userIdTV.text = userId.plus("님")
 
         // basket 으로 이동
@@ -105,6 +111,16 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
 
         // 한/영 전환
         languageBtn.setOnClickListener {
+            val db = Database(mainActivity, "ediya.db",null,1)
+            val readableDb = db.readableDatabase
+            val writableDb = db.writableDatabase
+            val dbControl = DatabaseControl()
+
+            var isLanguage = dbControl.readData(readableDb,"interface", arrayOf("isLanguage"), arrayListOf("id"), arrayOf(userId))[0][0].toInt()
+            when (isLanguage) {
+                0 -> mainActivity.setLocate("en")
+                1 -> mainActivity.setLocate("ko")
+            }
             Toast.makeText(mainActivity, "한/영 버튼 클릭!", Toast.LENGTH_SHORT).show()
         }
 

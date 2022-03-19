@@ -155,7 +155,7 @@ class PaymentFragment : Fragment() {
         var orderIndexList = dbControl.readData(readableDb, "basket", arrayOf("order_index"), arrayListOf("id"), arrayOf(userId))
         Log.d("TAG","$orderIndexList")
         if (orderIndexList.size != 0) {
-            orderIndex = orderIndexList[-1][0]
+            orderIndex = orderIndexList.last()[0]
         }
 
         for (i in menuDataList[0]!!.indices) {

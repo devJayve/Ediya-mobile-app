@@ -53,10 +53,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="적립금"
+                    android:text="@string/point"
                     android:layout_marginBottom="5dp"
                     android:textSize="20sp"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_131313_FFFFFF"
                     android:textStyle="bold"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -76,6 +76,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/edit_text_stroke"
                         android:text="모두 사용"
+                        android:textColor="@color/fixed_black_000000_000000"
                         android:textStyle="bold"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="10dp"
@@ -88,13 +89,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="사용 가능 적립금"/>
+                        android:text="@string/usable_point"
+                        android:textColor="@color/dark_gray_595959_C5C5C5"/>
                     <TextView
                         android:id="@+id/point_TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 원"
-                        android:textColor="@color/black"
+                        android:textColor="@color/dark_gray_595959_C5C5C5"
                         android:layout_marginLeft="10dp"/>
                 </LinearLayout>
             </LinearLayout>
@@ -103,7 +105,9 @@
                 android:id="@+id/showCouponBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="쿠폰"
+                android:text="@string/coupon"
+                android:textColor="@color/black_131313_FFFFFF"
+                android:textAllCaps="false"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:textAlignment="textStart"
@@ -125,13 +129,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
                     android:layout_marginLeft="10dp"
-                    android:text="결제수단"
-                    android:textColor="@color/black"
+                    android:text="@string/payment"
+                    android:textColor="@color/black_131313_FFFFFF"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
                 <Button
                     android:id="@+id/ediyaPayBtn"
-                    android:text="이디야 페이"
+                    android:text="@string/ediya_pay"
+                    android:textColor="@color/black_131313_FFFFFF"
+                    android:textAllCaps="false"
                     android:textAlignment="viewStart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -280,7 +286,9 @@
                     android:background="#C8C8C8"/>
                 <Button
                     android:id="@+id/otherPayBtn"
-                    android:text="다른 결제수단"
+                    android:text="@string/other_pay"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black_131313_FFFFFF"
                     android:textAlignment="viewStart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -359,10 +367,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="상품 금액"
+                        android:text="@string/product_cost"
                         android:textAlignment="viewStart"
                         android:textSize="15sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_131313_FFFFFF"
                         android:layout_weight="9"/>
                     <TextView
                         android:id="@+id/product_cost_TV"
@@ -370,7 +378,7 @@
                         android:layout_height="wrap_content"
                         android:text="0원"
                         android:textSize="15sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_131313_FFFFFF"
                         android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
@@ -382,10 +390,10 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="할인 금액"
+                        android:text="@string/discount"
                         android:textAlignment="viewStart"
                         android:textSize="15sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_131313_FFFFFF"
                         android:layout_weight="9"/>
                     <TextView
                         android:id="@+id/discount_TV"
@@ -393,7 +401,7 @@
                         android:layout_height="wrap_content"
                         android:text="0원"
                         android:textSize="15sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_131313_FFFFFF"
                         android:layout_weight="1"/>
                 </LinearLayout>
                 <View
@@ -411,11 +419,11 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
-                        android:text="결제 예정 금액"
+                        android:text="@string/to_be_paid"
                         android:textAlignment="viewStart"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_131313_FFFFFF"
                         android:layout_weight="9"/>
                     <TextView
                         android:id="@+id/final_cost_TV"
@@ -424,7 +432,7 @@
                         android:text="0원"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_131313_FFFFFF"
                         android:layout_weight="1"/>
                 </LinearLayout>
             </LinearLayout>
@@ -444,8 +452,8 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/category_btn_shape_selected"
-            android:text="주문하기"
-            android:textColor="@color/white"
+            android:text="@string/order"
+            android:textColor="@color/fixed_white_FFFFFF_FFFFFF"
             android:layout_marginTop="20dp"
             android:layout_marginRight="100dp"
             android:layout_marginLeft="100dp"

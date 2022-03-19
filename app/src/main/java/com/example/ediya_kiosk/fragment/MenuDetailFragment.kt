@@ -57,7 +57,7 @@ class MenuDetailFragment : Fragment() {
 
         nameTxt.text = menuName
         priceTxt.text = menuPrice
-        menuCost.text = (totalCost.toString()).plus("원")
+        menuCost.text = totalCost.toString()
         imgIV.setImageResource(menuImg!!.toInt())
 
         // temp 설정
@@ -90,7 +90,7 @@ class MenuDetailFragment : Fragment() {
                 override fun onClicked(cost: Int) {
                     optionCost = cost
                     totalCost = menuPriceInt + optionCost
-                    menuCost.text = (totalCost.toString()).plus("원")
+                    menuCost.text = totalCost.toString()
                 }
             })
         }
@@ -102,10 +102,10 @@ class MenuDetailFragment : Fragment() {
         intoBasketBtn.setOnClickListener {
             when {
                 !hotBtn.isSelected and !iceBtn.isSelected -> {
-                    Toast.makeText(mainActivity, "온도를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mainActivity, R.string.warning_temp, Toast.LENGTH_SHORT).show()
                 }
                 !sizeBtn1.isSelected and !sizeBtn2.isSelected and !sizeBtn3.isSelected -> {
-                    Toast.makeText(mainActivity, "사이즈를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(mainActivity,  R.string.warning_size, Toast.LENGTH_SHORT).show()
                 }
                 else -> {
                     menuTemp = when{
@@ -145,7 +145,7 @@ class MenuDetailFragment : Fragment() {
             } else {
                 (totalCost / (menuNum - 1))
             }
-            menuCost.text = (totalCost.toString()).plus("원")
+            menuCost.text = totalCost.toString()
         }
 
         menuMinusBtn.setOnClickListener {
@@ -156,7 +156,7 @@ class MenuDetailFragment : Fragment() {
                 menuNum--
                 menuOutputNum.text = menuNum.toString()
                 totalCost -= (totalCost / (menuNum + 1))
-                menuCost.text = (totalCost.toString()).plus("원")
+                menuCost.text = totalCost.toString()
             }
         }
 

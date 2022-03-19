@@ -16,10 +16,20 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/order_num"
+                android:textAlignment="viewEnd"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="3"/>
+            <TextView
                 android:id="@+id/history_order_indexTV"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="주문 번호  1"
+                android:text="1"
                 android:textSize="15sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -46,19 +56,21 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="주문 메뉴"
+                android:text="@string/order_menu"
+                android:textAlignment="center"
                 android:textSize="12sp"
-                android:textColor="#303030"/>
+                android:textColor="#303030"
+                android:layout_weight="1"/>
             <TextView
                 android:id="@+id/history_menu_nameTV"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="ICED 아메리카노 외 5건"
                 android:textSize="12sp"
-                android:textColor="#494949"/>
+                android:textColor="#494949"
+                android:layout_weight="4"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -67,19 +79,21 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="결제 방법"
+                android:text="@string/pay_kind"
+                android:textAlignment="center"
                 android:textSize="12sp"
-                android:textColor="#303030"/>
+                android:textColor="#303030"
+                android:layout_weight="1"/>
             <TextView
                 android:id="@+id/history_pay_kindTV"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="이디야 페이"
                 android:textSize="12sp"
-                android:textColor="#494949"/>
+                android:textColor="#494949"
+                android:layout_weight="4"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,19 +102,21 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="결제 금액"
+                android:text="@string/pay_cost"
+                android:textAlignment="center"
                 android:textSize="12sp"
-                android:textColor="#303030"/>
+                android:textColor="#303030"
+                android:layout_weight="1"/>
             <TextView
                 android:id="@+id/history_pay_costTV"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="28,500원"
                 android:textSize="12sp"
-                android:textColor="#494949"/>
+                android:textColor="#494949"
+                android:layout_weight="4"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,19 +125,21 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="주문 상태"
+                android:text="@string/order_state"
+                android:textAlignment="center"
                 android:textSize="12sp"
-                android:textColor="#303030"/>
+                android:textColor="#303030"
+                android:layout_weight="1"/>
             <TextView
                 android:id="@+id/history_order_stateTV"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="테이크 아웃"
                 android:textSize="12sp"
-                android:textColor="#494949"/>
+                android:textColor="#494949"
+                android:layout_weight="4"/>
         </LinearLayout>
     </LinearLayout>
 

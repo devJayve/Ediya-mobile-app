@@ -16,6 +16,8 @@ import com.example.ediya_kiosk.fragment.*
 import com.example.ediya_kiosk.service.BasketService
 import com.example.ediya_kiosk.service.ForegroundService
 import com.example.ediya_kiosk.service.ForegroundService.Companion.ACTION_STOP
+import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
@@ -211,6 +213,11 @@ class MainActivity : AppCompatActivity() {
             1 -> applyDayNight(OnDayNightStateChanged.NIGHT)
         }
 
+        when (isLanguage) {
+            0 -> setLocate("ko")
+            1 -> setLocate("en")
+        }
+
         var mainFrag = MainFragment()
         var bundle = Bundle()
         bundle.putString("userId",userId)
@@ -255,6 +262,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     fun updateInterface(num : Int) {
         val db = Database(this, "ediya.db",null,1)
         val writableDb = db.writableDatabase
@@ -272,8 +280,35 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        serviceUnBind()
+    fun setLocate(Lang: String) {
+        val db = Database(this, "ediya.db",null,1)
+        val writableDb = db.writableDatabase
+        val dbControl = DatabaseControl()
+
+        Log.d("로그", "setLocate")
+        val locale = Locale(Lang) // Local 객체 생성. 인자로는 해당 언어의 축약어가 들어가게 됩니다. (ex. ko, en)
+        Locale.setDefault(locale) // 생성한 Locale로 설정을 해줍니다.
+
+        val config = Configuration() //이 클래스는 응용 프로그램이 검색하는 리소스에 영향을 줄 수 있는
+        // 모든 장치 구성 정보를 설명합니다.
+
+        config.setLocale(locale) // 현재 유저가 선호하는 언어를 환경 설정으로 맞춰 줍니다.
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+
+        when (Lang) {
+            "ko" -> {
+                dbControl.updateData(writableDb,"interface", arrayListOf("isLanguage"), arrayListOf("0"),
+                    arrayListOf("id"), arrayOf(userId))
+            }
+            "en" -> {
+                dbControl.updateData(writableDb,"interface", arrayListOf("isLanguage"), arrayListOf("1"),
+                    arrayListOf("id"), arrayOf(userId))
+            }
+        }
     }
+
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        serviceUnBind()
+//    }
 }

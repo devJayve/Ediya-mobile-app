@@ -43,6 +43,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/menuImg"
             app:layout_constraintStart_toStartOf="@+id/menuNameTV"
             tools:text="Price"/>
+        <TextView
+            android:id="@+id/currencyTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/default_gray_A3A3A3_636363"
+            android:layout_marginLeft="2dp"
+            app:layout_constraintBottom_toBottomOf="@+id/menuImg"
+            app:layout_constraintStart_toEndOf="@+id/menuPriceTV"
+            tools:text="@string/currency"/>
 
         <TextView
             android:id="@+id/menuCategoryTV"
@@ -51,7 +61,7 @@
             android:layout_marginStart="16dp"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/menuPriceTV"
-            app:layout_constraintStart_toEndOf="@+id/menuPriceTV"
+            app:layout_constraintStart_toEndOf="@+id/currencyTV"
             app:layout_constraintTop_toTopOf="@+id/menuPriceTV"
             tools:text="Category" />
     </androidx.constraintlayout.widget.ConstraintLayout>

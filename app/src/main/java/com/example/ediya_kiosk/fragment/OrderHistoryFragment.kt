@@ -47,7 +47,6 @@ class OrderHistoryFragment : Fragment() {
         backBtn.setOnClickListener {
             mainActivity.loadFrag(0)
         }
-
         return view
     }
 
@@ -155,13 +154,13 @@ class OrderHistoryFragment : Fragment() {
                     totalCost += orderList[i][3].toInt()
                 }
                 totalCost -= paymentDataList[i][1].toInt()
+                Log.d("TAG",totalCost.toString())
 
-                Log.d("TAG",orderList[i][0])
-                orderIndex.text = "주문번호 ".plus(orderList[i][0])
-                "${orderList[i][2]} ${(orderList[i][1])} 외 ${orderList.size - 1}건".also {
+                orderIndex.text = orderList[0][0]
+                "${orderList[0][2]} ${(orderList[0][1])} 외 ${orderList.size - 1}건".also {
                     menuName.text = it
                 }
-                payKind.text = paymentDataList[i][2]
+                payKind.text = "이디야 페이"//paymentDataList[i][2]
                 payCost.text = "$totalCost".plus("원")
                 orderState.text = "픽업 완료"
 

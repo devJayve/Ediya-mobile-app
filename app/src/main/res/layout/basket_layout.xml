@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/white_background_FFFFFF_353535"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/basket_fragmentArea">
 
@@ -52,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/white_background_FFFFFF_353535"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_banner"
@@ -64,7 +65,7 @@
             android:text="담은 메뉴"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="#13235D"
+            android:textColor="@color/ediya_navy_131F5C_7D88BD"
             android:layout_weight="1"
             android:gravity="bottom"
             android:paddingLeft="10dp"/>
@@ -81,8 +82,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="전체 삭제"
+                android:textColor="@color/black_131313_FFFFFF"
                 android:gravity="bottom"
-                android:background="@color/white"/>
+                android:background="@color/white_background_FFFFFF_353535"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -100,7 +102,7 @@
         android:layout_height="570dp"
         android:layout_marginTop="70dp"
         android:paddingBottom="50dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@color/white_background_FFFFFF_353535"
         app:layout_constraintBottom_toTopOf="@id/linear4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +110,7 @@
 
         <LinearLayout
             android:id="@+id/basket_container"
+            android:background="@color/white_background_FFFFFF_353535"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"/>
@@ -129,7 +132,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="14,500원"
-            android:textColor="@color/black"
+            android:textColor="@color/black_131313_FFFFFF"
             android:textStyle="bold"
             android:textSize="20sp"
             android:layout_marginTop="10dp"
@@ -140,7 +143,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@drawable/category_btn_shape_selected"
-            android:text="주문하기"
+            android:text="@string/order"
             android:textColor="@color/white"
             android:layout_marginRight="100dp"
             android:layout_marginLeft="100dp"

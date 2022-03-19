@@ -66,7 +66,7 @@
             android:background="#00000000"
             android:text="옵션 변경"
             android:textAlignment="viewStart"
-            android:textColor="@color/ediya_color"/>
+            android:textColor="@color/ediya_navy_131F5C_7D88BD"/>
         <TextView
             android:id="@+id/menuPriceTV"
             android:layout_marginTop="20dp"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:text="9000원"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/black_131313_FFFFFF"
             android:textAlignment="viewEnd"
             android:paddingRight="10dp"/>
     </LinearLayout>

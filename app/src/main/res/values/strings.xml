@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ediya_Kiosk</string>
+    <string name="app_name">EDIYA</string>
 
     <!-- 카테고리_메뉴이름 정보 -->
     <string-array name="coffee_name">
@@ -78,75 +78,75 @@
     <!-- 카테고리_가격 정보 -->
 
     <string-array name="coffee_price">
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
     </string-array>
 
     <string-array name="beverage_price">
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
     </string-array>
 
     <string-array name="blendingtea_price">
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
     </string-array>
 
     <string-array name="bubblemilktea_price">
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3000</item>
     </string-array>
 
     <string-array name="flatccino_price">
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
     </string-array>
 
     <string-array name="shake_price">
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
+        <item>2500</item>
+        <item>3000</item>
+        <item>3000</item>
     </string-array>
 
     <string-array name="ade_price">
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
     </string-array>
 
     <string-array name="bakery_price">
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
-        <item>3000원</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
+        <item>3000</item>
     </string-array>
 
     <!-- 카테고리_메뉴 이미지 정보 -->
@@ -235,5 +235,44 @@
         <item>kakao.com</item>
         <item>nate.com</item>
     </string-array>
+    <string name="beverage">베버러지</string>
+    <string name="coffee">COFFEE</string>
+    <string name="blending_tea">블랜딩 티</string>
+    <string name="ade">에이드</string>
+    <string name="shake">쉐이크</string>
+    <string name="bubble_milk_tea">버블 밀크티</string>
+    <string name="bakery">베이커리</string>
+    <string name="size">사이즈</string>
+    <string name="personal_option">퍼스널 옵션</string>
+    <string name="free_option">무료 옵션</string>
+    <string name="charge_option">유료 옵션</string>
+    <string name="into_basket">담기</string>
+    <string name="order">주문하기</string>
+    <string name="order_num">주문번호</string>
+    <string name="order_menu">주문 메뉴</string>
+    <string name="pay_kind">결제 방법</string>
+    <string name="pay_cost">결제 금액</string>
+    <string name="order_state">주문 상태</string>
+    <string name="flatccino">플랫치노</string>
+    <string name="currency">원</string>
+    <string name="warning_temp">온도를 선택해주세요.</string>
+    <string name="warning_size">사이즈를 선택해주세요.</string>
+    <string name="bakset_menu">담은 메뉴</string>
+    <string name="basket">장바구니</string>
+    <string name="remove_all">전체 삭제</string>
+    <string name="option_change">옵션 변경</string>
+    <string name="order_history">주문 내역</string>
+    <string name="go_basket">바로가기</string>
+    <string name="confrim">확인</string>
+    <string name="toast_put_bakset">장바구니에 메뉴가 담겼습니다.</string>
+    <string name="point">적립금</string>
+    <string name="usable_point">사용 가능 적립금</string>
+    <string name="coupon">쿠폰</string>
+    <string name="payment">결제수단</string>
+    <string name="ediya_pay">이디야 페이</string>
+    <string name="other_pay">다른 결제수단</string>
+    <string name="product_cost">상품 금액</string>
+    <string name="discount">할인 금액</string>
+    <string name="to_be_paid">결제 예정 금액</string>
 
 </resources>

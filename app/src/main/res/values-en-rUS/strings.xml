@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EDIYA</string>
+    <string name="coffee">COFFEE</string>
+    <string name="beverage">beverage</string>
+    <string name="blending_tea">blending tea</string>
+    <string name="ade">ade</string>
+    <string name="shake">shake</string>
+    <string name="bubble_milk_tea">bubble milk tea</string>
+    <string name="bakery">bakery</string>
+    <string name="size">Size</string>
+    <string name="personal_option">Personal Option</string>
+    <string name="free_option">Free Option</string>
+    <string name="charge_option">Charge Option</string>
+    <string name="into_basket">put in</string>
+    <string name="order">order</string>
+    <string name="order_num">order num</string>
+    <string name="order_menu">order menu</string>
+    <string name="pay_kind">pay   kind</string>
+    <string name="pay_cost">pay   cost</string>
+    <string name="order_state">order state</string>
+    <string name="flatccino">flatccino</string>
+    <string name="currency">won</string>
+    <string name="warning_temp">Choose menu\'s temperature.</string>
+    <string name="warning_size">Choose menu\'s Size</string>
+    <string name="bakset_menu">basket menu</string>
+    <string name="basket">Basket</string>
+    <string name="remove_all">remove all</string>
+    <string name="option_change">change option</string>
+    <string name="order_history">Order History</string>
+    <string name="go_basket">go basket</string>
+    <string name="confrim">confirm</string>
+    <string name="toast_put_bakset">The menu has been added to the basket.</string>
+    <string name="point">Point</string>
+    <string name="usable_point">usable point</string>
+    <string name="coupon">Coupon</string>
+    <string name="payment">Payment</string>
+    <string name="ediya_pay">EDIYA pay</string>
+    <string name="other_pay">other payment</string>
+    <string name="product_cost">product cost</string>
+    <string name="discount">discount amount</string>
+    <string name="to_be_paid">amount to be paid</string>
+
+</resources>
