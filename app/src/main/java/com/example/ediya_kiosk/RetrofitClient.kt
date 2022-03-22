@@ -13,8 +13,8 @@ object RetrofitClient {
 
     fun initRetrofit() : Retrofit {
 
-        val url = "http://3.35.214.92:3000" //서버 주소
-        val gson = Gson()                   // 서버와 주고 받을 데이ㅓ 형식
+        val url = "http://52.79.157.214" //서버 주소
+        val gson = Gson()                   // 서버와 주고 받을 데이터 형식
         val clientBuilder = OkHttpClient.Builder().build()
 
         val connection = Retrofit.Builder()
