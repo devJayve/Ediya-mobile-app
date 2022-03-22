@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Ediya_Kiosk">
+        android:theme="@style/Theme.Ediya_Kiosk"
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".LoginActivity"
