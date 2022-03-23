@@ -1,10 +1,11 @@
-package com.example.ediya_kiosk
+package com.example.ediya_kiosk.dialog
 
 import android.app.Dialog
 import android.util.Log
 import android.view.WindowManager
 import android.widget.*
-import kotlinx.android.synthetic.main.cost_option_dialog_layout.*
+import com.example.ediya_kiosk.activity.MainActivity
+import com.example.ediya_kiosk.R
 import android.content.Context as Context
 
 class CouponOptionDialog(context: Context, CouponNum : Int?)

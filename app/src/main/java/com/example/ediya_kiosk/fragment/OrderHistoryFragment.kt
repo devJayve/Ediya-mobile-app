@@ -6,12 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.ediya_kiosk.MainActivity
+import com.example.ediya_kiosk.activity.MainActivity
 import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl

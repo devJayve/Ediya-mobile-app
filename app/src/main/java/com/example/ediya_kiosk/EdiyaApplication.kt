@@ -1,8 +1,7 @@
 package com.example.ediya_kiosk
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import com.example.ediya_kiosk.database.PreferenceUtil
 
 class EdiyaApplication : Application() {
     companion object {

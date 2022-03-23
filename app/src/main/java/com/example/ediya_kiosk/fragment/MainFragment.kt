@@ -4,10 +4,8 @@ import android.animation.ObjectAnimator
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.TypedArray
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,22 +17,19 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
-import androidx.core.app.ActivityCompat.recreate
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ediya_kiosk.MainActivity
-import com.example.ediya_kiosk.OnDayNightStateChanged
+import com.example.ediya_kiosk.*
+import com.example.ediya_kiosk.activity.MainActivity
 import com.example.ediya_kiosk.recycler_view.MainRvAdapter
 import com.example.ediya_kiosk.recycler_view.MenuData
-import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
-import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.main_fragment.*
-import java.util.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(), OnDayNightStateChanged {
@@ -43,6 +38,7 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
     private lateinit var mainActivity: MainActivity
     private lateinit var configuration: Configuration
     private lateinit var userId : String
+    private lateinit var isLang : String
     private var isFabOpen = false
 
     override fun onAttach(context: Context) {
@@ -71,6 +67,7 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
 
         //아이디 세팅
         userId = arguments?.getString("userId").toString()
+        isLang = arguments?.getInt("isLang").toString()
         val userIdTV = view.findViewById<TextView>(R.id.userIdTV)
         userIdTV.text = userId.plus("님")
 
@@ -150,9 +147,39 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
         var name = res.getStringArray(R.array.coffee_name)
         var price = res.getStringArray(R.array.coffee_price)
         var img = context?.resources?.obtainTypedArray(R.array.coffee_img)
+        var serverCategoryList = getCategory()
+
 
         initRecyclerView(name, price, "COFFEE", img)
         clickCategoryEvent(view)
+    }
+
+    fun getCategory() : List<String> {
+        val lang : String = when(isLang) {
+            "0" -> "kr"
+            "1" -> "en"
+            else -> "None"
+        }
+        Log.d("TAG",lang)
+
+        val retrofit = RetrofitClient.initRetrofit()
+        var categoryList = listOf<String>()
+
+        val requestCategoryApi = retrofit.create(CategoryApi::class.java)
+        requestCategoryApi.getCategory(lang).enqueue(object : Callback<CategoryData> {
+            override fun onFailure(call: Call<CategoryData>, t: Throwable) {
+            }
+
+            override fun onResponse(call: Call<CategoryData>, response: Response<CategoryData>) {
+
+                categoryList = response.body()!!.categoryList
+                Log.d("result", response.body()!!.message)
+                Log.d("result", response.body()!!.success.toString())
+                Log.d("TAG","list is ${response.body()!!.categoryList}")
+            }
+        })
+
+        return  categoryList
     }
 
     fun initRecyclerView(name: Array<String>, price: Array<String>, cateogry: String, img: TypedArray?) {

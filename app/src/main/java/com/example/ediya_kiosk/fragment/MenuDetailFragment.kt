@@ -9,6 +9,8 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.ediya_kiosk.*
+import com.example.ediya_kiosk.activity.MainActivity
+import com.example.ediya_kiosk.dialog.optionDialog
 import kotlinx.android.synthetic.main.menu_detail_layout.*
 import android.os.Bundle as Bundle1
 

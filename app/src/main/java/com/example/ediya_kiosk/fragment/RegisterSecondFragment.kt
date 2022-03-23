@@ -2,7 +2,6 @@ package com.example.ediya_kiosk.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,8 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import com.example.ediya_kiosk.LoginActivity
-import com.example.ediya_kiosk.MainActivity
+import com.example.ediya_kiosk.activity.LoginActivity
 import com.example.ediya_kiosk.R
 import kotlinx.android.synthetic.main.register_layout_2.*
 import java.util.regex.Pattern
@@ -77,6 +75,7 @@ class RegisterSecondFragment : Fragment() {
         } else if (!Pattern.matches("^01(?:0|1|[6-9])(?:\\d{3}|\\d{4})\\d{4}$", phoneNumberET.text)){
             Toast.makeText(loginActivity, "전화번호 형식이 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
         } else { saveMemoryInPref(arrayListOf(nameInputET.text.toString(),FrontBirthInputET.text.toString(),BackBirthInputET.text.toString(),mobile.toString(),phoneNumberET.text.toString()))
+            Log.d("TAG",phoneNumberET.text.toString())
             loginActivity!!.register(3)
         }
     }
@@ -89,7 +88,8 @@ class RegisterSecondFragment : Fragment() {
         editor.putInt("frontBirth",memoryList[1].toInt())
         editor.putInt("backBirth",memoryList[2].toInt())
         editor.putInt("mobileIndex",memoryList[3].toInt())
-        editor.putInt("phoneNum",memoryList[4].toInt())
+        editor.putString("phoneNum",memoryList[4])
+        Log.d("TAG",memoryList[4])
         editor.apply()
     }
 

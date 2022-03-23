@@ -4,20 +4,17 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import com.example.ediya_kiosk.CouponOptionDialog
-import com.example.ediya_kiosk.MainActivity
+import com.example.ediya_kiosk.dialog.CouponOptionDialog
+import com.example.ediya_kiosk.activity.MainActivity
 import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
-import com.example.ediya_kiosk.optionDialog
-import kotlinx.android.synthetic.main.menu_detail_layout.*
 import kotlinx.android.synthetic.main.payment_layout.*
 
 class PaymentFragment : Fragment() {

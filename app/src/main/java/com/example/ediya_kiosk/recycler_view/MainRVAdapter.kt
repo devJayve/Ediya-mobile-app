@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ediya_kiosk.MainActivity
+import com.example.ediya_kiosk.activity.MainActivity
 import com.example.ediya_kiosk.R
 
 class MainRvAdapter() : RecyclerView.Adapter<MainViewHolder>() {

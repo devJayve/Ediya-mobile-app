@@ -11,7 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.ediya_kiosk.MainActivity
+import com.example.ediya_kiosk.activity.MainActivity
 import com.example.ediya_kiosk.R
 
 

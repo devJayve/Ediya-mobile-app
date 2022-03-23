@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,15 +12,16 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.example.ediya_kiosk.LoginActivity
-import com.example.ediya_kiosk.R
+import com.example.ediya_kiosk.*
+import com.example.ediya_kiosk.activity.LoginActivity
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
 import com.google.android.material.textfield.TextInputLayout
-import kotlinx.android.synthetic.main.register_layout_2.*
 import kotlinx.android.synthetic.main.register_layout_3.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Pattern
-import kotlin.math.log
 
 class RegisterThirdFragment : Fragment() {
     private lateinit var loginActivity: LoginActivity
@@ -191,25 +191,54 @@ class RegisterThirdFragment : Fragment() {
                 arrayOf(idET.text.toString())
             )
             if (idET.length() != 0) {
-                isOverlapCheck = if (idData.size != 0) {
+                if (idData.size != 0) {
                     idInputLayout.error = "중복된 아이디 입니다."
-                    false
+                    isOverlapCheck = false
                 } else {
-                    showToastWarning("사용 가능한 아이디입니다.")
-                    idInputLayout.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
-                    idInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
-                    isIdStated = true
-                    true
+                    val retrofit = RetrofitClient.initRetrofit()
+
+                    val requestOverlapApi = retrofit.create(OverlapApi::class.java)
+                    requestOverlapApi.getOverlapId(idET.text.toString()).enqueue(object : Callback<LoginData> {
+                        override fun onFailure(call: Call<LoginData>, t: Throwable) {
+                            Log.d("Error","$t")
+                        }
+
+                        override fun onResponse(call: Call<LoginData>, response: Response<LoginData>) {
+                            if (response.body()!!.success) {
+                                showToastWarning("사용 가능한 아이디입니다.")
+                                idInputLayout.backgroundTintList = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                                idInputLayout.hintTextColor = ContextCompat.getColorStateList(loginActivity,R.color.blue)
+                                isIdStated = true
+                                isOverlapCheck = true
+                            } else {
+                                idInputLayout.error = "중복된 아이디 입니다."
+                                isOverlapCheck = false
+                            }
+                        }
+                    })
                 }
             }
         }
-
 
         // 회원가입 완료
         nextPageBtn.setOnClickListener {
 
             if (isOverlapCheck && isPwStated && isRePwStated && isIdStated && isEmailStated) {
-                saveInLocalDb(idET.text.toString(),pwET.text.toString(),emailET.text.toString())
+                val id = idET.text.toString()
+                val pw = pwET.text.toString()
+                val name = pref.getString("name","")
+                val contact : String? = pref.getString("phoneNum","")
+
+                saveInLocalDb(id,pw,contact.toString())
+
+                val userInfo = UserInfo(
+                    userId = id,
+                    userName = name,
+                    userPw = pw,
+                    userContact = contact,
+                )
+
+                postNewUserInServer(userInfo)
                 finishRegister()
             }
             else Toast.makeText(loginActivity,"회원 정보를 다시 확인해주세요.",Toast.LENGTH_SHORT).show()
@@ -236,6 +265,7 @@ class RegisterThirdFragment : Fragment() {
         editor.remove("backBirth")
         editor.remove("mobileIndex")
         editor.remove("phoneNum")
+        editor.remove("name")
         editor.apply()
         loginActivity!!.register(4)
     }
@@ -259,12 +289,27 @@ class RegisterThirdFragment : Fragment() {
         val pref = loginActivity.getPreferences(0)
         var name = pref.getString("name","").toString()
         var certificationNum = pref.getInt("frontBirth",0).plus(pref.getInt("backBirth",0))
-        var phoneNum = pref.getInt("phoneNum",0)
+        var phoneNum = pref.getString("phoneNum","")
         var domain = domainSpinner?.selectedItem.toString()
         var totalEmail = "$email@$domain"
         var accountValueList = arrayListOf(id,pw,totalEmail,name,certificationNum.toString(),phoneNum.toString(),"2000")
 
         dbControl.createData(writableDb,"account",accountColumnList,accountValueList)
         dbControl.createData(writableDb, "interface",arrayListOf("id","isMode","isLanguage"), arrayListOf(id,"0","0"))
+    }
+
+    private fun postNewUserInServer(userData: UserInfo) {
+        val retrofit = RetrofitClient.initRetrofit()
+
+        val requestRegisterApi = retrofit.create(RegisterApi::class.java)
+        requestRegisterApi.postNewUser(userData).enqueue(
+            object : Callback<UserInfo> {
+                override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+                }
+
+                override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
+                }
+            }
+        )
     }
 }

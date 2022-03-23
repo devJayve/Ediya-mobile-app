@@ -3,8 +3,6 @@ package com.example.ediya_kiosk.fragment
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,12 +12,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.amitshekhar.DebugDB
 import com.example.ediya_kiosk.*
+import com.example.ediya_kiosk.activity.LoginActivity
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
-import com.example.ediya_kiosk_Logic.main
-import kotlinx.android.synthetic.main.login_layout.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -124,7 +120,7 @@ class LoginFragment : Fragment() {
                 Log.d("result", response.body()!!.message)
                 Log.d("result", response.body()!!.success.toString())
                 if (response.body()!!.success) {
-                    loginActivity!!.login(dataList[0][0])
+                    loginActivity.login(dataList[0][0])
                 } else {
                     Toast.makeText(loginActivity, "아이디 또는 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
                 }

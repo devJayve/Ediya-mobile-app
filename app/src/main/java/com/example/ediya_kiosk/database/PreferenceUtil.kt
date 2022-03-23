@@ -1,4 +1,4 @@
-package com.example.ediya_kiosk
+package com.example.ediya_kiosk.database
 
 import android.content.Context
 import android.content.SharedPreferences

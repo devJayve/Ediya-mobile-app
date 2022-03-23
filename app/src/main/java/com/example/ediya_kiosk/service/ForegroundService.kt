@@ -10,7 +10,7 @@ import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.example.ediya_kiosk.BuildConfig
-import com.example.ediya_kiosk.MainActivity
+import com.example.ediya_kiosk.activity.MainActivity
 import com.example.ediya_kiosk.R
 import java.lang.StringBuilder
 import java.util.ArrayList

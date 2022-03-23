@@ -1,4 +1,4 @@
-package com.example.ediya_kiosk
+package com.example.ediya_kiosk.activity
 
 import android.content.*
 import android.content.res.Configuration
@@ -8,8 +8,8 @@ import android.os.IBinder
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import com.example.ediya_kiosk.OnDayNightStateChanged
+import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
 import com.example.ediya_kiosk.fragment.*
@@ -221,6 +221,7 @@ class MainActivity : AppCompatActivity() {
         var mainFrag = MainFragment()
         var bundle = Bundle()
         bundle.putString("userId",userId)
+        bundle.putInt("isLang",isLanguage)
         mainFrag.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.fragment_area, mainFrag).commit()
 

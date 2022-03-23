@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.ediya_kiosk.LoginActivity
+import com.example.ediya_kiosk.activity.LoginActivity
 import com.example.ediya_kiosk.R
 
 class RegisterForthFragment : Fragment() {

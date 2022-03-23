@@ -1,15 +1,11 @@
-package com.example.ediya_kiosk
+package com.example.ediya_kiosk.activity
 
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import com.amitshekhar.DebugDB
+import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
-import com.example.ediya_kiosk.database.DatabaseControl
 import com.example.ediya_kiosk.fragment.*
-import kotlinx.android.synthetic.main.login_layout.*
 
 class LoginActivity : AppCompatActivity() {
 

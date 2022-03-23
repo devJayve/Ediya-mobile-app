@@ -1,8 +1,10 @@
-package com.example.ediya_kiosk
+package com.example.ediya_kiosk.dialog
 
 import android.app.Dialog
 import android.view.WindowManager
 import android.widget.*
+import com.example.ediya_kiosk.activity.MainActivity
+import com.example.ediya_kiosk.R
 import kotlinx.android.synthetic.main.cost_option_dialog_layout.*
 import android.content.Context as Context
 
