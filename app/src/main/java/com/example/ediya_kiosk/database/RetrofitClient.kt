@@ -43,7 +43,23 @@ data class UserInfo (
 data class CategoryData(
     val message: String,
     val success : Boolean,
-    val categoryList : List<String>
+    @SerializedName("data") val data: ArrayList<CategoryName>,
+)
+
+data class CategoryName(
+    @SerializedName("category_name") val categoryName: String?
+)
+
+data class OrderInfo(
+    @SerializedName("id") val userId: String,
+    @SerializedName("order_list") val orderList: ArrayList<MenuInfo>,
+    @SerializedName("total_price") val totalPrice: String
+)
+
+data class MenuInfo(
+    @SerializedName("name") val menuName: String,
+    @SerializedName("count") val menuCount: Int,
+    @SerializedName("sum_price") val menuSumPrice: Int
 )
 
 // Api로 요청을 보내는 함수
@@ -74,6 +90,13 @@ interface CategoryApi {
     fun getCategory(
         @Query("lang") lang : String
     ) : Call<CategoryData>
+}
+
+interface OrderApi {
+    @POST("/order")
+    fun postOrder(
+        @Body orderData : OrderInfo
+    ) : Call<OrderInfo>
 }
 
 

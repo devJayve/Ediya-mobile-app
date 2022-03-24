@@ -21,16 +21,17 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ediya_kiosk.*
 import com.example.ediya_kiosk.activity.MainActivity
-import com.example.ediya_kiosk.recycler_view.MainRvAdapter
-import com.example.ediya_kiosk.recycler_view.MenuData
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
+import com.example.ediya_kiosk.recycler_view.MainRvAdapter
+import com.example.ediya_kiosk.recycler_view.MenuData
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.main_fragment.*
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.collections.ArrayList
 
 class MainFragment : Fragment(), OnDayNightStateChanged {
 
@@ -105,7 +106,6 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
             }
         }
 
-
         // 한/영 전환
         languageBtn.setOnClickListener {
             val db = Database(mainActivity, "ediya.db",null,1)
@@ -148,13 +148,14 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
         var price = res.getStringArray(R.array.coffee_price)
         var img = context?.resources?.obtainTypedArray(R.array.coffee_img)
         var serverCategoryList = getCategory()
+        Log.d("TAG","$serverCategoryList")
 
 
-        initRecyclerView(name, price, "COFFEE", img)
+        initRecyclerView(name, price, serverCategoryList[0], img)
         clickCategoryEvent(view)
     }
 
-    fun getCategory() : List<String> {
+    private fun getCategory() : List<String> {
         val lang : String = when(isLang) {
             "0" -> "kr"
             "1" -> "en"
@@ -163,7 +164,7 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
         Log.d("TAG",lang)
 
         val retrofit = RetrofitClient.initRetrofit()
-        var categoryList = listOf<String>()
+        var categoryList = arrayListOf<String>()
 
         val requestCategoryApi = retrofit.create(CategoryApi::class.java)
         requestCategoryApi.getCategory(lang).enqueue(object : Callback<CategoryData> {
@@ -171,22 +172,31 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
             }
 
             override fun onResponse(call: Call<CategoryData>, response: Response<CategoryData>) {
-
-                categoryList = response.body()!!.categoryList
                 Log.d("result", response.body()!!.message)
-                Log.d("result", response.body()!!.success.toString())
-                Log.d("TAG","list is ${response.body()!!.categoryList}")
+
+                for (i in 0 until response.body()!!.data.size) {
+                    val jsonString = Gson().toJson(response.body()!!.data[i])
+                    Log.d("result", jsonString)
+
+                    val jsonObject = JSONObject(jsonString)
+
+                    var category = CategoryName(jsonObject.getString("category_name"))
+
+                    categoryList.add(category.categoryName.toString())
+                    Log.d("result", category.categoryName.toString())
+                }
             }
         })
-
+        Log.d("result","categoryList $categoryList")
         return  categoryList
     }
 
-    fun initRecyclerView(name: Array<String>, price: Array<String>, cateogry: String, img: TypedArray?) {
+
+    private fun initRecyclerView(name: Array<String>, price: Array<String>, category: String, img: TypedArray?) {
         this.menuList.clear()
         for (i in name.indices) {
             var imgInt : Int = img?.getResourceId(i,-1)!!.toInt()
-            val menuData = MenuData("$cateogry", "${name[i]}", "${price[i]}", "${imgInt}")
+            val menuData = MenuData(category, name[i], price[i], "$imgInt")
             this.menuList.add(menuData)
 
             //어답터 인스턴스 생성
