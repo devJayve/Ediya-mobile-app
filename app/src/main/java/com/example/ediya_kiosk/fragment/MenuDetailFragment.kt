@@ -213,7 +213,7 @@ class MenuDetailFragment : Fragment() {
             mainActivity.loadFrag(1)
         }
         dlg.setPositiveButton("확인") { _, _ ->
-            mainActivity.openOtherFragmentforBundle(1, MainFragment())
+            mainActivity.loadFrag(0)
         }
         dlg.show()
     }

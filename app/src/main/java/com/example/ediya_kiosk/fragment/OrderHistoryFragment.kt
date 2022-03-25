@@ -10,10 +10,15 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.ediya_kiosk.*
 import com.example.ediya_kiosk.activity.MainActivity
-import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
+import com.google.gson.Gson
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class OrderHistoryFragment : Fragment() {
@@ -40,7 +45,8 @@ class OrderHistoryFragment : Fragment() {
         val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn2)
 
         // 기록 불러오기
-        setHistoryContent(historyContainer)
+        //setHistoryContent(historyContainer)
+        getHistoryFromServer()
 
         //뒤로 가기
         backBtn.setOnClickListener {
@@ -168,5 +174,32 @@ class OrderHistoryFragment : Fragment() {
         } else {
             Log.d("TAG","not history")
         }
+    }
+
+    private fun getHistoryFromServer() {
+        val retrofit = RetrofitClient.initRetrofit()
+        var categoryList = arrayListOf<String>()
+
+        val requestHistoryApi = retrofit.create(HistoryApi::class.java)
+        requestHistoryApi.getHistory(userId).enqueue(object : Callback<HistoryData> {
+            override fun onFailure(call: Call<HistoryData>, t: Throwable) {
+            }
+
+            override fun onResponse(call: Call<HistoryData>, response: Response<HistoryData>) {
+                Log.d("result", response.body()!!.message)
+                Log.d("result", "${response.body()}")
+                Log.d("result", "${response.body()!!.historyData}")
+
+                for (i in 0 until response.body()!!.historyData.size) {
+                    val jsonString = Gson().toJson(response.body()!!.historyData[i])
+                    Log.d("result", jsonString)
+
+                    val jsonObject = JSONObject(jsonString)
+
+                    //var menuName = MenuInfo(jsonObject.getString("name"))
+
+                }
+            }
+        })
     }
 }

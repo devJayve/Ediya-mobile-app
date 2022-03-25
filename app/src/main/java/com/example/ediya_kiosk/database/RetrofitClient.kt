@@ -50,6 +50,18 @@ data class CategoryName(
     @SerializedName("category_name") val categoryName: String?
 )
 
+data class CategoryMenuData(
+    val message: String,
+    val success : Boolean,
+    @SerializedName("data") val categoryMenuList: ArrayList<CategoryMenuInfo>,
+)
+
+data class CategoryMenuInfo(
+    @SerializedName("menu_name") val menuName: String,
+    @SerializedName("menu_price") val menuPrice: Int,
+    @SerializedName("menu_image") val menuImg: String
+)
+
 data class OrderInfo(
     @SerializedName("id") val userId: String,
     @SerializedName("order_list") val orderList: ArrayList<MenuInfo>,
@@ -60,6 +72,13 @@ data class MenuInfo(
     @SerializedName("name") val menuName: String,
     @SerializedName("count") val menuCount: Int,
     @SerializedName("sum_price") val menuSumPrice: Int
+)
+
+data class HistoryData(
+    val message: String,
+    val success: Boolean,
+    @SerializedName("data") val historyData: ArrayList<MenuInfo>,
+    @SerializedName("total_price") val totalPrice: Int
 )
 
 // Api로 요청을 보내는 함수
@@ -92,6 +111,14 @@ interface CategoryApi {
     ) : Call<CategoryData>
 }
 
+interface MenuApi {
+    @GET("/category/menu")
+    fun getMenu(
+        @Query("category_name") categoryName: String,
+        @Query("lang") lang: String
+    ) : Call<CategoryMenuData>
+}
+
 interface OrderApi {
     @POST("/order")
     fun postOrder(
@@ -103,7 +130,7 @@ interface HistoryApi {
     @GET("/order")
     fun getHistory(
         @Query("id") id : String
-    )
+    ) : Call<HistoryData>
 }
 
 

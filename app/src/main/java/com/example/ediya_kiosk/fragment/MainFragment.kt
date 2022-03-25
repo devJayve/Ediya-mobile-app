@@ -149,7 +149,7 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
         var img = context?.resources?.obtainTypedArray(R.array.coffee_img)
         var serverCategoryList = getCategory()
         Log.d("TAG","$serverCategoryList")
-
+        getMenu()
 
         initRecyclerView(name, price,"COFFEE", img)
         clickCategoryEvent(view)
@@ -188,6 +188,34 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
             }
         })
         return  categoryList
+    }
+
+    private fun getMenu() {
+        val lang : String = when(isLang) {
+            "0" -> "kr"
+            "1" -> "en"
+            else -> "None"
+        }
+
+        val retrofit = RetrofitClient.initRetrofit()
+        var categoryList = arrayListOf<String>()
+
+        val requestMenuApi = retrofit.create(MenuApi::class.java)
+        requestMenuApi.getMenu(categoryName = "커피",lang).enqueue(object : Callback<CategoryMenuData> {
+            override fun onFailure(call: Call<CategoryMenuData>, t: Throwable) {
+            }
+
+            override fun onResponse(call: Call<CategoryMenuData>, response: Response<CategoryMenuData>) {
+                Log.d("result", response.body()!!.message)
+                Log.d("result", response.body().toString())
+
+                for (i in 0 until response.body()!!.categoryMenuList.size) {
+                    val jsonString = Gson().toJson(response.body()!!.categoryMenuList[i])
+                    Log.d("result", jsonString)
+                }
+            }
+        })
+
     }
 
 
