@@ -10,17 +10,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.ediya_kiosk.*
 import com.example.ediya_kiosk.dialog.CouponOptionDialog
 import com.example.ediya_kiosk.activity.MainActivity
-import com.example.ediya_kiosk.R
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
 import kotlinx.android.synthetic.main.payment_layout.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class PaymentFragment : Fragment() {
 
     private lateinit var mainActivity: MainActivity
     private lateinit var userId : String
+    var discount = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -64,7 +68,6 @@ class PaymentFragment : Fragment() {
         val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn)
         val couponBtn = view.findViewById<Button>(R.id.showCouponBtn)
 
-        var discount = 0
         var payment : String
 
         //db
@@ -118,8 +121,6 @@ class PaymentFragment : Fragment() {
 
         //결제 완료
         orderBtn.setOnClickListener {
-            Log.d("Message","orderBtn click")
-
             addOrderHistory(menuDataList)
             mainActivity!!.loadFrag(3)
             Toast.makeText(mainActivity,"주문이 완료되었습니다.",Toast.LENGTH_SHORT).show()
@@ -149,7 +150,7 @@ class PaymentFragment : Fragment() {
         val dbControl = DatabaseControl()
 
         var orderIndex = "-1"
-        var orderIndexList = dbControl.readData(readableDb, "basket", arrayOf("order_index"), arrayListOf("id"), arrayOf(userId))
+        val orderIndexList = dbControl.readData(readableDb, "basket", arrayOf("order_index"), arrayListOf("id"), arrayOf(userId))
         Log.d("TAG","$orderIndexList")
         if (orderIndexList.size != 0) {
             orderIndex = orderIndexList.last()[0]
@@ -186,17 +187,50 @@ class PaymentFragment : Fragment() {
             )
         }
 
-        dbControl.createData(
-            writableDb,
-            "payment",
-            arrayListOf("id",
+        dbControl.createData(writableDb, "payment", arrayListOf("id",
                 "order_index",
                 "discount",
-                "payment"),
-            arrayListOf(userId,
+                "payment"), arrayListOf(userId,
                 (orderIndex.toInt()+1).toString(),
                 "0",
-                "0")
+                "0"))
+
+        var menuInfoList = arrayListOf<MenuInfo>()
+        for (i in menuDataList[0]!!.indices) {
+            val menuInfo = MenuInfo(
+                menuName = menuDataList[0]!![i],
+                menuCount = menuDataList[1]!![i].toInt(),
+                menuSumPrice = menuDataList[7]!![i].toInt()
+            )
+            menuInfoList.add(menuInfo)
+        }
+
+        var totalCost = 0
+        for (i in menuDataList[0]!!.indices) {
+            totalCost += menuDataList[7]!![i].toInt()
+        }
+        totalCost -= discount
+
+        val orderInfo = OrderInfo(
+            userId = userId,
+            orderList = menuInfoList,
+            totalPrice = totalCost
+        )
+        postNewOrder(orderInfo)
+    }
+
+    private fun postNewOrder(orderData: OrderInfo) {
+        val retrofit = RetrofitClient.initRetrofit()
+
+        val requestOrderApi = retrofit.create(OrderApi::class.java)
+        requestOrderApi.postOrder(orderData).enqueue(
+            object : Callback<OrderInfo> {
+                override fun onFailure(call: Call<OrderInfo>, t: Throwable) {
+                }
+
+                override fun onResponse(call: Call<OrderInfo>, response: Response<OrderInfo>) {
+                }
+            }
         )
     }
 

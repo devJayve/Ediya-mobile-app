@@ -151,7 +151,7 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
         Log.d("TAG","$serverCategoryList")
 
 
-        initRecyclerView(name, price, serverCategoryList[0], img)
+        initRecyclerView(name, price,"COFFEE", img)
         clickCategoryEvent(view)
     }
 
@@ -181,13 +181,12 @@ class MainFragment : Fragment(), OnDayNightStateChanged {
                     val jsonObject = JSONObject(jsonString)
 
                     var category = CategoryName(jsonObject.getString("category_name"))
-
                     categoryList.add(category.categoryName.toString())
                     Log.d("result", category.categoryName.toString())
+                    Log.d("result", "$categoryList")
                 }
             }
         })
-        Log.d("result","categoryList $categoryList")
         return  categoryList
     }
 

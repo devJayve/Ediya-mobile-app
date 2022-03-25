@@ -53,7 +53,7 @@ data class CategoryName(
 data class OrderInfo(
     @SerializedName("id") val userId: String,
     @SerializedName("order_list") val orderList: ArrayList<MenuInfo>,
-    @SerializedName("total_price") val totalPrice: String
+    @SerializedName("total_price") val totalPrice: Int
 )
 
 data class MenuInfo(
@@ -97,6 +97,13 @@ interface OrderApi {
     fun postOrder(
         @Body orderData : OrderInfo
     ) : Call<OrderInfo>
+}
+
+interface HistoryApi {
+    @GET("/order")
+    fun getHistory(
+        @Query("id") id : String
+    )
 }
 
 

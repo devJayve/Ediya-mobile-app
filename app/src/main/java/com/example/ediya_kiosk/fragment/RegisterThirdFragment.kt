@@ -241,7 +241,7 @@ class RegisterThirdFragment : Fragment() {
                 postNewUserInServer(userInfo)
                 finishRegister()
             }
-            else Toast.makeText(loginActivity,"회원 정보를 다시 확인해주세요.",Toast.LENGTH_SHORT).show()
+            else showToastWarning("회원 정보를 다시 확인해주세요.")
         }
 
         //뒤로 가기
@@ -253,7 +253,7 @@ class RegisterThirdFragment : Fragment() {
     }
 
     private fun showToastWarning(txt: String) {
-        Toast.makeText(loginActivity, "$txt", Toast.LENGTH_SHORT).show()
+        Toast.makeText(loginActivity, txt, Toast.LENGTH_SHORT).show()
     }
 
     private fun finishRegister() {
