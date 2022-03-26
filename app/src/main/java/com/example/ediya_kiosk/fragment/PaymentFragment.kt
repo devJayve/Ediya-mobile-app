@@ -195,16 +195,17 @@ class PaymentFragment : Fragment() {
                 "0",
                 "0"))
 
-        var menuInfoList = arrayListOf<MenuInfo>()
+        val menuInfoList = arrayListOf<MenuInfo>()
         for (i in menuDataList[0]!!.indices) {
             val menuInfo = MenuInfo(
                 menuName = menuDataList[0]!![i],
                 menuCount = menuDataList[1]!![i].toInt(),
                 menuSumPrice = menuDataList[7]!![i].toInt()
             )
+            Log.d("payment","${menuDataList[0]!![i]}, ${menuDataList[1]!![i].toInt()}, ${menuDataList[7]!![i].toInt()}")
             menuInfoList.add(menuInfo)
         }
-
+        Log.d("payment","$menuInfoList")
         var totalCost = 0
         for (i in menuDataList[0]!!.indices) {
             totalCost += menuDataList[7]!![i].toInt()
@@ -216,6 +217,8 @@ class PaymentFragment : Fragment() {
             orderList = menuInfoList,
             totalPrice = totalCost
         )
+
+        Log.d("payment","$orderInfo")
         postNewOrder(orderInfo)
     }
 
@@ -229,6 +232,7 @@ class PaymentFragment : Fragment() {
                 }
 
                 override fun onResponse(call: Call<OrderInfo>, response: Response<OrderInfo>) {
+                    Log.d("payment","${response.body()}")
                 }
             }
         )

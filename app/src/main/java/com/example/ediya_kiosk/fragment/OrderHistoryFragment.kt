@@ -14,6 +14,8 @@ import com.example.ediya_kiosk.*
 import com.example.ediya_kiosk.activity.MainActivity
 import com.example.ediya_kiosk.database.Database
 import com.example.ediya_kiosk.database.DatabaseControl
+import com.example.ediya_kiosk.dialog.ReceiptDialog
+import com.example.ediya_kiosk.dialog.optionDialog
 import com.google.gson.Gson
 import org.json.JSONObject
 import retrofit2.Call
@@ -45,7 +47,7 @@ class OrderHistoryFragment : Fragment() {
         val backBtn = view.findViewById<ImageButton>(R.id.backToMainBtn2)
 
         // 기록 불러오기
-        //setHistoryContent(historyContainer)
+        setHistoryContent(historyContainer)
         getHistoryFromServer()
 
         //뒤로 가기
@@ -144,6 +146,12 @@ class OrderHistoryFragment : Fragment() {
 
                 intoInfoBtn.setOnClickListener {
                     Log.d("TAG","$i clicked")
+//                    val dialog = ReceiptDialog(mainActivity,i)
+//                    dialog.showDialog(mainActivity)
+//                    dialog.setOnClickListener(object : optionDialog.OnDialogClickListener {
+//                        override fun onClicked(cost: Int) {
+//                        }
+//                    })
                 }
 
 
@@ -178,7 +186,6 @@ class OrderHistoryFragment : Fragment() {
 
     private fun getHistoryFromServer() {
         val retrofit = RetrofitClient.initRetrofit()
-        var categoryList = arrayListOf<String>()
 
         val requestHistoryApi = retrofit.create(HistoryApi::class.java)
         requestHistoryApi.getHistory(userId).enqueue(object : Callback<HistoryData> {
@@ -186,17 +193,17 @@ class OrderHistoryFragment : Fragment() {
             }
 
             override fun onResponse(call: Call<HistoryData>, response: Response<HistoryData>) {
-                Log.d("result", response.body()!!.message)
+                Log.d("result", response.body()!!.message.toString())
                 Log.d("result", "${response.body()}")
-                Log.d("result", "${response.body()!!.historyData}")
+                Log.d("result", "${response.body()!!.data}")
 
-                for (i in 0 until response.body()!!.historyData.size) {
-                    val jsonString = Gson().toJson(response.body()!!.historyData[i])
+                for (i in 0 until response.body()!!.data.size) {
+                    val jsonString = Gson().toJson(response.body()!!.data[i])
                     Log.d("result", jsonString)
 
                     val jsonObject = JSONObject(jsonString)
 
-                    //var menuName = MenuInfo(jsonObject.getString("name"))
+
 
                 }
             }

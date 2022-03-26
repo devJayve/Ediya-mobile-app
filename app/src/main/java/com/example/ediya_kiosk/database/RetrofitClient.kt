@@ -1,6 +1,7 @@
 package com.example.ediya_kiosk
 
 import com.google.gson.Gson
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -63,22 +64,27 @@ data class CategoryMenuInfo(
 )
 
 data class OrderInfo(
-    @SerializedName("id") val userId: String,
-    @SerializedName("order_list") val orderList: ArrayList<MenuInfo>,
-    @SerializedName("total_price") val totalPrice: Int
+    @SerializedName("id") var userId: String?,
+    @SerializedName("order_list") var orderList: List<MenuInfo>,
+    @SerializedName("total_price") var totalPrice: Int?
 )
 
 data class MenuInfo(
-    @SerializedName("name") val menuName: String,
-    @SerializedName("count") val menuCount: Int,
-    @SerializedName("sum_price") val menuSumPrice: Int
+    @SerializedName("name") val menuName: String?,
+    @SerializedName("count") val menuCount: Int?,
+    @SerializedName("sum_price") val menuSumPrice: Int?
 )
 
 data class HistoryData(
-    val message: String,
-    val success: Boolean,
-    @SerializedName("data") val historyData: ArrayList<MenuInfo>,
-    @SerializedName("total_price") val totalPrice: Int
+    val message: String?,
+    val success: Boolean?,
+    val data: List<Any?>
+)
+
+data class HistoryMenuInfo(
+    @SerializedName("name") val menuName: String?,
+    @SerializedName("count") val menuCount: Int?,
+    @SerializedName("sum_price") val menuSumPrice: Int?
 )
 
 // Api로 요청을 보내는 함수
@@ -122,7 +128,7 @@ interface MenuApi {
 interface OrderApi {
     @POST("/order")
     fun postOrder(
-        @Body orderData : OrderInfo
+        @Body() orderData : OrderInfo
     ) : Call<OrderInfo>
 }
 
